@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\DtaReview\Http\Controllers;
+namespace Modules\DTARequests\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\DTAReview\Repositories\DTAReviewRepository;
+use Modules\DTARequests\Repositories\DTAReviewRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\StaffRepository;
 
@@ -36,11 +36,11 @@ class DtaReviewController extends Controller
             # code...
             $dtareview = $this->dtaReviewRepository->getAllRequests();
         }
-        
-        
 
-        return view('dtareview::dtareview.index')->with('dtareviews', $dtareview);
-        
+
+
+        return view('dtarequests::dtareview.index')->with('dtareviews', $dtareview);
+
     }
 
     /**
@@ -49,7 +49,7 @@ class DtaReviewController extends Controller
      */
     public function create()
     {
-        return view('dtareview::create');
+        return view('dtarequests::dtareview.create');
     }
 
     /**
@@ -69,7 +69,7 @@ class DtaReviewController extends Controller
      */
     public function show($id)
     {
-        return view('dtareview::show');
+        return view('dtarequests::dtareview.show');
     }
 
     /**
@@ -79,7 +79,7 @@ class DtaReviewController extends Controller
      */
     public function edit($id)
     {
-        return view('dtareview::edit');
+        return view('dtarequests::dtareview.edit');
     }
 
     /**
