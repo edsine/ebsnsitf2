@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\DTAReview\Repositories;
+namespace Modules\DTARequests\Repositories;
 
-use Modules\DTAReview\Models\DTAReview;
+use Modules\DTARequests\Models\DTAReview;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
 

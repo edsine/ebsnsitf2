@@ -10,7 +10,7 @@ use Modules\DTARequests\Http\Requests\CreateDTARequests;
 use Modules\DTARequests\Http\Requests\UpdateDTARequests;
 use App\Http\Controllers\AppBaseController;
 use Modules\DTARequests\Repositories\DTARequestsRepository;
-use Modules\DTAReview\Repositories\DTAReviewRepository;
+use Modules\DTARequests\Repositories\DTAReviewRepository;
 use Flash;
 use Modules\Shared\Repositories\BranchRepository;
 use App\Repositories\UserRepository;
@@ -56,9 +56,9 @@ class DTARequestsController extends AppBaseController
             # code...
             $dtarequests = $this->dtaRequestsRepository->paginate(10);
         }
-        
+
         return view('dtarequests::dtarequests.index')->with('dtarequests', $dtarequests);
-        
+
     }
 
     /**
@@ -78,7 +78,7 @@ class DTARequestsController extends AppBaseController
      * @param Request $request
      * @return Renderable
      */
-    
+
     public function store(CreateDTARequests $request)
     {
         $input = $request->all();
@@ -99,7 +99,7 @@ class DTARequestsController extends AppBaseController
         }
 
         $dtarequests = $this->dtaRequestsRepository->create($input);
-        
+
 
         Flash::success('DTA Requests saved successfully.');
 
@@ -114,7 +114,7 @@ class DTARequestsController extends AppBaseController
     public function show($id)
     {
         $dtarequests = $this->dtaRequestsRepository->find($id);
-        
+
         if (empty($dtarequests)) {
             Flash::error('DTA Requests not found');
 
@@ -138,7 +138,7 @@ class DTARequestsController extends AppBaseController
 
             return redirect(route('dtarequests.index'));
         }
-        
+
 
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');

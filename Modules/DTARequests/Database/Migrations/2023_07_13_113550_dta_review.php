@@ -14,7 +14,7 @@ class DtaReview extends Migration
     public function up()
     {
         //
-        
+
         Schema::create('dta_reviews', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('dtarequest_id')->nullable()->constrained('dta_requests')->onDelete('cascade');

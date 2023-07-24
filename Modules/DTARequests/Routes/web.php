@@ -21,3 +21,9 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('dtareview')->group(function () {
+        Route::resource('dtareview', Modules\DTARequests\Http\Controllers\DtaReviewController::class);
+    });
+});
+

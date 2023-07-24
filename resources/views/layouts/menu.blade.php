@@ -151,13 +151,11 @@
             @include('documentmanager::layouts.menu')
 
             @include('claimscompensation::layouts.menu')
-            
+
             @include('employermanager::layouts.menu')
 
             @include('dtarequests::layouts.menu')
             @include('humanresource::layouts.menu')
-
-            @include('dtareview::layouts.menu')
 
             {{-- @include('unitmanager::layouts.menu') --}}
 
@@ -328,7 +326,6 @@
             <!--end:Menu item-->
             <!--end:Menu item-->
         </div>
-      
 
 
 
@@ -344,8 +341,9 @@
 
 
 
-        
-      
+
+
+
         <!--end::Menu-->
     </div>
     <!--end::Menu wrapper-->

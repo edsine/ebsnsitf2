@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\DtaReview\Http\Controllers;
+namespace Modules\DTARequests\Http\Controllers;
 
-use Modules\DtaReview\Http\Requests\CreateDtaReviewRequest;
-use Modules\DtaReview\Http\Requests\UpdateDtaReviewRequest;
+use Modules\DTARequests\Http\Requests\CreateDtaReviewRequest;
+use Modules\DTARequests\Http\Requests\UpdateDtaReviewRequest;
 use App\Http\Controllers\AppBaseController;
-use Modules\DtaReview\Repositories\DtaReviewRepository;
+use Modules\DTARequests\Repositories\DtaReviewRepository;
 use Illuminate\Http\Request;
 use Flash;
 
