@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\DtaReview\Repositories;
+namespace Modules\DTARequests\Repositories;
 
-use Modules\DtaReview\Models\DtaReview;
+use Modules\DTARequests\Models\DtaReview;
 use App\Repositories\BaseRepository;
 
 class DtaReviewRepository extends BaseRepository

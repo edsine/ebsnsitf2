@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\DtaReview\Http\Requests;
+namespace Modules\DTARequests\Http\Requests;
 
-use Modules\DtaReview\Models\DtaReview;
+use Modules\DTARequests\Models\DtaReview;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateDtaReviewRequest extends FormRequest
@@ -25,7 +25,7 @@ class UpdateDtaReviewRequest extends FormRequest
     public function rules()
     {
         $rules = DtaReview::$rules;
-        
+
         return $rules;
     }
 }

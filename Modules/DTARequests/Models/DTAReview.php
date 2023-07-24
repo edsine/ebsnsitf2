@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\DtaReview\Models;
+namespace Modules\DTARequests\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,14 +19,5 @@ class DTAReview extends Model
         'review_status',
         'status',
         'dta_reviewid',
-
-        
     ];
-
-
-    
-    protected static function newFactory()
-    {
-        return \Modules\DtaReview\Database\factories\DtaReviewsFactory::new();
-    }
 }

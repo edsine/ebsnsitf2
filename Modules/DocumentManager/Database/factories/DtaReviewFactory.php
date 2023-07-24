@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\DtaReview\Database\Factories;
+namespace Modules\DTARequests\Database\Factories;
 
-use Modules\DtaReview\Models\DtaReview;
+use Modules\DTARequests\Models\DtaReview;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -22,7 +22,7 @@ class DtaReviewFactory extends Factory
      */
     public function definition()
     {
-        
+
         return [
             'dta_reviewid' => $this->faker->word,
             'officer_id' => $this->faker->randomDigitNotNull,

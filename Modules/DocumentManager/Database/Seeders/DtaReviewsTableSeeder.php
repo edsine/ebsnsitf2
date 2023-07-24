@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\DtaReview\Database\Seeders;
+namespace Modules\DTARequests\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
