@@ -20,7 +20,7 @@ class UpdateUnitHeadsAndUnitsAndUsersTables extends Migration
 
         Schema::create('unit_heads', function (Blueprint $table) {
             $table->id();
-            $table->dropColumn('name');
+            //$table->dropColumn('name');
             $table->foreignId('unit_id')->nullable()->constrained('units')->onDelete('cascade');
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
