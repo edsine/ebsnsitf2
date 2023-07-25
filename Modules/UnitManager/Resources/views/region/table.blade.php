@@ -3,27 +3,27 @@
         <table class="table" id="departments-table">
             <thead>
             <tr>
-                <th>Unit Name</th>
+                <th>Region Name</th>
                 <th>Created At</th>
                 <th>Updated At</th>
                 <th colspan="3">Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($units as $unit)
+            @foreach($regions as $region)
                 <tr>
-                    <td>{{ $unit->unit_name }}</td>
-                    <td>{{ $unit->created_at }}</td>
-                    <td>{{ $unit->updated_at }}</td>
+                    <td>{{ $region->name }}</td>
+                    <td>{{ $region->created_at }}</td>
+                    <td>{{ $region->updated_at }}</td>
                     
                     <td  style="width: 120px">
-                        {!! Form::open(['route' => ['units.destroy', $unit->id], 'method' => 'delete']) !!}
+                        {!! Form::open(['route' => ['region.destroy', $region->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('units.show', [$unit->id]) }}"
+                            <a href="{{ route('region.show', [$region->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
-                            <a href="{{ route('units.edit', [$unit->id]) }}"
+                            <a href="{{ route('region.edit', [$region->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
@@ -39,7 +39,7 @@
 
     <div class="card-footer clearfix">
         <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $units])
+            @include('adminlte-templates::common.paginate', ['records' => $regions])
         </div>
     </div>
 </div>

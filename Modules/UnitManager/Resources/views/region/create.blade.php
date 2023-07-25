@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                    Create Unit
+                    Create Region
                     </h1>
                 </div>
             </div>
@@ -16,23 +16,22 @@
     <div class="content px-3">
 
         @include('adminlte-templates::common.errors')
-        
 
         <div class="card">
 
-            {!! Form::open(['route' => 'units.store','enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route' => 'region.store','enctype' => 'multipart/form-data']) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('unitmanager::units.fields')
+                    @include('unitmanager::region.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('units.index') }}" class="btn btn-default"> Cancel </a>
+                <a href="{{ route('region.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
             {!! Form::close() !!}
