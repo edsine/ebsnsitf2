@@ -13,7 +13,7 @@
             </span>
             <!--end::Svg Icon-->
         </span>
-        
+
         <span class="menu-title">DTA Requests</span>
         <span class="menu-arrow"></span>
     </span>
@@ -23,7 +23,7 @@
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
-            <a href="{{ route('dtarequests.create') }}" class="menu-link {{ Request::is('dtarequests*') ? 'active' : '' }}">
+            <a href="{{ route('dtarequests.create') }}" class="menu-link {{ Request::is('dtarequests/dtarequests/create') ? 'active' : '' }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -31,13 +31,19 @@
             </a>
             <!--end:Menu link-->
 			<!--begin:Menu link-->
-            <a href="{{ route('dtarequests.index') }}" class="menu-link {{ Request::is('dtarequests*') ? 'active' : '' }}">
+            <a href="{{ route('dtarequests.index') }}" class="menu-link {{ Request::is('dtarequests/dtarequests') ? 'active' : '' }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
                 <span class="menu-title">My DTA Applications</span>
             </a>
             <!--end:Menu link-->
+            <a href="{{ route('dtareview.index') }}" class="menu-link {{ Request::is('dtareview*') ? 'active' : '' }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">View Reviewed DTA </span>
+            </a>
         </div>
         <!--end:Menu item-->
     </div>

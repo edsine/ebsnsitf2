@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\DtaReview\Http\Requests;
+namespace Modules\DTARequests\Http\Requests;
 
-use Modules\DtaReview\Models\DtaReview;
+use Modules\DTARequests\Models\DtaReview;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateDtaReviewRequest extends FormRequest

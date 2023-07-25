@@ -5,9 +5,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>DTA Reviews</h1>
+                    <h1>ALL LEAVE TYPES</h1>
                 </div>
-
+                <div class="col-sm-6">
+                    <a class="btn btn-primary float-end"
+                       href="{{ route('leave_type.create') }}">
+                        ADD NEW LEAVETYPE
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -19,7 +24,7 @@
         <div class="clearfix"></div>
 
         <div class="card">
-            @include('dtarequests::dtareview.table')
+            @include('humanresource::leavetypes.table')
         </div>
     </div>
 
