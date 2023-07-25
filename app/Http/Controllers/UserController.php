@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 
-use Hash;
-use Flash;
 use Response;
+use App\Models\User;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
+use App\Notifications\UserCreated;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Hash;
 use App\Repositories\StaffRepository;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Notification;
 use Modules\Shared\Repositories\BranchRepository;
 use Modules\Shared\Repositories\DepartmentRepository;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
-use App\Models\User;
-use App\Notifications\UserCreated;
-use Illuminate\Support\Facades\Notification;
 
 class UserController extends AppBaseController
 {

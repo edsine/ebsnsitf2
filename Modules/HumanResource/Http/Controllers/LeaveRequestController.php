@@ -12,17 +12,18 @@ use Illuminate\Routing\Controller;
 
 
 use Illuminate\Support\Facades\DB;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\StaffRepository;
-use App\Http\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Notification;
 use Modules\Shared\Repositories\BranchRepository;
 use Modules\HumanResource\Repositories\LeavetypeRepository;
 
 use Modules\HumanResource\Http\Requests\CreateLeaveRequests;
 use Modules\HumanResource\Http\Requests\UpdateLeaveRequests;
-use Modules\HumanResource\Models\LeaveType as ModelsLeaveType;
+use Modules\HumanResource\Notifications\Leaverequest;
 use Modules\HumanResource\Repositories\LeaveRequestRepository;
 
 
@@ -41,17 +42,19 @@ class LeaveRequestController extends  AppBaseController
     private $leavetypeRepository ;
 
 
- 
+    /** @var $userRepository UserRepository */
+    private $userRepository;
 
 /** @var StaffRepository $staffRepository*/
 private $staffRepository;
 
-public function __construct(LeaveRequestRepository $leaverequestRepo, BranchRepository $branchRepo, StaffRepository $staffRepo ,LeavetypeRepository $leavetypeRepo)
+public function __construct(UserRepository $userRepo, LeaveRequestRepository $leaverequestRepo, BranchRepository $branchRepo, StaffRepository $staffRepo ,LeavetypeRepository $leavetypeRepo)
     {
         $this->leaverequestRepository = $leaverequestRepo;
         $this->branchRepository = $branchRepo;
         $this->staffRepository = $staffRepo;
         $this->leavetypeRepository = $leavetypeRepo;
+        $this->userRepository=$userRepo;
     }
 
 
@@ -117,8 +120,13 @@ public function __construct(LeaveRequestRepository $leaverequestRepo, BranchRepo
      */
     public function store(CreateLeaveRequests $request, LeavetypeRepository $leavetype)
     {        
+
         $input=$request->all();
+
         $uid=Auth::id();
+        $user=Auth::user();
+
+        
         
          //$staff_id = $this->staffRepository.getByUserId($uid);
          // $input['staff_id'] = $staff_id->id;
@@ -127,7 +135,7 @@ public function __construct(LeaveRequestRepository $leaverequestRepo, BranchRepo
          $input['md_hr'] = 0;
          $input['leave_officer'] = 0;
         
-        // $input['leavetype_id'] = $request->type;
+        $input['leavetype_id'] = $request->type;
          
         
 
@@ -140,6 +148,8 @@ public function __construct(LeaveRequestRepository $leaverequestRepo, BranchRepo
 
         $leaveRequest = $this->leaverequestRepository->create($input);
         
+        // sending a notification to the user that he has created a leave request
+        Notification::send($user,new Leaverequest($input));
 
         Flash::success('Leave Requests sent successfully.');
 
@@ -202,6 +212,7 @@ public function __construct(LeaveRequestRepository $leaverequestRepo, BranchRepo
      */
     public function update($id, UpdateLeaveRequests $request)
     {
+        $user= Auth::user();
         $leaverequest = $this->leaverequestRepository->find($id);
 
         if (empty($leaverequest)) {
@@ -227,7 +238,7 @@ public function __construct(LeaveRequestRepository $leaverequestRepo, BranchRepo
 
         $leaverequest = $this->leaverequestRepository->update($input, $id);
 
-        
+        Notification::send($user,new Leaverequest($input));
 
         Flash::success('LEAVE REQUEST Updated successfully .');
 
