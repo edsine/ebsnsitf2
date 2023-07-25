@@ -288,7 +288,7 @@
     </span>
     <!--end:Menu link-->
     <!--begin:Menu sub-->
-    <div class="menu-sub menu-sub-accordion">
+    {{-- <div class="menu-sub menu-sub-accordion">
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
@@ -301,7 +301,7 @@
             <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-    </div>
+    </div> --}}
     <div class="menu-sub menu-sub-accordion">
         <!--begin:Menu item-->
         <div class="menu-item">
@@ -311,6 +311,20 @@
                     <span class="bullet bullet-dot"></span>
                 </span>
                 <span class="menu-title">Unit</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        <!--end:Menu item-->
+    </div>
+    <div class="menu-sub menu-sub-accordion">
+        <!--begin:Menu item-->
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a href="{{ route('region.index') }}" class="menu-link {{ Request::is('region*') ? 'active' : '' }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Region</span>
             </a>
             <!--end:Menu link-->
         </div>

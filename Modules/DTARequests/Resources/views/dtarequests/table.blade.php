@@ -66,7 +66,7 @@
                     
                     
                     <td  style="width: 120px">
-                        @hasanyrole('HOD|MD|ED FINANCE & ACCOUNT|SUPERVISOR|super-admin')
+                       {{--  @hasanyrole('HOD|MD|ED FINANCE & ACCOUNT|SUPERVISOR|super-admin') --}}
                         {!! Form::open(['route' => ['dtarequests.destroy', $dtarequests->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             <a href="{{ route('dtarequests.show', [$dtarequests->id]) }}"
@@ -80,7 +80,7 @@
                             {{-- {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!} --}}
                         </div>
                         {!! Form::close() !!}
-                        @endhasanyrole
+                       {{--  @endhasanyrole --}}
                     </td>
                 </tr>
             @endforeach

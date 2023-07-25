@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\UnitManager\Models;
+namespace Modules\Shared\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -8,25 +8,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 
- class UnitHead extends Model implements Auditable
+ class DepartmentHead extends Model implements Auditable
 {
     use SoftDeletes;
     use HasFactory;
     use AuditingAuditable;
-    public $table = 'unit_heads';
+    public $table = 'department_heads';
 
     public $fillable = [
-        'unit_id',
+        'department_id',
         'user_id'
     ];
 
     protected $casts = [
-        'unit_id' => 'integer',
+        'department_id' => 'integer',
         'user_id' => 'integer',
     ];
 
     public static array $rules = [
-        'unit_id' => 'required',
+        'department_id' => 'required',
         'user_id' => 'required'
     ];
 
@@ -39,8 +39,8 @@ use OwenIt\Auditing\Contracts\Auditable;
     {
         return $this->hasOne(\App\Models\User::class);
     }
-    public function unit(): \Illuminate\Database\Eloquent\Relations\hasOne
+    public function department(): \Illuminate\Database\Eloquent\Relations\hasOne
     {
-        return $this->hasOne(\App\Models\Units::class);
+        return $this->hasOne(\Modules\Shared\Models\DepartmentHead::class);
     }
 }

@@ -12,7 +12,7 @@ use App\Http\Controllers\AppBaseController;
 use Modules\UnitManager\Repositories\UnitRepository;
 use Modules\UnitManager\Repositories\UnitHeadRepository;
 use Flash;
-use App\Http\Repositories\UserRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Repositories\DepartmentRepository;
 
@@ -29,12 +29,16 @@ class UnitController extends AppBaseController
     /** @var UnitRepository $unitRepository*/
     private $unitRepository;
 
+    /** @var UserRepository $userRepository*/
+    private $userRepository;
 
-    public function __construct(DepartmentRepository $departmentRepo, UnitHeadRepository $unitHeadRepo, UnitRepository $unitRepo)
+
+    public function __construct(UserRepository $userRepo, DepartmentRepository $departmentRepo, UnitHeadRepository $unitHeadRepo, UnitRepository $unitRepo)
     {
         $this->departmentRepository = $departmentRepo;
         $this->unitheadRepository = $unitHeadRepo;
         $this->unitRepository = $unitRepo;
+        $this->userRepository = $userRepo;
     }
 
     /**
@@ -54,11 +58,10 @@ class UnitController extends AppBaseController
      */
     public function create()
     {
-        $departments = $this->departmentRepository->all()->pluck('department_unit', 'id');
-        $departments->prepend('Select department', '');
-        $unitheads = $this->unitheadRepository->all()->pluck('name', 'id');
-        $unitheads->prepend('Select Unit Head', '');
-        return view('unitmanager::units.create')->with(['unitheads'=> $unitheads,'departments'=> $departments]);
+        
+        $users = $this->userRepository->all()->pluck("first_name","id");
+        $users->prepend('Select Users', '');
+        return view('unitmanager::units.create')->with(['users'=> $users]);
     }
 
     /**
@@ -70,10 +73,19 @@ class UnitController extends AppBaseController
     {
         $input = $request->all();
         //$input['user_id'] = Auth::id();
-
-        
-
         $unit = $this->unitRepository->create($input);
+
+        $unit_head_id = $request->input("user_id");
+        if (empty($unit_head_id)) {
+            $errorMessage ="Please select a unit head";
+            return redirect(route('units.create'))->withErrors([$errorMessage]);
+        }
+        if (!empty($unit_head_id)) {
+        $input['unit_id'] = $unit->id;
+        $input['user_id'] = $unit_head_id;
+
+        $this->unitheadRepository->create($input);
+        }
 
         Flash::success('Unit saved successfully.');
 
@@ -113,11 +125,9 @@ class UnitController extends AppBaseController
             return redirect(route('units.index'));
         }
         
-        $departments = $this->departmentRepository->all()->pluck('department_unit', 'id');
-        $departments->prepend('Select Department', '');
-        $unithead = $this->unitheadRepository->all()->pluck('name', 'id');
-        $unithead->prepend('Select Unit Head', '');
-        return view('unitmanager::units.edit')->with(['unitheads' => $unithead, 'unit' => $unit, 'departments' => $departments]);
+        $users = $this->userRepository->all()->pluck("first_name","id");
+        $users->prepend('Select Users', '');
+        return view('unitmanager::units.edit')->with(['users' => $users, 'unit' => $unit]);
     }
     /**
      * Update the specified resource in storage.
@@ -140,6 +150,15 @@ class UnitController extends AppBaseController
         //$input['user_id'] = Auth::id();
 
         $unit = $this->unitRepository->update($input, $id);
+
+        $unit_head_id = $request->input("user_id");
+
+        $input['unit_id'] = $id;
+        $input['user_id'] = $unit_head_id;
+
+        $unit_id = $this->unitheadRepository->findByDepartmentId($id);
+
+        $this->unitheadRepository->update($input, $unit_id->id);
 
         Flash::success('Unit updated successfully.');
 

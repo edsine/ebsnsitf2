@@ -6,9 +6,11 @@ use Modules\Shared\Http\Requests\CreateDepartmentRequest;
 use Modules\Shared\Http\Requests\UpdateDepartmentRequest;
 use App\Http\Controllers\AppBaseController;
 use Modules\Shared\Repositories\DepartmentRepository;
+use Modules\Shared\Repositories\DepartmentHeadRepository;
 use Illuminate\Http\Request;
 use Flash;
 use Modules\Shared\Repositories\BranchRepository;
+use App\Repositories\UserRepository;
 
 class DepartmentController extends AppBaseController
 {
@@ -18,10 +20,18 @@ class DepartmentController extends AppBaseController
     /** @var BranchRepository $branchRepository*/
     private $branchRepository;
 
-    public function __construct(DepartmentRepository $departmentRepo, BranchRepository $branchRepo)
+    /** @var UserRepository $userRepository*/
+    private $userRepository;
+
+    /** @var DepartmentHeadRepository $departmentHeadRepository*/
+    private $departmentHeadRepository;
+
+    public function __construct(DepartmentHeadRepository $departmentHeadRepo, UserRepository $userRepo, DepartmentRepository $departmentRepo, BranchRepository $branchRepo)
     {
         $this->departmentRepository = $departmentRepo;
         $this->branchRepository = $branchRepo;
+        $this->userRepository = $userRepo;
+        $this->departmentHeadRepository = $departmentHeadRepo;
     }
 
     /**
@@ -42,7 +52,9 @@ class DepartmentController extends AppBaseController
     {
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
-        return view('shared::departments.create')->with('branches', $branches);
+        $users = $this->userRepository->all()->pluck("first_name","id");
+        $users->prepend('Select Users', '');
+        return view('shared::departments.create')->with(['users'=> $users,'branches'=> $branches]);
     }
 
     /**
@@ -53,6 +65,19 @@ class DepartmentController extends AppBaseController
         $input = $request->all();
 
         $department = $this->departmentRepository->create($input);
+
+        $department_head_id = $request->input("user_id");
+        if (empty($department_head_id)) {
+            $errorMessage ="Please select a department head";
+            return redirect(route('departments.create'))->withErrors([$errorMessage]);
+        }
+
+        if (!empty($department_head_id)) {
+        $input['department_id'] = $department->id;
+        $input['user_id'] = $department_head_id;
+
+        $this->departmentHeadRepository->create($input);
+        }
 
         Flash::success('Department saved successfully.');
 
@@ -88,9 +113,11 @@ class DepartmentController extends AppBaseController
             return redirect(route('departments.index'));
         }
 
+        $users = $this->userRepository->all()->pluck("first_name","id");
+        $users->prepend('Select Users', '');
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
-        return view('shared::departments.edit')->with(['department' => $department, 'branches' => $branches]);
+        return view('shared::departments.edit')->with(['users' => $users,'department' => $department, 'branches' => $branches]);
     }
 
     /**
@@ -107,6 +134,16 @@ class DepartmentController extends AppBaseController
         }
 
         $department = $this->departmentRepository->update($request->all(), $id);
+
+        $department_head_id = $request->input("user_id");
+        
+        $input['department_id'] = $id;
+        $input['user_id'] = $department_head_id;
+
+        $department_id = $this->departmentHeadRepository->findByDepartmentId($id);
+
+        $this->departmentHeadRepository->update($input, $department_id->id);
+        
 
         Flash::success('Department updated successfully.');
 

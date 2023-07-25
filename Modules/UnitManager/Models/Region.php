@@ -8,23 +8,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 
- class Units extends Model implements Auditable
+ class Region extends Model implements Auditable
 {
     use SoftDeletes;
     use HasFactory;
     use AuditingAuditable;
-    public $table = 'units';
+    public $table = 'regions';
 
     public $fillable = [
-        'unit_name'
+        'name'
     ];
 
     protected $casts = [
-        'unit_name' => 'string'
+        'name' => 'string'
     ];
 
     public static array $rules = [
-        'unit_name' => 'required'
+        'name' => 'required'
     ];
 
     public function department(): \Illuminate\Database\Eloquent\Relations\hasOne

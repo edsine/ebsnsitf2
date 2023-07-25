@@ -2,10 +2,10 @@
 
 namespace Modules\UnitManager\Http\Requests;
 
-use Modules\UnitManager\Models\Units;
+use Modules\UnitManager\Models\Region;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUnitRequest extends FormRequest
+class CreateRegionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class UpdateUnitRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Units::$rules;
-        
-        return $rules;
+        return Region::$rules;
     }
 }

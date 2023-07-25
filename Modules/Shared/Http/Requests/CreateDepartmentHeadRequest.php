@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\UnitManager\Http\Requests;
+namespace Modules\Shared\Http\Requests;
 
-use Modules\UnitManager\Models\Units;
+use Modules\Shared\Models\DepartmentHead;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUnitRequest extends FormRequest
+class CreateDepartmentHeadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class UpdateUnitRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = Units::$rules;
-        
-        return $rules;
+        return DepartmentHead::$rules;
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Modules\UnitManager\Repositories;
 
-use Modules\UnitManager\Models\Units;
+use Modules\UnitManager\Models\Region;
 use App\Repositories\BaseRepository;
 
-class UnitRepository extends BaseRepository
+class RegionRepository extends BaseRepository
 {
 
     protected $fieldSearchable = [
-        'unit_name'
+        'name'
     ];
      public function getFieldsSearchable(): array
     {
@@ -18,7 +18,7 @@ class UnitRepository extends BaseRepository
 
     public function model(): string
     {
-        return Units::class;
+        return Region::class;
     }
 
     public function findByDepartment($department_id)
