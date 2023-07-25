@@ -19,8 +19,8 @@ use Modules\Shared\Repositories\DepartmentRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use App\Models\User;
-
-
+use App\Notifications\UserCreated;
+use Illuminate\Support\Facades\Notification;
 
 class UserController extends AppBaseController
 {
@@ -121,6 +121,8 @@ class UserController extends AppBaseController
 
 
         $user->assignRole($role);
+        // Send notification to user about his account details
+        Notification::send($user, new UserCreated($input));
 
         Flash::success('User saved successfully.');
 
@@ -232,7 +234,7 @@ class UserController extends AppBaseController
         }
 
         $user = $this->userRepository->update($input, $id);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
 
         //$user->assignRole($request->input('roles'));
 
@@ -278,8 +280,8 @@ class UserController extends AppBaseController
     }
 
     //function for profile
-    public function manage_account($id){
-        echo "I am here! ".$id;
-
+    public function manage_account($id)
+    {
+        echo "I am here! " . $id;
     }
 }
