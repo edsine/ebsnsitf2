@@ -22,4 +22,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('unithead')->group(function () {
         Route::resource('unithead', Modules\UnitManager\Http\Controllers\UnitHeadController::class);
     });
+    Route::prefix('region')->group(function () {
+        Route::resource('region', Modules\UnitManager\Http\Controllers\RegionController::class);
+    });
 });
