@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\UnitManager\Repositories;
+namespace Modules\Shared\Repositories;
 
-use Modules\UnitManager\Models\UnitHead;
+use Modules\Shared\Models\DepartmentHead;
 use App\Repositories\BaseRepository;
 
-class UnitHeadRepository extends BaseRepository
+class DepartmentHeadRepository extends BaseRepository
 {
 
     protected $fieldSearchable = [
@@ -20,7 +20,7 @@ class UnitHeadRepository extends BaseRepository
 
     public function model(): string
     {
-        return UnitHead::class;
+        return DepartmentHead::class;
     }
 
     public function findByUser($user_id)
@@ -30,11 +30,12 @@ class UnitHeadRepository extends BaseRepository
         return $query->where('user_id', $user_id)->get();
     }
 
-    public function findByDepartmentId($unit_id)
+    public function findByDepartmentId($department_id)
     {
         $query = $this->model->newQuery();
 
-        return $query->where('unit_id', $unit_id)->first();
+        return $query->where('department_id', $department_id)->first();
     }
+
     
 }
