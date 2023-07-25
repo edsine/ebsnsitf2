@@ -65,6 +65,7 @@ class User extends Authenticatable implements Auditable
     {
         return $this->hasOne(Staff::class);
     }
+    
 
     
 }
