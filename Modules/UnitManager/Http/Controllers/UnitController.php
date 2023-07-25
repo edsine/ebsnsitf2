@@ -156,7 +156,9 @@ class UnitController extends AppBaseController
         $input['unit_id'] = $id;
         $input['user_id'] = $unit_head_id;
 
-        $this->unitheadRepository->update($input, $id);
+        $unit_id = $this->unitheadRepository->findByDepartmentId($id);
+
+        $this->unitheadRepository->update($input, $unit_id->id);
 
         Flash::success('Unit updated successfully.');
 

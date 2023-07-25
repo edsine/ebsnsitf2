@@ -17,6 +17,10 @@ use App\Repositories\UserRepository;
 use App\Repositories\StaffRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Modules\UnitManager\Repositories\UnitHeadRepository;
+use Modules\DTARequests\Models\DTARequests;
+use Modules\UnitManager\Models\UnitHead;
+use Modules\Shared\Models\DepartmentHead;
 
 
 class DTARequestsController extends AppBaseController
@@ -31,15 +35,16 @@ class DTARequestsController extends AppBaseController
     /** @var DTAReviewRepository $dtaReviewRepository*/
     private $dtaReviewRepository;
 
-    /** @var StaffRepository $staffRepository*/
-    private $staffRepository;
+    /** @var UnitHeadRepository $unitHeadRepository*/
+    private $unitHeadRepository;
 
-    public function __construct(DTARequestsRepository $dtaRequestsRepo, BranchRepository $branchRepo, DTAReviewRepository $dtaReviewRepo, StaffRepository $staffRepo)
+    public function __construct(UnitHeadRepository $unitHeadRepo, DTARequestsRepository $dtaRequestsRepo, BranchRepository $branchRepo, DTAReviewRepository $dtaReviewRepo, StaffRepository $staffRepo)
     {
         $this->dtaRequestsRepository = $dtaRequestsRepo;
         $this->branchRepository = $branchRepo;
         $this->dtaReviewRepository = $dtaReviewRepo;
         $this->staffRepository = $staffRepo;
+        $this->unitHeadRepository = $unitHeadRepo;
     }
 
     /**
@@ -49,6 +54,9 @@ class DTARequestsController extends AppBaseController
     public function index()
     {
         $user_id = Auth::id();
+        $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
+        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+
         if (!empty($user_id) && $user_id != 1) {
             # code...
             $dtarequests = $this->dtaRequestsRepository->getByUserId($user_id);
@@ -57,8 +65,8 @@ class DTARequestsController extends AppBaseController
             $dtarequests = $this->dtaRequestsRepository->paginate(10);
         }
 
-        return view('dtarequests::dtarequests.index')->with('dtarequests', $dtarequests);
-
+        return view('dtarequests::dtarequests.index')->with(['department_head_data'=> $department_head_data,'dtarequests'=> $dtarequests,'unit_head_data'=>$unit_head_data]);
+ 
     }
 
     /**
@@ -67,10 +75,13 @@ class DTARequestsController extends AppBaseController
      */
     public function create()
     {
-        $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
+        $user_id = Auth::id();
+        $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
+        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
 
+        $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
-        return view('dtarequests::dtarequests.create')->with('branches', $branches);
+        return view('dtarequests::dtarequests.create')->with(['department_head_data'=>$department_head_data, 'branches'=> $branches,'unit_head_data'=>$unit_head_data]);
     }
 
     /**
@@ -139,10 +150,13 @@ class DTARequestsController extends AppBaseController
             return redirect(route('dtarequests.index'));
         }
 
+        $user_id = Auth::id();
+        $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
+        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
 
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
-        return view('dtarequests::dtarequests.edit')->with(['dtarequests' => $dtarequests, 'branches' => $branches]);
+        return view('dtarequests::dtarequests.edit')->with(['department_head_data' => $department_head_data,'unit_head_data' => $unit_head_data,'dtarequests' => $dtarequests, 'branches' => $branches]);
     }
     /**
      * Update the specified resource in storage.

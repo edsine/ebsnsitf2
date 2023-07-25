@@ -29,4 +29,6 @@ class DepartmentRepository extends BaseRepository
 
         return $query->where('branch_id', $branch_id)->get();
     }
+
+    
 }

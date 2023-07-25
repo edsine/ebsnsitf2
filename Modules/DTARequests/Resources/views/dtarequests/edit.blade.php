@@ -28,12 +28,12 @@
             </div>
 
             <div class="card-footer">
-                @role('SUPERVISOR')
+                @if(isset($unit_head_data))
                 {!! Form::submit('Approve & Send To HOD', ['class' => 'btn btn-primary']) !!}
-                @endrole
-                @role('HOD')
+                @endif
+                @if(isset($department_head_data))
                 {!! Form::submit('Approve & Send To MD', ['class' => 'btn btn-primary']) !!}
-                @endrole
+                @endif
                 @role('MD')
                 {!! Form::submit('Approve & Send To ED FINANCE & ACCOUNT', ['class' => 'btn btn-primary']) !!}
                 @endrole
