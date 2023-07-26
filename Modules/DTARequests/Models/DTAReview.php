@@ -18,6 +18,6 @@ class DTAReview extends Model
         'user_id',
         'review_status',
         'status',
-        'dta_reviewid',
+        'dta_id',
     ];
 }
