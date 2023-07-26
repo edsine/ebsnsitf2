@@ -2,25 +2,25 @@
 
 namespace Modules\DTARequests\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-use Modules\DTARequests\Http\Requests\CreateDTARequests;
-use Modules\DTARequests\Http\Requests\UpdateDTARequests;
-use App\Http\Controllers\AppBaseController;
-use Modules\DTARequests\Repositories\DTARequestsRepository;
-use Modules\DTARequests\Repositories\DTAReviewRepository;
-use Flash;
-use Modules\Shared\Repositories\BranchRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\StaffRepository;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Modules\UnitManager\Repositories\UnitHeadRepository;
-use Modules\DTARequests\Models\DTARequests;
+use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\StaffRepository;
 use Modules\UnitManager\Models\UnitHead;
 use Modules\Shared\Models\DepartmentHead;
+use App\Http\Controllers\AppBaseController;
+use Modules\DTARequests\Models\DTARequests;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Shared\Repositories\BranchRepository;
+use Modules\DTARequests\Http\Requests\CreateDTARequests;
+use Modules\DTARequests\Http\Requests\UpdateDTARequests;
+use Modules\UnitManager\Repositories\UnitHeadRepository;
+use Modules\DTARequests\Repositories\DTAReviewRepository;
+use Modules\DTARequests\Repositories\DTARequestsRepository;
 
 
 class DTARequestsController extends AppBaseController
