@@ -126,7 +126,7 @@ class UserController extends AppBaseController
 
         $user->assignRole($role);
         // Send notification to user about his account details
-        Notification::send($user, new UserCreated($input));
+       // Notification::send($user, new UserCreated($input));
 
         Flash::success('User saved successfully.');
 
