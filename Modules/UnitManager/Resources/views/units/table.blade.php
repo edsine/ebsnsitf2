@@ -4,6 +4,7 @@
             <thead>
             <tr>
                 <th>Unit Name</th>
+                <th>Department</th>
                 <th>Created At</th>
                 <th>Updated At</th>
                 <th colspan="3">Action</th>
@@ -13,6 +14,7 @@
             @foreach($units as $unit)
                 <tr>
                     <td>{{ $unit->unit_name }}</td>
+                    <td>{{ $unit->department->department_unit }}</td>
                     <td>{{ $unit->created_at }}</td>
                     <td>{{ $unit->updated_at }}</td>
                     

@@ -4,8 +4,35 @@
     {!! Form::text('unit_name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
-<!-- department Id Field -->
+<!-- department Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('user_id', 'Users:') !!}
-    {!! Form::select('user_id', $users, null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::label('department_id', 'Departments:') !!}
+    {!! Form::select('department_id', $departments, null, ['class' => 'form-control custom-select','id'=>'departmentSelect']) !!}
 </div>
+
+<!-- users Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('user_id', 'Unit Heads:') !!}
+    {!! Form::select('user_id', $users, null, ['class' => 'form-control custom-select','id'=>'userSelect']) !!}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // JavaScript to handle the department selection and update user dropdown
+    $('#departmentSelect').on('change', function () {
+        const selectedDepartmentId = $(this).val();
+        if (selectedDepartmentId) {
+            $.get(`http://127.0.0.1:8000/units/staff/${selectedDepartmentId}`, function (users) {
+                $('#userSelect').empty().append('<option value="">Select Unit Head</option>');
+                var u = JSON.stringify(users);
+                    
+                $.each(users, function (index, user) {
+                    $('#userSelect').append(`<option value="${user.id}">${user.first_name}</option>`);
+                });
+            
+            });
+        } else {
+            $('#userSelect').empty().append('<option value="">Select Unit Head</option>');
+        }
+    });
+</script>

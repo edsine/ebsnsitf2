@@ -95,7 +95,12 @@ class DTARequestsController extends AppBaseController
         $input = $request->all();
         $uid = Auth::id();
         $staff_id = $this->staffRepository->getByUserId($uid);
-        $input['staff_id'] = $staff_id->id;
+        if(!$staff_id){
+            Flash::error('Admin can not add new DTA Request. DTA request should be added by a staff only');
+            return redirect(route('dtarequests.index'));
+        } else{
+        
+        $input['staff_id'] = isset($staff->id) ? $staff_id->id : 0;
         $input['user_id'] = $uid;
         $input['hod_status'] = 0;
         $input['supervisor_status'] = 0;
@@ -115,6 +120,8 @@ class DTARequestsController extends AppBaseController
         Flash::success('DTA Requests saved successfully.');
 
         return redirect(route('dtarequests.index'));
+    }
+
     }
 
     /**
@@ -195,7 +202,7 @@ class DTARequestsController extends AppBaseController
         $staff = $this->staffRepository->getByUserId($user_id);
 
         $input_r = null;
-        $input_r['officer_id'] = $staff->id;
+        $input_r['staff_id'] = isset($staff->id) ? $staff->id : 0;
         $input_r['user_id'] = $user_id;
         $input_r['dta_reviewid'] = $id;
         $input_r['dta_id'] = $id;

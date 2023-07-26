@@ -4,6 +4,12 @@
     <p>{{ $unit->unit_name }}</p>
 </div>
 
+<!-- department Id Field -->
+<div class="col-sm-12">
+    {!! Form::label('unit_name', 'Unit Name:') !!}
+    <p>{{ $unit->department ? $unit->department->department_unit : '' }}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="col-sm-12">
     {!! Form::label('created_at', 'Created At:') !!}
