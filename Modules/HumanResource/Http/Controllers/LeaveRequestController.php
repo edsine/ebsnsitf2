@@ -155,8 +155,8 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
         
         
-         $staff_id = $this->staffRepository->getByUserId($uid);
-          $input['staff_id'] = $staff_id->id;
+         //$staff_id = $this->staffRepository->getByUserId($uid);
+         // $input['staff_id'] = $staff_id->id;
          $input['approve_status'] = 0;
          $input['user_id']=$uid;
          $input['supervisor_office'] = 0;
@@ -177,7 +177,7 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
         $leaveRequest = $this->leaverequestRepository->create($input);
         
         // sending a notification to the user that he has created a leave request
-        Notification::send($user,new Leaverequest($input));
+        //Notification::send($user,new Leaverequest($input));
 
         Flash::success('Leave Requests sent successfully.');
 
@@ -265,7 +265,7 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
         $leaverequest = $this->leaverequestRepository->update($input, $id);
 
-        Notification::send($user,new Leaverequest($input));
+        //Notification::send($user,new Leaverequest($input));
 
         Flash::success('LEAVE REQUEST Updated successfully .');
 
