@@ -2,8 +2,9 @@
 
 namespace Modules\HumanResource\Repositories;
 
-use Modules\HumanResource\Models\LeaveRequest;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\BaseRepository;
+use Modules\HumanResource\Models\LeaveRequest;
 //use LeaveRequest as GlobalLeaveRequest;
 
 class LeaveRequestRepository extends BaseRepository
@@ -27,5 +28,10 @@ class LeaveRequestRepository extends BaseRepository
         $query = $this->model->newQuery();
 
         return $query->where('branch_id', $branch_id)->get();
+    }
+
+    public function getByUserId($id)
+    {
+        return DB::table('dta_requests')->where('user_id', $id)->paginate(10);
     }
 }

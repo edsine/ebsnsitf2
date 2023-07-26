@@ -26,11 +26,19 @@ use Modules\HumanResource\Http\Requests\UpdateLeaveRequests;
 use Modules\HumanResource\Notifications\Leaverequest;
 use Modules\HumanResource\Repositories\LeaveRequestRepository;
 
+use Modules\UnitManager\Models\UnitHead;
+use Modules\Shared\Models\DepartmentHead;
+
 
 
 
 class LeaveRequestController extends  AppBaseController
 {
+
+
+
+    /** @var UnitHeadRepository $unitHeadRepository*/
+    private $unitHeadRepository;
 
     /** @var LeaveRequestController $leaverequest*/
     private $leaverequestRepository;
@@ -70,8 +78,18 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
     {
 
+        $user_id = Auth::id();
+        $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
+        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+
+        if(!empty($user_id)&& $user_id !=1){
+            $leaverequest=$this->leaverequestRepository->getByUserId($user_id);
+        } else {
+
+            $leaverequest=$this->leaverequestRepository->paginate(10);
+
+        }
         
-        $leaverequest=$this->leaverequestRepository->paginate(10);
         return view('humanresource::leaverequest.index',compact('leaverequest'));
     }
 
@@ -83,14 +101,23 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
     {
         
-        
+        $user_id = Auth::id();
+        $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
+        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+
+        $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
+        $branches->prepend('Select branch', '');
+
+
 
         $leavetype = $this->leavetypeRepository->all();
+
+        //the downone has been commented out 
        // $leavetype = $this->leavetypeRepository->all()->pluck('name','id');
         
     
 
-        return view('humanresource::leaverequest.create',compact('leavetype'));
+        return view('humanresource::leaverequest.create',compact(['leavetype','department_head_data','branches','unit_head_data']));
 
     }
 
@@ -128,8 +155,8 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
         
         
-         //$staff_id = $this->staffRepository.getByUserId($uid);
-         // $input['staff_id'] = $staff_id->id;
+         $staff_id = $this->staffRepository->getByUserId($uid);
+          $input['staff_id'] = $staff_id->id;
          $input['approve_status'] = 0;
          $input['user_id']=$uid;
          $input['supervisor_office'] = 0;
@@ -174,9 +201,6 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
             return redirect(route('leaverequests.index'));
         }
 
-
-
-
         return view('humanresource::leaverequest.show')->with('leaverequest',$leaverequest);
     }
 
@@ -194,6 +218,8 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
             return redirect(route('leave_request.index'));
         }
+
+        
         // $leavetype=$this->leavetypeRepository->find($id)->pluck('duration','id');
         $leavetype=$this->leavetypeRepository->find($id)->all();
        
