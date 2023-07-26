@@ -2,6 +2,7 @@
 
 namespace Modules\HumanResource\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ class LeaveRequest extends Model implements Auditable
     public $table = 'leave_request';
 public $primarykey='id';
     public $fillable = [
+        'user_id',
         'staff_id',
       'leavetype_id',
         'type',
@@ -76,9 +78,7 @@ public $primarykey='id';
     ];
     
 
-// public function leavetypes(){
-//     return $this->belongsTo('Modules\HumanResource\Models\LeaveType','leave_request_id','id'); 
-// }
+
 
    
 public function leavetype(){
@@ -88,5 +88,9 @@ public function leavetype(){
     public function staff(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\Modules\Shared\Models\staff::class, 'staff_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_id','id');
     }
 }
