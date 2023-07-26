@@ -22,6 +22,13 @@ use Illuminate\Support\Facades\Notification;
 use Modules\Shared\Repositories\BranchRepository;
 use Modules\Shared\Repositories\DepartmentRepository;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
+use App\Models\User;
+use App\Notifications\UserCreated;
+use Illuminate\Support\Facades\Notification;
+
+
 class UserController extends AppBaseController
 {
     /** @var $userRepository UserRepository */
