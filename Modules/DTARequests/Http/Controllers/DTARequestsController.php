@@ -59,7 +59,8 @@ class DTARequestsController extends AppBaseController
 
         if (!empty($user_id) && $user_id != 1) {
             # code...
-            $dtarequests = $this->dtaRequestsRepository->getByUserId($user_id);
+            //$dtarequests = $this->dtaRequestsRepository->getByUserId($user_id);
+            $dtarequests = $this->dtaRequestsRepository->paginate(10);
         } else {
             # code...
             $dtarequests = $this->dtaRequestsRepository->paginate(10);
@@ -204,7 +205,7 @@ class DTARequestsController extends AppBaseController
         $input_r = null;
         $input_r['staff_id'] = isset($staff->id) ? $staff->id : 0;
         $input_r['user_id'] = $user_id;
-        $input_r['dta_reviewid'] = $id;
+        $input_r['dtarequest_id'] = $id;
         $input_r['dta_id'] = $id;
         $input_r['comments'] = $request->input('comments');
         $input_r['review_status'] = $request->input('approval_status');

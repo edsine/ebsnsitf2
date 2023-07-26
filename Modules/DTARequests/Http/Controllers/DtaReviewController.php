@@ -31,7 +31,8 @@ class DtaReviewController extends Controller
         $user_id = Auth::id();
         if (!empty($user_id) && $user_id != 1) {
             # code...
-            $dtareview = $this->dtaReviewRepository->getAllRequestsById($user_id);
+           // $dtareview = $this->dtaReviewRepository->getAllRequestsById($user_id);
+           $dtareview = $this->dtaReviewRepository->getAllRequests();
         } else {
             # code...
             $dtareview = $this->dtaReviewRepository->getAllRequests();

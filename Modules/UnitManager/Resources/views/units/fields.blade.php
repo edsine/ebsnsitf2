@@ -21,8 +21,9 @@
     // JavaScript to handle the department selection and update user dropdown
     $('#departmentSelect').on('change', function () {
         const selectedDepartmentId = $(this).val();
+        var homeUrl = window.location.origin;
         if (selectedDepartmentId) {
-            $.get(`http://127.0.0.1:8000/units/staff/${selectedDepartmentId}`, function (users) {
+            $.get(`${homeUrl}/units/staff/${selectedDepartmentId}`, function (users) {
                 $('#userSelect').empty().append('<option value="">Select Unit Head</option>');
                 var u = JSON.stringify(users);
                     
