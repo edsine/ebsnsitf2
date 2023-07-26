@@ -13,8 +13,10 @@ use Modules\UnitManager\Repositories\UnitRepository;
 use Modules\UnitManager\Repositories\UnitHeadRepository;
 use Flash;
 use App\Repositories\UserRepository;
+use App\Repositories\StaffRepository;
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Repositories\DepartmentRepository;
+use Illuminate\Support\Facades\DB;
 
 
 class UnitController extends AppBaseController
@@ -32,13 +34,17 @@ class UnitController extends AppBaseController
     /** @var UserRepository $userRepository*/
     private $userRepository;
 
+    /** @var StaffRepository $staffRepository*/
+    private $staffRepository;
 
-    public function __construct(UserRepository $userRepo, DepartmentRepository $departmentRepo, UnitHeadRepository $unitHeadRepo, UnitRepository $unitRepo)
+
+    public function __construct(StaffRepository $staffRepo, UserRepository $userRepo, DepartmentRepository $departmentRepo, UnitHeadRepository $unitHeadRepo, UnitRepository $unitRepo)
     {
         $this->departmentRepository = $departmentRepo;
         $this->unitheadRepository = $unitHeadRepo;
         $this->unitRepository = $unitRepo;
         $this->userRepository = $userRepo;
+        $this->staffRepository = $staffRepo;
     }
 
     /**
@@ -59,9 +65,24 @@ class UnitController extends AppBaseController
     public function create()
     {
         
-        $users = $this->userRepository->all()->pluck("first_name","id");
-        $users->prepend('Select Users', '');
-        return view('unitmanager::units.create')->with(['users'=> $users]);
+        //$users = $this->userRepository->all()->pluck("first_name","id");
+        //$users->prepend('Select Unit Head', '');
+        $users = [
+            '0' => 'Select Unit Head'
+        ];
+        $departments = $this->departmentRepository->all()->pluck("department_unit","id");
+        $departments->prepend('Select Department', '');
+        return view('unitmanager::units.create')->with(['departments'=> $departments,'users'=> $users]);
+       
+        
+    }
+
+    public function getUsersByDepartment($departmentId)
+    {
+        $users = $this->staffRepository->getUsersByDepartment($departmentId);
+        $u = array();
+        $u = $users;
+        return $u;
     }
 
     /**
@@ -125,9 +146,14 @@ class UnitController extends AppBaseController
             return redirect(route('units.index'));
         }
         
-        $users = $this->userRepository->all()->pluck("first_name","id");
-        $users->prepend('Select Users', '');
-        return view('unitmanager::units.edit')->with(['users' => $users, 'unit' => $unit]);
+         //$users = $this->userRepository->all()->pluck("first_name","id");
+        //$users->prepend('Select Unit Head', '');
+        $users = [
+            '0' => 'Select Unit Head'
+        ];
+        $departments = $this->departmentRepository->all()->pluck("department_unit","id");
+        $departments->prepend('Select Department', '');
+        return view('unitmanager::units.edit')->with(['departments' => $departments, 'users' => $users, 'unit' => $unit]);
     }
     /**
      * Update the specified resource in storage.

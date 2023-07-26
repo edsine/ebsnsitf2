@@ -18,6 +18,7 @@ Route::prefix('unitmanager')->group(function() {
 Route::middleware(['auth'])->group(function () {
     Route::prefix('units')->group(function () {
         Route::resource('units', Modules\UnitManager\Http\Controllers\UnitController::class);
+        Route::get('/staff/{departmentId}', 'UnitController@getUsersByDepartment');
     });
     Route::prefix('unithead')->group(function () {
         Route::resource('unithead', Modules\UnitManager\Http\Controllers\UnitHeadController::class);
