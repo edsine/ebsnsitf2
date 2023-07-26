@@ -131,6 +131,7 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
          //$staff_id = $this->staffRepository.getByUserId($uid);
          // $input['staff_id'] = $staff_id->id;
          $input['approve_status'] = 0;
+         $input['user_id']=$uid;
          $input['supervisor_office'] = 0;
          $input['md_hr'] = 0;
          $input['leave_officer'] = 0;
