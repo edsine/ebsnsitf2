@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Response;
 
+use Illuminate\Http\Request;
 use App\Models\User;
 use Laracasts\Flash\Flash;
 use App\Notifications\UserCreated;
