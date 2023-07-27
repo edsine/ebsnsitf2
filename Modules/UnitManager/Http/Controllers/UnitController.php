@@ -17,6 +17,7 @@ use App\Repositories\StaffRepository;
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Repositories\DepartmentRepository;
 use Illuminate\Support\Facades\DB;
+use Modules\UnitManager\Models\UnitHead;
 
 
 class UnitController extends AppBaseController
@@ -67,6 +68,8 @@ class UnitController extends AppBaseController
         
         //$users = $this->userRepository->all()->pluck("first_name","id");
         //$users->prepend('Select Unit Head', '');
+        
+        
         $users = [
             '0' => 'Select Unit Head'
         ];

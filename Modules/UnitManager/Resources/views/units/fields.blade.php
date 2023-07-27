@@ -28,7 +28,7 @@
                 var u = JSON.stringify(users);
                     
                 $.each(users, function (index, user) {
-                    $('#userSelect').append(`<option value="${user.id}">${user.first_name}</option>`);
+                    $('#userSelect').append(`<option value="${user.id}">${user.first_name} ${user.last_name}</option>`);
                 });
             
             });
