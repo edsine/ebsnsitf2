@@ -160,15 +160,8 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
 
         
         
-         $staff_id = $this->staffRepository->getByUserId($uid);
-         if(!$staff_id){
-            Flash::error('Admin can not Make A Leave request,staff only');
-            return redirect(route('leave_request.index'));
-        } else{
-
-
-          $input['staff_id'] =isset($staff_id->id) ? $staff_id->id :0;
-
+         //$staff_id = $this->staffRepository->getByUserId($uid);
+         // $input['staff_id'] = $staff_id->id;
          $input['approve_status'] = 0;
          $input['user_id']=$uid;
          $input['supervisor_office'] = 0;
@@ -196,7 +189,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
         return redirect(route('leave_request.index'));
 
     }
-}
+
 
     /**
      * Show the specified resource.
