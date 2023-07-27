@@ -90,6 +90,11 @@ public function leavetype(){
         return $this->belongsTo(\Modules\Shared\Models\staff::class, 'staff_id', 'id');
     }
 
+    public function branch(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\Modules\Shared\Models\Branch::class, 'branch_id', 'id');
+    }
+
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
     }
