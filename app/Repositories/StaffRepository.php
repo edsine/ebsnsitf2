@@ -73,7 +73,7 @@ class StaffRepository extends BaseRepository
         $users = DB::table('users')
     ->join('staff as s', 'users.id', '=', 's.user_id') // Use alias 's' for the staff table
     ->join('departments as d', 's.department_id', '=', 'd.id') // Use alias 'd' for the departments table
-    ->select('users.id as id', 'users.first_name') // Use 'd' to reference the departments table
+    ->select('users.id as id', 'users.first_name', 'users.last_name') // Use 'd' to reference the departments table
     ->where('s.department_id', $departmentId)
     ->get();
 return $users;
