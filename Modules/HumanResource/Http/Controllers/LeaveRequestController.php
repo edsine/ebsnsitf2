@@ -284,20 +284,6 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
         $leaverequest = $this->leaverequestRepository->update($input, $id);
 
         //Notification::send($user,new Leaverequest($input));
-        $staff = $this->staffRepository->getByUserId($user_id);
-        $input_r = null;
-// check the table for the relationship
-       $input_r['staff_id'] = isset($staff->id) ? $staff->id : 0;
-       $input_r['user_id'] = $user_id;
-       $input_r['leaverequest_id'] = $id;
-     //  $input_r['dta_id'] = $id;
-       $input_r['comments'] = $request->input('comments');
-        $input_r['review_status'] = $request->input('approval_status');
-        $input_r['created_at'] = now();
-        $input_r['updated_at'] = now();
-
-        $this->leaverequestRepository->create($input_r);
-
 
         Flash::success('LEAVE REQUEST Updated successfully .');
 
