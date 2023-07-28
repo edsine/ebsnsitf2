@@ -31,6 +31,7 @@ class LeaveRequest extends Migration
              $table->integer('number_days')->nullable();
              $table->longText('home_address')->nullable();
              $table->longText('home_number')->nullable();
+             $table->longText('comments')->nullable();
           
              $table->string('local_council')->nullable();
              $table->string('state')->nullable();

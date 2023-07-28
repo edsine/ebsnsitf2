@@ -11,8 +11,8 @@
                 <th>OFFICER RELIEVER</th>
                 <th>LEAVE END DATE</th>
                 <th>SUPERVISOR APPROVAL</th>
-                <th>MD HR STATUS</th>
-                <th>LEAVER OFFICER STATUS</th>
+                <th>HOD  STATUS</th>
+                <th>HR  STATUS</th>
                 <th colspan="3">Action</th>
             </tr>
             </thead>

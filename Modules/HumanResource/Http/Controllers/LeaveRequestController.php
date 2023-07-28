@@ -157,7 +157,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
     {        
 
         $input=$request->all();
-//dd($input);
+
         $uid=Auth::id();
         $user=Auth::user();
 
@@ -165,14 +165,12 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
         
          $staff_id = $this->staffRepository->getByUserId($uid);
           $input['staff_id'] = $staff_id->id;
+      
          $input['supervisor_approval'] = 0;
          $input['hr_approval'] = 0;
          $input['hod_approval'] = 0;
          $input['user_id']=$uid;
-         //$input['supervisor_office'] = 0;
-        // $input['md_hr'] = 0;
-        // $input['leave_officer'] = 0;
-        
+         
         $input['leavetype_id'] = $request->type;
          
         
@@ -265,9 +263,10 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
         $input = $request->all();
         $user_id = Auth::id();
         $input['staff_id'] = $user_id;
+        $input['comments'] = $input['comments'];
 
-        if ($request->hasFile('uploaded_doc')) {
-            $file = $request->file('uploaded_doc');
+        if ($request->hasFile('signature_path')) {
+            $file = $request->file('signature_path');
             $fileName = $file->hashName();
             $path = $file->store('public');
             $input['signature_path'] = $fileName;
