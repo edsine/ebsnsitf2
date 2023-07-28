@@ -32,14 +32,14 @@
                 {!! Form::submit('Approve & Send To HOD', ['class' => 'btn btn-primary']) !!}
                 @endif
                 @if(isset($department_head_data))
-                {!! Form::submit('Approve & Send To HOD', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Approve & Send To HR', ['class' => 'btn btn-primary']) !!}
                 @endif
-                @role('MD')
-                {!! Form::submit('Approve & Send To HR ', ['class' => 'btn btn-primary']) !!}
+                @role('HR')
+                {!! Form::submit('Approve ', ['class' => 'btn btn-primary']) !!}
                 @endrole
-                @role('ED ADMIN')
+                {{-- @role('ED ADMIN')
                 {!! Form::submit('Approve', ['class' => 'btn btn-primary']) !!}
-                @endrole
+                @endrole --}}
 
 
 

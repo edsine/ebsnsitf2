@@ -84,7 +84,9 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
 
         $user_id = Auth::id();
         $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
-        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+       $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+
+       //$unit_head_id = $this->leaverequestRepository->isUnitHeadInSameDepartment($user_id, $department_id);
 
         if(!empty($user_id) && $user_id !=1){
             // $leaverequest=$this->leaverequestRepository->getByUserId($user_id);
@@ -95,7 +97,8 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
 
         }
         
-        return view('humanresource::leaverequest.index',compact(['department_head_data','leaverequest','unit_head_data']));
+        //return view('humanresource::leaverequest.index',compact(['department_head_data','leaverequest','unit_head_data']));
+        return view('humanresource::leaverequest.index',compact(['leaverequest']));
     }
 
     /**
@@ -154,19 +157,21 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
     {        
 
         $input=$request->all();
-
+//dd($input);
         $uid=Auth::id();
         $user=Auth::user();
 
         
         
-         //$staff_id = $this->staffRepository->getByUserId($uid);
-         // $input['staff_id'] = $staff_id->id;
-         $input['approve_status'] = 0;
+         $staff_id = $this->staffRepository->getByUserId($uid);
+          $input['staff_id'] = $staff_id->id;
+         $input['supervisor_approval'] = 0;
+         $input['hr_approval'] = 0;
+         $input['hod_approval'] = 0;
          $input['user_id']=$uid;
-         $input['supervisor_office'] = 0;
-         $input['md_hr'] = 0;
-         $input['leave_officer'] = 0;
+         //$input['supervisor_office'] = 0;
+        // $input['md_hr'] = 0;
+        // $input['leave_officer'] = 0;
         
         $input['leavetype_id'] = $request->type;
          
@@ -198,10 +203,10 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
      */
     
     public function show($id)
-
     {
         $leaverequest = $this->leaverequestRepository->find($id);
         
+
         if (empty($leaverequest)) {
             Flash::error('Leave Requests not found');
 
@@ -260,9 +265,6 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
         $input = $request->all();
         $user_id = Auth::id();
         $input['staff_id'] = $user_id;
-
-        
-        
 
         if ($request->hasFile('uploaded_doc')) {
             $file = $request->file('uploaded_doc');

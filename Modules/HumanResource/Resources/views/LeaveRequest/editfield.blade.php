@@ -87,6 +87,9 @@
     {{-- <div class="form-group my-5 col-sm-6">
         {!!Form::button('Update',['class'=>'btn btn-info','id'=>'u']) !!}
         </div> --}}
+        <div class="card">
+            <h1> GIVE A STATEMENT HERE  </h1>
+        </div>
 
         <div class="form-group col-sm-6 my-4">
             {!! Form::label('comments ', 'Comments:') !!}
@@ -95,12 +98,12 @@
 
 
         @if(isset($unit_head_data))
-        <!-- HOD Status Field -->
+        <!-- UNIT HEAD  Status Field -->
         <div class="form-group col-sm-6">
-            {!! Form::label('supervisor_status', 'Supervisor Status') !!}
+            {!! Form::label('supervisor_approval', 'Supervisor Status') !!}
             <div class="">
-            {!! Form::radio('supervisor_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-            {!! Form::radio('supervisor_status', 0, true) !!}&nbsp;Unapproved
+            {!! Form::radio('supervisor_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            {!! Form::radio('supervisor_approval', 0, true) !!}&nbsp;Unapproved
             </div>
         </div>
         @endif
@@ -108,52 +111,44 @@
         @if(isset($department_head_data))
         <!-- HOD Status Field -->
         <div class="form-group col-sm-6">
-            {!! Form::label('hod_status', 'HOD Status') !!}
+            {!! Form::label('hod_approval', 'HOD Status') !!}
             <div class="">
-            {!! Form::radio('hod_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-            {!! Form::radio('hod_status', 0, true) !!}&nbsp;Unapproved
+            {!! Form::radio('hod_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            {!! Form::radio('hod_approval', 0, true) !!}&nbsp;Unapproved
             </div>
         </div>
         @endif
         
         @role('MD')
         <?php 
-        if($dtarequests->hod_status == 1){
+        if($leaverequest->hod_approval == 1){
         ?>
         <!-- MD Status Field -->
         <div class="form-group col-sm-6">
-            {!! Form::label('md_status', 'MD Status') !!}
+            {!! Form::label('hod_approval', 'MD Status') !!}
             <div class="">
-            {!! Form::radio('md_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-            {!! Form::radio('md_status', 0, true) !!}&nbsp;Unapproved
+            {!! Form::radio('hod_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            {!! Form::radio('hod_approval', 0, true) !!}&nbsp;Unapproved
             </div>
         </div>
         <?php } ?>
         @endrole
-        @role('ED FINANCE & ACCOUNT')
+        @role('HR')
         <?php 
-        if($dtarequests->hod_status == 1 && $dtarequests->md_status == 1){
+        if($leaverequest->supervisor_approval == 1 && $leaverequest->hod_approval == 1){
         ?>
         <!-- Account Status Field -->
         <div class="form-group col-sm-6">
-            {!! Form::label('account_status', 'Account Status') !!}
+            {!! Form::label('hr_approval', 'HUMAN RESOURCE') !!}
             <div class="">
-            {!! Form::radio('account_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-            {!! Form::radio('account_status', 0, true) !!}&nbsp;Unapproved
+            {!! Form::radio('hr_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            {!! Form::radio('hr_approval', 0, true) !!}&nbsp;Unapproved
             </div>
         </div>
         <?php } ?>
         @endrole
-        @role('ED FINANCE & ACCOUNT')
-        <!-- Approval Status Field -->
-        <div class="form-group col-sm-6">
-            {!! Form::label('approval_status', 'Approval Status') !!}
-            <div class="">
-            {!! Form::radio('approval_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-            {!! Form::radio('approval_status', 0, true) !!}&nbsp;Unapproved
-            </div>
-        </div>
-        @endrole
+
+      
 
 
 

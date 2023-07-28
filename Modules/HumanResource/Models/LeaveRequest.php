@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Shared\Models\Department;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 class LeaveRequest extends Model implements Auditable
@@ -97,5 +98,8 @@ public function leavetype(){
 
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');
+    }
+    public function departments(){
+        return $this->belongsTo(Department::class,'department_id','id');
     }
 }

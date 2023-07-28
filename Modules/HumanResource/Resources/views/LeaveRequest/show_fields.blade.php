@@ -13,7 +13,7 @@
 <!--  TYPE OF  LEAVE  Field -->
 <div class="col-sm-12">
     {!! Form::label('type', 'TYPE OF LEAVE:') !!}
-    <p>{{ $leaverequest->type }}</p>
+    <p>{{ $leaverequest->type ? $leaverequest->leavetype->name:'' }}</p>
 </div>
 
 <!--  END OF LEAVE Field -->
@@ -23,10 +23,10 @@
 </div>
 
 <!-- Branch Id Field -->
-<div class="col-sm-12">
+{{-- <div class="col-sm-12">
     {!! Form::label('staff', 'Branch:') !!}
     <p>{{ $leaverequest->staff_id ? $leaverequest->staff_id->user_id : '' }}</p>
-</div>
+</div> --}}
 
 <!-- signature_path Field -->
 <div class="col-sm-4">
