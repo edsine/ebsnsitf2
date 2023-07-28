@@ -21,8 +21,12 @@ class LeaveRequest extends Migration
             $table->unsignedBigInteger('leavetype_id')->nullable()->default(1);
             $table->foreign('leavetype_id')->references('id')->on('leavetype')->onDelete('cascade');
     
-                     
-             $table->dateTime('date_start_new')->nullable();
+            $table->foreignId('branch_id')->nullable()->constrained('branches')->onDelete('cascade');
+            $table->foreignId('department_id')->nullable()->constrained('departments')->onDelete('cascade');
+            // $table->string('md_status')->nullable();
+            // $table->string('status')->nullable();
+            
+            $table->dateTime('date_start_new')->nullable();
              $table->string('type')->nullable();
              $table->integer('number_days')->nullable();
              $table->longText('home_address')->nullable();
@@ -34,10 +38,11 @@ class LeaveRequest extends Migration
              $table->string('officer_relieve')->nullable();
              $table->string('signature_path')->nullable();
              $table->dateTime('end_date')->nullable();
-             $table->integer('approve_status')->nullable()->default(0);
-             $table->integer('supervisor_office')->nullable()->default(0);
-             $table->integer('md_hr')->nullable()->default(0);
-             $table->integer('leave_officer')->nullable()->default(0);
+            //  $table->integer('approve_status')->nullable()->default(0);
+             $table->integer('supervisor_approval')->nullable()->default(0);
+             $table->integer('hr_approval')->nullable()->default(0);
+             $table->integer('hod_approval')->nullable()->default(0);
+             
              $table->integer('daystaken')->nullable();
         
              $table->timestamps();

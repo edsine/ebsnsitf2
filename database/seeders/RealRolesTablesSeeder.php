@@ -31,6 +31,7 @@ class RealRolesTablesSeeder extends Seeder
                 'LEAVE PROCESSING OFFICER',
                 'REGISTRY OFFICER',
                 'ED ADMIN',
+                'HR',
             ];
 
         $roles = collect($roleNames)->map(function ($roles_arrays) {

@@ -28,8 +28,24 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('leave_request.index') }}" class="btn btn-danger"> Cancel </a>
+                @if(isset($unit_head_data))
+                {!! Form::submit('Approve & Send To HOD', ['class' => 'btn btn-primary']) !!}
+                @endif
+                @if(isset($department_head_data))
+                {!! Form::submit('Approve & Send To HR', ['class' => 'btn btn-primary']) !!}
+                @endif
+                @role('HR')
+                {!! Form::submit('Approve ', ['class' => 'btn btn-primary']) !!}
+                @endrole
+                {{-- @role('ED ADMIN')
+                {!! Form::submit('Approve', ['class' => 'btn btn-primary']) !!}
+                @endrole --}}
+
+
+
+
+                {!! Form::submit('Reject', ['class' => 'btn btn-primary']) !!}
+                {{-- <a href="{{ route('leave_request.index') }}" class="btn btn-danger"> Cancel </a> --}}
             </div>
 
             {!! Form::close() !!}

@@ -108,7 +108,7 @@
 
 
 <!-- Description Field -->
-
+{{-- 
 
 @can(['approve as md_hr', 'approve as leave_officer', 'approve as supervisor_office','approve as approve_status'])
 <!-- Regional Manager Status Field -->
@@ -144,7 +144,7 @@
     {!! Form::radio('approve_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
-@endcan
+@endcan --}}
 
  
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

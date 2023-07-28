@@ -26,6 +26,7 @@ use Modules\HumanResource\Http\Requests\UpdateLeaveRequests;
 use Modules\HumanResource\Notifications\Leaverequest;
 use Modules\HumanResource\Repositories\LeaveRequestRepository;
 
+use Modules\UnitManager\Repositories\UnitHeadRepository;
 use Modules\UnitManager\Models\UnitHead;
 use Modules\Shared\Models\DepartmentHead;
 
@@ -56,13 +57,16 @@ class LeaveRequestController extends  AppBaseController
 /** @var StaffRepository $staffRepository*/
 private $staffRepository;
 
-public function __construct(UserRepository $userRepo, LeaveRequestRepository $leaverequestRepo, BranchRepository $branchRepo, StaffRepository $staffRepo ,LeavetypeRepository $leavetypeRepo)
+
+
+public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $userRepo, LeaveRequestRepository $leaverequestRepo, BranchRepository $branchRepo, StaffRepository $staffRepo ,LeavetypeRepository $leavetypeRepo)
     {
         $this->leaverequestRepository = $leaverequestRepo;
         $this->branchRepository = $branchRepo;
         $this->staffRepository = $staffRepo;
         $this->leavetypeRepository = $leavetypeRepo;
         $this->userRepository=$userRepo;
+        $this->unitHeadRepository = $unitHeadRepo;
     }
 
 
@@ -80,17 +84,21 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
         $user_id = Auth::id();
         $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
-        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+       $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
 
-        if(!empty($user_id)&& $user_id !=1){
-            $leaverequest=$this->leaverequestRepository->getByUserId($user_id);
+       //$unit_head_id = $this->leaverequestRepository->isUnitHeadInSameDepartment($user_id, $department_id);
+
+        if(!empty($user_id) && $user_id !=1){
+            // $leaverequest=$this->leaverequestRepository->getByUserId($user_id);
+            $leaverequest=$this->leaverequestRepository->paginate(10);
         } else {
 
             $leaverequest=$this->leaverequestRepository->paginate(10);
 
         }
         
-        return view('humanresource::leaverequest.index',compact('leaverequest'));
+        //return view('humanresource::leaverequest.index',compact(['department_head_data','leaverequest','unit_head_data']));
+        return view('humanresource::leaverequest.index',compact(['leaverequest']));
     }
 
     /**
@@ -108,9 +116,9 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
 
-
-
         $leavetype = $this->leavetypeRepository->all();
+
+
 
         //the downone has been commented out 
        // $leavetype = $this->leavetypeRepository->all()->pluck('name','id');
@@ -149,7 +157,7 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
     {        
 
         $input=$request->all();
-
+//dd($input);
         $uid=Auth::id();
         $user=Auth::user();
 
@@ -157,11 +165,13 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
         
          $staff_id = $this->staffRepository->getByUserId($uid);
           $input['staff_id'] = $staff_id->id;
-         $input['approve_status'] = 0;
+         $input['supervisor_approval'] = 0;
+         $input['hr_approval'] = 0;
+         $input['hod_approval'] = 0;
          $input['user_id']=$uid;
-         $input['supervisor_office'] = 0;
-         $input['md_hr'] = 0;
-         $input['leave_officer'] = 0;
+         //$input['supervisor_office'] = 0;
+        // $input['md_hr'] = 0;
+        // $input['leave_officer'] = 0;
         
         $input['leavetype_id'] = $request->type;
          
@@ -177,7 +187,7 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
         $leaveRequest = $this->leaverequestRepository->create($input);
         
         // sending a notification to the user that he has created a leave request
-        Notification::send($user,new Leaverequest($input));
+        //Notification::send($user,new Leaverequest($input));
 
         Flash::success('Leave Requests sent successfully.');
 
@@ -185,16 +195,18 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
     }
 
+
     /**
      * Show the specified resource.
      * @param int $id
      * @return Renderable
      */
+    
     public function show($id)
-
     {
         $leaverequest = $this->leaverequestRepository->find($id);
         
+
         if (empty($leaverequest)) {
             Flash::error('Leave Requests not found');
 
@@ -219,16 +231,18 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
             return redirect(route('leave_request.index'));
         }
 
-        
-        // $leavetype=$this->leavetypeRepository->find($id)->pluck('duration','id');
-        $leavetype=$this->leavetypeRepository->find($id)->all();
+        $user_id = Auth::id();
+        $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
+        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+
+       //  $leavetype=$this->leavetypeRepository->find($id)->pluck('duration','id');
+      //  $leavetype=$this->leavetypeRepository->find($id)->all();
+        $leavetype=$this->leavetypeRepository->all();
        
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
 
-
-
-        return view('humanresource::leaverequest.edit')->with(['LeaveRequest' => $leaverequest, 'branches' => $branches,'leavetype'=>$leavetype]);;
+        return view('humanresource::leaverequest.edit')->with(['department_head_data' => $department_head_data,'unit_head_data' => $unit_head_data,'LeaveRequest' => $leaverequest, 'branches' => $branches,'leavetype'=>$leavetype]);;
     }
 
     /**
@@ -239,7 +253,7 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
      */
     public function update($id, UpdateLeaveRequests $request)
     {
-        $user= Auth::user();
+       // $user= Auth::user();
         $leaverequest = $this->leaverequestRepository->find($id);
 
         if (empty($leaverequest)) {
@@ -249,9 +263,8 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
         }
 
         $input = $request->all();
-
-        
-        
+        $user_id = Auth::id();
+        $input['staff_id'] = $user_id;
 
         if ($request->hasFile('uploaded_doc')) {
             $file = $request->file('uploaded_doc');
@@ -265,7 +278,7 @@ public function __construct(UserRepository $userRepo, LeaveRequestRepository $le
 
         $leaverequest = $this->leaverequestRepository->update($input, $id);
 
-        Notification::send($user,new Leaverequest($input));
+        //Notification::send($user,new Leaverequest($input));
 
         Flash::success('LEAVE REQUEST Updated successfully .');
 

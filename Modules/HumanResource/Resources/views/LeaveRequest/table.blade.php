@@ -22,7 +22,7 @@
                 <tr>
                     
                     <td>{{ $leaves->id }}</td>
-                    <td>{{ $leaves->leavetype ? $leaves->leavetype->name : 'personal'}}</td>
+                    <td>{{ $leaves->leavetype ? $leaves->leavetype->name : ''}}</td>
 
                     <td>{{ $leaves->date_start_new}}</td>
                     <td>{{ $leaves->number_days }}</td>
@@ -30,8 +30,10 @@
                     <td>{{ $leaves->officer_relieve }}</td>
                     <td>{{ $leaves->end_date }}</td>
                     
+                    
                     <td>
-                        <p> @if (isset($leaves->regional_manager_status) && $leaves->regional_manager_status == 1)
+                        {{-- UNIT HEAD APPROVAL SECTION approve_status stands for the unit head approval   --}}
+                            <p> @if (isset($leaves->supervisor_approval) && $leaves->supervisor_approval == 1)
                             <span class="btn btn-sm btn-success">Approved</span>
                         @else
                             <span class="btn btn-sm btn-secondary">Unapproved</span>
@@ -39,7 +41,8 @@
                             </p>
                         </td>
                     <td>
-                        <p> @if (isset($leaves->head_office_status) && $leaves->head_office_status == 1)
+                          {{--  HEAD OF DEPARTMENT APPROVAL SECTION  status stands for hod --}}
+                        <p> @if (isset($leaves->hod_approval) && $leaves->hod_approval == 1)
                             <span class="btn btn-sm btn-success">Approved</span>
                         @else
                             <span class="btn btn-sm btn-secondary">Unapproved</span>
@@ -47,7 +50,8 @@
                             </p>
                         </td>
                     <td>
-                        <p> @if (isset($leaves->head_office_status) && $leaves->head_office_status == 1)
+                          {{--  HR APPROVAL SECTION    hr --}}
+                        <p> @if (isset($leaves->hr_approval) && $leaves->hr_approval == 1)
                             <span class="btn btn-sm btn-success">Approved</span>
                         @else
                             <span class="btn btn-sm btn-secondary">Unapproved</span>
@@ -62,10 +66,10 @@
                                 <i class="far fa-eye"></i>
                             </a>
                             <a href="{{ route('leave_request.edit', [$leaves->id]) }}"
-                               class='btn btn-default btn-xs'>
+                               class='btn btn-default btn-xs'  title="MAKE APPROVAL">
                                 <i class="far fa-edit"></i>
                             </a>
-                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            {{-- {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!} --}}
                         </div>
                         {!! Form::close() !!}
                     </td>
