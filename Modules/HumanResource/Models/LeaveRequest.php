@@ -23,14 +23,11 @@ public $primarykey='id';
         'staff_id',
       'leavetype_id',
         'type',
-        'reasons',
-       // 'date_last_leave',
+        'department_id',
         'date_start_new',
         'number_days',
         'home_address',
-        'house_number',
-      //  'street_name',
-        //'district',
+        'home_number',
         'local_council',
         'state',
         'phone_number',
@@ -41,7 +38,11 @@ public $primarykey='id';
         'supervisor_office',
         'md_hr',
         'leave_officer',
-        'daystaken'
+        'daystaken',
+        'supervisor_approval',
+        'hr_approval',
+        'hod_approval',
+        'comments'
 
     ];
 
@@ -49,14 +50,13 @@ public $primarykey='id';
         'staff_id'=>'integer',
         'type'=>'string',
 
-        //'reasons'=>'string',
-        //'date_last_leave'=>'string',
+    
         'date_start_new'=>'string',
         'number_days'=>'string',
         'home_address'=>'string',
-        'house_number'=>'string',
+        'home_number'=>'string',
         'street_name'=>'string',
-        //'district'=>'string',
+       
         'local_council'=>'string',
         'state'=>'string',
         'phone_number'=>'integer',
@@ -66,16 +66,18 @@ public $primarykey='id';
         'approve_status'=>'integer',
         'supervisor_office'=>'integer',
         'md_hr'=>'string',
-        'leave_officer'=>'string'
+        'leave_officer'=>'string',
+        'supervisor_approval'=>'integer',
+        'hod_approval'=>'integer',
+        'hr_approval'=>'integer',
     ];
     public static array $rules=[
-        // 'reasons'=>'required',
-        // 'date_last_leave'=>'required',
         'daystaken'=>'required',
         'number_days'=>'required',
         'date_start_new'=>'required',
         'number_days'=>'required',
         'phone_number'=>'required',
+       
     ];
     
 

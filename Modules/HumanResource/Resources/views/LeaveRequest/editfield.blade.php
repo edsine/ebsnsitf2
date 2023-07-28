@@ -5,18 +5,27 @@
  
 
 
-    <div class="form-group col-sm-6">
+    {{-- <div class="form-group col-sm-6">
         {!! Form::label('type', 'SELECT LEAVE TYPE:') !!}
         {!! Form::select('type', $leavetype->pluck('name','id'), null, ['class' => 'form-control form-select', 'required','id'=>'leave_type','readonly'=>true]) !!}
+    
+    </div> --}}
+    <div class="form-group col-sm-6">
+        {!! Form::label('type', 'SELECT LEAVE TYPE:') !!}
+        {!! Form::text('type',  $LeaveRequest->leavetype->name ??  null,  ['class' => 'form-control ', 'required','id'=>'leave_type','readonly'=>true]) !!}
     
     </div>
 
 
 
     
+    {{-- <div class="form-group col-sm-6">
+        {!! Form::label('date_start_new', 'DATE REQUESTED TO COMMENCE PRESENT LEAVE:') !!}
+        {!! Form::text('date_start_new',  $LeaveRequest->pluck('date_start_new','id') ??   null, ['class' => 'form-control ','id'=>'date_start']) !!}
+    </div> --}}
     <div class="form-group col-sm-6">
         {!! Form::label('date_start_new', 'DATE REQUESTED TO COMMENCE PRESENT LEAVE:') !!}
-        {!! Form::date('date_start_new',  $LeaveRequest->pluck('date_start_new','id') ??   null, ['class' => 'form-control ','id'=>'date_start']) !!}
+        {!! Form::text('date_start_new',  $LeaveRequest->date_start_new ??   null, ['class' => 'form-control ','id'=>'date_start','readonly'=>true]) !!}
     </div>
    
     
@@ -60,7 +69,7 @@
     </div>
     <div class="form-group col-sm-6">
         {!! Form::label('state', 'STATE:') !!}
-        {!! Form::select('state', getBranchRegions(), null, ['class' => 'form-control form-select ','readonly'=>true]) !!}
+        {!! Form::select('state', getBranchRegions(), null, ['class' => 'form-control  ','readonly'=>true]) !!}
     </div>
     
     
@@ -78,18 +87,17 @@
     <!-- Signature Field -->
     <div class="col-sm-4 my-4">
         {!! Form::label('signature_path', 'UPLOAD SIGNATURE PDF ONLY') !!}
-        <div class="form-group">
-        {!! Form::file('signature_path', null, ['class' => 'form-control','accept' => 'image/*','readonly'=>true]) !!}
+        @if ($LeaveRequest->signature_path)
+<img src="{{ asset('storage/' . $LeaveRequest->signature_path) }}" alt="Signature Of applicant" style="width: 100px;">
+<div class="form-group">
+    {{-- {!! Form::file('signature_path', null, ['class' => 'form-control','accept' => 'image/*','readonly'=>true]) !!} --}}
+    @endif
         </div>
     </div>
 
 
-    {{-- <div class="form-group my-5 col-sm-6">
-        {!!Form::button('Update',['class'=>'btn btn-info','id'=>'u']) !!}
-        </div> --}}
-        <div class="card">
-            <h1> GIVE A STATEMENT HERE  </h1>
-        </div>
+   
+       
 
         <div class="form-group col-sm-6 my-4">
             {!! Form::label('comments ', 'Comments:') !!}
@@ -99,10 +107,11 @@
 
         @if(isset($unit_head_data))
         <!-- UNIT HEAD  Status Field -->
-        <div class="form-group col-sm-6">
-            {!! Form::label('supervisor_approval', 'Supervisor Status') !!}
-            <div class="">
+        <div class="form-group col-sm-6 my-5">
+            {!! Form::label('supervisor_approval', 'Supervisor Status',['class'=>'h4']) !!} <br>
+            <div class="form-control">
             {!! Form::radio('supervisor_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            <br>
             {!! Form::radio('supervisor_approval', 0, true) !!}&nbsp;Unapproved
             </div>
         </div>
@@ -111,8 +120,8 @@
         @if(isset($department_head_data))
         <!-- HOD Status Field -->
         <div class="form-group col-sm-6">
-            {!! Form::label('hod_approval', 'HOD Status') !!}
-            <div class="">
+            {!! Form::label('hod_approval', 'HOD Status',['class'=>'h4']) !!}
+            <div class="form-control">
             {!! Form::radio('hod_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
             {!! Form::radio('hod_approval', 0, true) !!}&nbsp;Unapproved
             </div>
@@ -126,7 +135,7 @@
         <!-- MD Status Field -->
         <div class="form-group col-sm-6">
             {!! Form::label('hod_approval', 'MD Status') !!}
-            <div class="">
+            <div class="form-control">
             {!! Form::radio('hod_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
             {!! Form::radio('hod_approval', 0, true) !!}&nbsp;Unapproved
             </div>
