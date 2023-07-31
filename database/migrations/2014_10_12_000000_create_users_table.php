@@ -15,12 +15,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+             $table->foreignId('ranking_id')->nullable()->constrained('rankings')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('email')->unique();
+            $table->string('rank')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            
         });
     }
 

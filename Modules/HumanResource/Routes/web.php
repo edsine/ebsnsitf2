@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use Modules\HumanResource\Http\Controllers\Leavetypescontroller;
 use Modules\HumanResource\Http\Controllers\LeaveRequestController;
+use Modules\HumanResource\Http\Controllers\RankingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +17,6 @@ use Modules\HumanResource\Http\Controllers\LeaveRequestController;
 |
 */
 
-// Route::prefix('humanresource')->group(function() {
-//     Route::get('/', 'HumanResourceController@index');
-// });
-// Route::resource('leave_request', LeaveRequestController::class);
 
 
 Route::prefix('leave_request_data')->group(function() {
@@ -28,17 +25,29 @@ Route::prefix('leave_request_data')->group(function() {
     Route::get('/leave_types','LeaveTypesController@index')->name("atp");
     Route::get('/get-data/{id}','LeaveRequestController@getDuration');
 
-
-// Route::get('/get_leave_type_duration/{id}', 'LeaveRequestController@getLeaveTypeDuration');
-
 });
-//  Route::livewire('/leave-request-fields',MultiSectionForm::class);
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('leave_request')->group(function () {
         Route::resource('leave_request', Modules\HumanResource\Http\Controllers\LeaveRequestController::class);
         Route::resource('/leave_type', Modules\HumanResource\Http\Controllers\Leavetypescontroller::class);
    
+    });
+    
+}
+
+);
+Route::prefix('ranking')->group(function(){
+    Route::get('/','RankingController@index')->name('ranking');
+
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('ranking')->group(function () {
+        Route::resource('ranking', Modules\HumanResource\Http\Controllers\RankingController::class);
+         
     });
     
 }

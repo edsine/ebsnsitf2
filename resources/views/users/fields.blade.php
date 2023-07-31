@@ -1,3 +1,9 @@
+{{-- RANK --}}
+<div class="form-group col-sm-4">
+    {!! Form::label('rank', 'Rank') !!}
+    {!! Form::select('rank',$rank , null, ['class' => 'form-control form-select']) !!}
+</div>
+
 <!-- First Name Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('first_name', 'First Name') !!}
@@ -26,7 +32,8 @@
 <div class="col-sm-6">
     {!! Form::label('roles', 'Roles') !!}
     <div class="form-group">
-    {!! Form::select('roles[]',$roles,null, ['multiple' => true,'class' => 'form-control']) !!}
+    {{-- {!! Form::select('roles[]',$roles,null, ['multiple' => true,'class' => 'form-control']) !!} --}}
+    {!! Form::select('roles[]',$roles,null, ['class' => 'form-control form-select']) !!}
 
     </div>
 </div>
