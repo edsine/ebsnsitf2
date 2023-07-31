@@ -35,7 +35,7 @@ class EmployerController extends AppBaseController
         $local_govt = LocalGovt::where('status', 1)->get();
 
         $employers = $this->employerRepository->paginate(10);
-        
+
         return view('employermanager::employers.index', compact('employers', 'state', 'local_govt'));
     }
 
@@ -43,15 +43,12 @@ class EmployerController extends AppBaseController
      * Show the form for creating a new Employer.
      */
     public function create()
-    {  
+    {
         $state = State::where('status', 1)->get();
         $local_govt = LocalGovt::where('status', 1)->get();
 
-        $employers = User::whereHas(
-            'roles', function ($q) {
-                $q->where('name', 'super-admin');
-            }
-        )->get();
+        $employers = User::get();
+
         return view('employermanager::employers.create', compact('employers','state', 'local_govt'));
     }
 
@@ -98,11 +95,7 @@ class EmployerController extends AppBaseController
         $local_govt = LocalGovt::where('status', 1)->get();
 
         $employer = $this->employerRepository->find($id);
-        $employers = User::whereHas(
-            'roles', function ($q) {
-                $q->where('name', 'super-admin');
-            }
-        )->get();
+        $employers = User::get();
 
         if (empty($employer)) {
             Flash::error('Employer not found');
@@ -164,8 +157,8 @@ class EmployerController extends AppBaseController
 
         $employer = $this->employerRepository->find($id);
         $employees = Employee::where('employer_id', '=', $employer->id)->paginate(10);
-       
+
         return view('employermanager::employers.employee', compact('employer', 'employees'));
     }
-    
+
 }
