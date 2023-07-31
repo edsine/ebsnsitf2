@@ -25,13 +25,42 @@
 <!-- Gender Field -->
 <div class="col-sm-12">
     {!! Form::label('gender', 'Gender:') !!}
-    <p>{{ $employee->gender }}</p>
+    <p>@if ($employee->gender == 1)
+        Male
+    @elseif($employee->gender == 2)
+        Female
+    @else
+        Others
+    @endif</p>
 </div>
 
 <!-- Marital Status Field -->
 <div class="col-sm-12">
     {!! Form::label('marital_status', 'Marital Status:') !!}
-    <p>{{ $employee->marital_status }}</p>
+    <p>@switch($employee->marital_status)
+        @case(1)
+            Single
+        @break
+
+        @case(2)
+            Married
+        @break
+
+        @case(3)
+            Separated
+        @break
+
+        @case(4)
+            Divorced
+        @break
+
+        @case(5)
+            Separated
+        @break
+
+        @default
+        Not Specified
+    @endswitch</p>
 </div>
 
 <!-- Email Field -->
@@ -55,7 +84,11 @@
 <!-- Local Govt Area Field -->
 <div class="col-sm-12">
     {!! Form::label('local_govt_area', 'Local Govt Area:') !!}
-    <p>{{ $employee->local_govt_area }}</p>
+    <p> @if ($employee->company_localgovt)
+        {{ $employee->localGovernment->name }}
+    @else
+        Not Specified
+    @endif</p>
 </div>
 
 <!-- State Of Origin Field -->
@@ -115,6 +148,10 @@
 <!-- Status Field -->
 <div class="col-sm-12">
     {!! Form::label('status', 'Status:') !!}
-    <p>{{ $employee->status }}</p>
+    <p>@if ($employee->status == 1)
+        Registered
+    @else
+        Incomplete
+    @endif</p>
 </div>
 

@@ -19,35 +19,76 @@
 														</tr>
             </thead>
             <tbody>
-            @foreach($employees as $employee)
+                @foreach ($employees as $employee)
                 <tr>
                     <td>{{ $employee->last_name }}</td>
                     <td>{{ $employee->first_name }}</td>
                     <td>{{ $employee->middle_name }}</td>
                     <td>{{ $employee->date_of_birth }}</td>
-                    <td>{{ $employee->gender }}</td>
-                    <td>{{ $employee->marital_status }}</td>
+                    <td>
+                        @if ($employee->gender == 1)
+                            Male
+                        @elseif($employee->gender == 2)
+                            Female
+                        @else
+                            Others
+                        @endif
+                    </td>
+                    <td>
+                        @switch($employee->marital_status)
+                            @case(1)
+                                Single
+                            @break
+
+                            @case(2)
+                                Married
+                            @break
+
+                            @case(3)
+                                Separated
+                            @break
+
+                            @case(4)
+                                Divorced
+                            @break
+
+                            @case(5)
+                                Separated
+                            @break
+
+                            @default
+                            Not Specified
+                        @endswitch
+                    </td>
                     <td>{{ $employee->email }}</td>
                     <td>{{ $employee->employment_date }}</td>
                     <td>{{ $employee->monthly_renumeration }}</td>
-                    <td>{{ $employee->status }}</td>
-                    <td  style="width: 120px">
+                    <td>
+                        @if ($employee->status == 1)
+                            Registered
+                        @else
+                            Incomplete
+                        @endif
+                    </td>
+                    <td style="width: 120px">
                         {!! Form::open(['route' => ['employees.destroy', $employee->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('employees.show', [$employee->id]) }}"
-                               class='btn btn-default btn-xs'>
+                            <a href="{{ route('employees.show', [$employee->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
-                            <a href="{{ route('employees.edit', [$employee->id]) }}"
-                               class='btn btn-default btn-xs'>
+                            <a href="{{ route('employees.edit', [$employee->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
-                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            {!! Form::button('<i class="far fa-trash-alt"></i>', [
+                                'type' => 'submit',
+                                'class' => 'btn btn-danger btn-xs',
+                                'onclick' => "return confirm('Are you sure?')",
+                            ]) !!}
                         </div>
                         {!! Form::close() !!}
                     </td>
-                															<th class="min-w-200px text-end rounded-end"></th>
-														</tr>
+                    <th class="min-w-200px text-end rounded-end"></th>
+                </tr>
             @endforeach
             </tbody>
         </table>

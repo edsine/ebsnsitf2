@@ -33,9 +33,24 @@ class EmployerController extends AppBaseController
 
         $state = State::where('status', 1)->get();
         $local_govt = LocalGovt::where('status', 1)->get();
+        $employers = Employer::orderBy('created_at', 'DESC');
+        // dd($employerRepo);
 
-        $employers = $this->employerRepository->paginate(10);
+        if ($request->filled('search')) {
+            $employers->where('ecs_number', 'like', '%' . $request->search . '%')
+                ->orWhere('company_name', 'like', '%' . $request->search . '%')
+                ->orWhere('company_email', 'like', '%' . $request->search . '%')
+                ->orWhere('company_address', 'like', '%' . $request->search . '%')
+                ->orWhere('company_rcnumber', 'like', '%' . $request->search . '%')
+                ->orWhere('company_phone', 'like', '%' . $request->search . '%')
+                ->orWhere('company_localgovt', 'like', '%' . $request->search . '%')
+                ->orWhere('company_state', 'like', '%' . $request->search . '%')
+                ->orWhere('business_area', 'like', '%' . $request->search . '%')
+                ->orWhere('status', 'like', '%' . $request->search . '%');
+        }
 
+        // $employers = $this->employerRepository->paginate(10);
+        $employers = $employers->paginate(10);
         return view('employermanager::employers.index', compact('employers', 'state', 'local_govt'));
     }
 
@@ -156,7 +171,22 @@ class EmployerController extends AppBaseController
     {
 
         $employer = $this->employerRepository->find($id);
-        $employees = Employee::where('employer_id', '=', $employer->id)->paginate(10);
+        $employees = Employee::where('employer_id', '=', $employer->id);
+
+        if ($request->filled('search')) {
+            $employees->where('last_name', 'like', '%' . $request->search . '%')
+                ->orWhere('first_name', 'like', '%' . $request->search . '%')
+                ->orWhere('middle_name', 'like', '%' . $request->search . '%')
+                ->orWhere('date_of_birth', 'like', '%' . $request->search . '%')
+                ->orWhere('gender', 'like', '%' . $request->search . '%')
+                ->orWhere('marital_status', 'like', '%' . $request->search . '%')
+                ->orWhere('email', 'like', '%' . $request->search . '%')
+                ->orWhere('employment_date', 'like', '%' . $request->search . '%')
+                ->orWhere('monthly_renumeration', 'like', '%' . $request->search . '%')
+                ->orWhere('status', 'like', '%' . $request->search . '%');
+        }
+
+        $employees = $employees->paginate(10);
 
         return view('employermanager::employers.employee', compact('employer', 'employees'));
     }
