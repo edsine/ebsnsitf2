@@ -22,8 +22,10 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Notification;
+use Modules\HumanResource\Models\Ranking;
 use Modules\Shared\Repositories\BranchRepository;
 use Modules\Shared\Repositories\DepartmentRepository;
+use Modules\HumanResource\Repositories\RankingRepository;
 
 
 class UserController extends AppBaseController
@@ -43,13 +45,17 @@ class UserController extends AppBaseController
     /** @var $staffRepository StaffRepository */
     private $staffRepository;
 
-    public function __construct(UserRepository $userRepo, RoleRepository $roleRepo, BranchRepository $branchRepo, DepartmentRepository $departmentRepo, StaffRepository $staffRepo)
+    /** @var $rankRepository RankingRepository */
+    private $rankRepository;
+
+    public function __construct(RankingRepository $rankRepo, UserRepository $userRepo, RoleRepository $roleRepo, BranchRepository $branchRepo, DepartmentRepository $departmentRepo, StaffRepository $staffRepo)
     {
         $this->userRepository = $userRepo;
         $this->roleRepository = $roleRepo;
         $this->branchRepository = $branchRepo;
         $this->departmentRepository = $departmentRepo;
         $this->staffRepository = $staffRepo;
+        $this->rankRepository=$rankRepo;
     }
 
     /**
@@ -72,13 +78,16 @@ class UserController extends AppBaseController
      * @return Response
      */
     public function create()
+
     {
+        // $rank=Ranking::pluck('name','id')->all();
+        $rank=$this->rankRepository->all()->pluck('name','id');
         $roles = Role::pluck('name', 'id')->all();
         $roles = $this->roleRepository->all()->pluck('name', 'id');
         $roles->prepend('Select role', '');
         $branch = $this->branchRepository->all()->pluck('branch_name', 'id');
         $department = $this->departmentRepository->all()->pluck('department_unit', 'id');
-        return view('users.create', compact('roles', 'branch', 'department'));
+        return view('users.create', compact('roles', 'branch', 'department','rank'));
     }
 
     /**
@@ -91,8 +100,11 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
 
+        
+
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
+       $input['ranking_id']=$request->rank;
         //Create a new user
         $user = $this->userRepository->create($input);
 
@@ -158,6 +170,7 @@ class UserController extends AppBaseController
     {
 
         $user = $this->userRepository->getByUserId($id);
+        $rank= $this->rankRepository->all()->pluck('name','id');
 
         $branch = $this->branchRepository->all()->pluck('branch_name', 'id');
         $department = $this->departmentRepository->all()->pluck('department_unit', 'id');
@@ -175,7 +188,7 @@ class UserController extends AppBaseController
 
         $roles->prepend('Select role', '');
 
-        return view('users.edit', compact('user', 'roles', 'branch', 'department', 'id'));
+        return view('users.edit', compact('user', 'roles', 'branch', 'department', 'id','rank'));
     }
 
     /**

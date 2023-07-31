@@ -5,13 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>
-                       THE  Rank
-                    </h1>
+                    <h1>RANKING STRUCTURES</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-default float-right" href="{{ route('ranking.index') }}">
-                        Back
+                    <a class="btn btn-primary float-end"
+                       href="{{ route('ranking.create') }}">
+                        ADD NEW RANK
                     </a>
                 </div>
             </div>
@@ -19,13 +18,14 @@
     </section>
 
     <div class="content px-3">
+
+        @include('flash::message')
+
+        <div class="clearfix"></div>
+
         <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    
-                    @include('humanresource::leavetypes.show_fields')
-                </div>
-            </div>
+            @include('humanresource::leavetypes.table')
         </div>
     </div>
+
 @endsection
