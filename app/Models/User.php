@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\HumanResource\Models\Ranking;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
@@ -28,6 +29,8 @@ class User extends Authenticatable implements Auditable
         'first_name',
         'middle_name',
         'last_name',
+        'ranking_id',
+        'rank'
     ];
 
     /**
@@ -65,7 +68,9 @@ class User extends Authenticatable implements Auditable
     {
         return $this->hasOne(Staff::class);
     }
-    
+    public function ranking(){
+        return $this->belongsTo(Ranking::class,'ranking_id','id');
+    }
 
     
 }

@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>
-                       THE  Rank
+                       THE SELECTED  RANK 
                     </h1>
                 </div>
                 <div class="col-sm-6">
@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row">
                     
-                    @include('humanresource::leavetypes.show_fields')
+                    @include('humanresource::ranking.show_fields')
                 </div>
             </div>
         </div>
