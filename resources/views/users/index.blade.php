@@ -17,9 +17,9 @@
                     </a>
                 </div>
             </div>
-            <div class="row mb-2">
-                <div class="col-sm-3">
-                    <form method="get" action="" class="navbar-search mr-4">
+            <div class="row my-5">
+                <div class="col-sm-3 ">
+                    <form method="get" action="" class="navbar-search mr-4 ">
                         <div class="input-group">
                             <input type="text" name="search" value="{{ \Request::get('search', '') }}"
                                 class="form-control bg-light border-0 small" placeholder="@lang('Search Users list..')" aria-label="Search"

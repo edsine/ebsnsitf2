@@ -24,7 +24,7 @@
         <div class="clearfix"></div>
 
         <div class="card">
-            @include('humanresource::leavetypes.table')
+            @include('humanresource::ranking.table')
         </div>
     </div>
 
