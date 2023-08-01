@@ -67,7 +67,16 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->paginate(10);
+        $users = User::orderBy('created_at', 'DESC');
+
+        if ($request->filled('search')) {
+            $users->where('first_name', 'like', '%' . $request->search . '%')
+                ->orWhere('middle_name', 'like', '%' . $request->search . '%')
+                ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                ->orWhere('email', 'like', '%' . $request->search . '%');
+        }
+        // $users = $this->userRepository->paginate(10);
+        $users = $users->paginate(10);
 
         return view('users.index')->with('users', $users);
     }

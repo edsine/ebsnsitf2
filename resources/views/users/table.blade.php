@@ -37,12 +37,6 @@
     </div>
 
     <div class="card-footer clearfix">
-
-        <script>
-            $(document).ready( function () {
-    $('#field-types-table').DataTable();
-} );
-        </script>
         <div class="float-right">
             @include('adminlte-templates::common.paginate', ['records' => $users])
         </div>
