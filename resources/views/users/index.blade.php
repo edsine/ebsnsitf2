@@ -48,11 +48,3 @@
         </div>
     </div>
 @endsection
-
-
-@push('page_scripts')
-    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script>
-        let table = new DataTable('#field-types-table');
-    </script>
-@endpush
