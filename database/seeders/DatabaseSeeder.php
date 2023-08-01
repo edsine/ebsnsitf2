@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\DocumentManager\Database\Seeders\DocumentManagerDatabaseSeeder;
+use Modules\HumanResource\Database\Seeders\HumanResourceDatabaseSeeder;
 use Modules\WorkflowEngine\Database\Seeders\WorkflowEngineDatabaseSeeder;
+use Modules\DocumentManager\Database\Seeders\DocumentManagerDatabaseSeeder;
 use Modules\EmployerManager\Database\Seeders\EmployerManagerDatabaseSeeder;
-use Modules\Leaves\Database\Seeders\leavesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(WorkflowEngineDatabaseSeeder::class);
         $this->call(DocumentManagerDatabaseSeeder::class);
         $this->call(EmployerManagerDatabaseSeeder::class);
+        $this->call(HumanResourceDatabaseSeeder::class);
     }
 }
