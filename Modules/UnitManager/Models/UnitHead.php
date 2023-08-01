@@ -16,15 +16,18 @@ use OwenIt\Auditing\Contracts\Auditable;
     public $table = 'unit_heads';
 
     public $fillable = [
-        'name'
+        'unit_id',
+        'user_id'
     ];
 
     protected $casts = [
-        'name' => 'string'
+        'unit_id' => 'integer',
+        'user_id' => 'integer',
     ];
 
     public static array $rules = [
-        'name' => 'required'
+        'unit_id' => 'required',
+        'user_id' => 'required'
     ];
 
     /* public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -32,8 +35,12 @@ use OwenIt\Auditing\Contracts\Auditable;
         return $this->belongsTo(\Modules\Shared\Models\Department::class, 'department_id', 'id');
     } */
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): \Illuminate\Database\Eloquent\Relations\hasOne
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
+        return $this->hasOne(\App\Models\User::class);
+    }
+    public function unit(): \Illuminate\Database\Eloquent\Relations\hasOne
+    {
+        return $this->hasOne(\App\Models\Units::class);
     }
 }

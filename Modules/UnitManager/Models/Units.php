@@ -17,20 +17,17 @@ use OwenIt\Auditing\Contracts\Auditable;
 
     public $fillable = [
         'unit_name',
-        'department_id',
-        'unit_head_id'
+        'department_id'
     ];
 
     protected $casts = [
         'unit_name' => 'string',
-        'department_id' => 'integer',
-        'unit_head_id' => 'integer'
+        'department_id' => 'integer'
     ];
 
     public static array $rules = [
         'unit_name' => 'required',
-        'department_id' => 'required',
-        'unit_head_id' => 'required'
+        'department_id' => 'required'
     ];
 
     public function department(): \Illuminate\Database\Eloquent\Relations\hasOne

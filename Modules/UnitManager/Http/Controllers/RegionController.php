@@ -8,9 +8,12 @@ use Illuminate\Routing\Controller;
 
 use Modules\UnitManager\Http\Requests\CreateUnitHeadRequest;
 use Modules\UnitManager\Http\Requests\UpdateUnitHeadRequest;
+use Modules\UnitManager\Http\Requests\CreateRegionRequest;
+use Modules\UnitManager\Http\Requests\UpdateRegionRequest;
 use App\Http\Controllers\AppBaseController;
 use Modules\UnitManager\Repositories\UnitRepository;
 use Modules\UnitManager\Repositories\UnitHeadRepository;
+use Modules\UnitManager\Repositories\RegionRepository;
 use Flash;
 use App\Http\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
@@ -26,15 +29,16 @@ class RegionController extends AppBaseController
     /** @var UnitHeadRepository $unitheadRepository*/
     private $unitheadRepository;
 
-    /** @var UnitRepository $unitRepository*/
-    private $unitRepository;
+    /** @var RegionRepository $regionRepository*/
+    private $regionRepository;
 
 
-    public function __construct(DepartmentRepository $departmentRepo, UnitHeadRepository $unitHeadRepo, UnitRepository $unitRepo)
+    public function __construct(RegionRepository $regionRepo,DepartmentRepository $departmentRepo, UnitHeadRepository $unitHeadRepo, UnitRepository $unitRepo)
     {
         $this->departmentRepository = $departmentRepo;
         $this->unitheadRepository = $unitHeadRepo;
         $this->unitRepository = $unitRepo;
+        $this->regionRepository = $regionRepo;
     }
 
     /**
@@ -43,9 +47,9 @@ class RegionController extends AppBaseController
      */
     public function index()
     {
-        $unitheads = $this->unitheadRepository->paginate(10);
+        $regions = $this->regionRepository->paginate(10);
 
-        return view('unitmanager::unithead.index')->with('unitheads', $unitheads);
+        return view('unitmanager::region.index')->with('regions', $regions);
     }
 
     /**
@@ -55,7 +59,7 @@ class RegionController extends AppBaseController
     public function create()
     {
         
-        return view('unitmanager::unithead.create');
+        return view('unitmanager::region.create');
     }
 
     /**
@@ -63,18 +67,18 @@ class RegionController extends AppBaseController
      * @param Request $request
      * @return Renderable
      */
-    public function store(CreateUnitHeadRequest $request)
+    public function store(CreateRegionRequest $request)
     {
         $input = $request->all();
         //$input['user_id'] = Auth::id();
 
         
 
-        $unit = $this->unitheadRepository->create($input);
+        $unit = $this->regionRepository->create($input);
 
-        Flash::success('Unit Head saved successfully.');
+        Flash::success('Region saved successfully.');
 
-        return redirect(route('unithead.index'));
+        return redirect(route('region.index'));
     }
 
     /**
@@ -84,15 +88,15 @@ class RegionController extends AppBaseController
      */
     public function show($id)
     {
-        $unithead = $this->unitheadRepository->find($id);
+        $region = $this->regionRepository->find($id);
         
-        if (empty($unit)) {
-            Flash::error('Unit Head not found');
+        if (empty($region)) {
+            Flash::error('Region not found');
 
-            return redirect(route('unithead.index'));
+            return redirect(route('region.index'));
         }
 
-        return view('unitmanager::unithead.show')->with('unithead', $unithead);
+        return view('unitmanager::region.show')->with('region', $region);
     }
 
     /**
@@ -102,16 +106,16 @@ class RegionController extends AppBaseController
      */
     public function edit($id)
     {
-        $unithead = $this->unitheadRepository->find($id);
+        $region = $this->regionRepository->find($id);
 
-        if (empty($unithead)) {
-            Flash::error('Unit Head not found');
+        if (empty($region)) {
+            Flash::error('Region not found');
 
-            return redirect(route('unithead.index'));
+            return redirect(route('region.index'));
         }
         
         
-        return view('unitmanager::unithead.edit')->with(['unithead' => $unithead]);
+        return view('unitmanager::region.edit')->with(['region' => $region]);
     }
     /**
      * Update the specified resource in storage.
@@ -119,25 +123,25 @@ class RegionController extends AppBaseController
      * @param int $id
      * @return Renderable
      */
-    public function update($id, UpdateUnitHeadRequest $request)
+    public function update($id, UpdateRegionRequest $request)
     {
-        $unithead = $this->unitheadRepository->find($id);
+        $region = $this->regionRepository->find($id);
 
-        if (empty($unithead)) {
-            Flash::error('Unit Head not found');
+        if (empty($region)) {
+            Flash::error('region not found');
 
-            return redirect(route('unithead.index'));
+            return redirect(route('region.index'));
         }
 
         $input = $request->all();
 
         //$input['user_id'] = Auth::id();
 
-        $this->unitheadRepository->update($input, $id);
+        $this->regionRepository->update($input, $id);
 
-        Flash::success('Unit Head updated successfully.');
+        Flash::success('Region updated successfully.');
 
-        return redirect(route('unithead.index'));
+        return redirect(route('region.index'));
     }
 
     /**
@@ -147,18 +151,18 @@ class RegionController extends AppBaseController
      */
     public function destroy($id)
     {
-        $unithead = $this->unitheadRepository->find($id);
+        $region = $this->regionRepository->find($id);
 
-        if (empty($unithead)) {
-            Flash::error('Unit Head not found');
+        if (empty($region)) {
+            Flash::error('Region not found');
 
-            return redirect(route('unithead.index'));
+            return redirect(route('region.index'));
         }
 
-        $this->unitheadRepository->delete($id);
+        $this->regionRepository->delete($id);
 
-        Flash::success('unit head deleted successfully.');
+        Flash::success('Region deleted successfully.');
 
-        return redirect(route('unithead.index'));
+        return redirect(route('region.index'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\ClaimsCompensation\Http\Requests;
+namespace Modules\UnitManager\Http\Requests;
 
 use Modules\UnitManager\Models\Units;
 use Illuminate\Foundation\Http\FormRequest;

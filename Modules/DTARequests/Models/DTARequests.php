@@ -34,6 +34,7 @@ use OwenIt\Auditing\Contracts\Auditable;
         'approval_status',
         'status',
         'uploaded_doc',
+        'unit_head_id',
     ];
 
     // protected $casts = [

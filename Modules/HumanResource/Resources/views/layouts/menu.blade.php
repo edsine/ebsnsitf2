@@ -46,6 +46,12 @@
                 </span>
                 <span class="menu-title"> LEAVE STATUS </span>
             </a>
+            <a href="{{route('ranking') }}" class="menu-link {{ Request::is('ranking*') ? 'active' : '' }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title"> RANK STRUCTURE </span>
+            </a>
             <!--end:Menu link-->
         </div>
         <!--end:Menu item-->

@@ -35,4 +35,5 @@ class LeavetypeRepository extends BaseRepository
 
         return $query->where('id', $id)->first();
     }
+    
 }

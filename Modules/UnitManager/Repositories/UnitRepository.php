@@ -9,9 +9,7 @@ class UnitRepository extends BaseRepository
 {
 
     protected $fieldSearchable = [
-        'unit_name',
-        'department_id',
-        'unit_head_id'
+        'unit_name'
     ];
      public function getFieldsSearchable(): array
     {

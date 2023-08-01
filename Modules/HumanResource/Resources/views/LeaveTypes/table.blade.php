@@ -3,7 +3,7 @@
         <table class="table" id="departments-table">
             <thead>
             <tr>
-                <th> TYPE OF LEAVE</th>
+                <th> RANK</th>
                 <th>DURATION</th>
                 
                 <th colspan="3">Action</th>

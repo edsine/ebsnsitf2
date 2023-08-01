@@ -151,13 +151,11 @@
             @include('documentmanager::layouts.menu')
 
             @include('claimscompensation::layouts.menu')
-            
+
             @include('employermanager::layouts.menu')
 
             @include('dtarequests::layouts.menu')
             @include('humanresource::layouts.menu')
-
-            @include('dtareview::layouts.menu')
 
             {{-- @include('unitmanager::layouts.menu') --}}
 
@@ -290,7 +288,7 @@
     </span>
     <!--end:Menu link-->
     <!--begin:Menu sub-->
-    <div class="menu-sub menu-sub-accordion">
+    {{-- <div class="menu-sub menu-sub-accordion">
         <!--begin:Menu item-->
         <div class="menu-item">
             <!--begin:Menu link-->
@@ -303,7 +301,7 @@
             <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-    </div>
+    </div> --}}
     <div class="menu-sub menu-sub-accordion">
         <!--begin:Menu item-->
         <div class="menu-item">
@@ -313,6 +311,20 @@
                     <span class="bullet bullet-dot"></span>
                 </span>
                 <span class="menu-title">Unit</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+        <!--end:Menu item-->
+    </div>
+    <div class="menu-sub menu-sub-accordion">
+        <!--begin:Menu item-->
+        <div class="menu-item">
+            <!--begin:Menu link-->
+            <a href="{{ route('region.index') }}" class="menu-link {{ Request::is('region*') ? 'active' : '' }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Region</span>
             </a>
             <!--end:Menu link-->
         </div>
@@ -328,7 +340,6 @@
             <!--end:Menu item-->
             <!--end:Menu item-->
         </div>
-      
 
 
 
@@ -344,8 +355,9 @@
 
 
 
-        
-      
+
+
+
         <!--end::Menu-->
     </div>
     <!--end::Menu wrapper-->

@@ -24,8 +24,8 @@
             <div class="row">
                 <!--begin::Col for User Id Field -->
                 <div class="col-md-6 fv-row">
-                    <label class="required fs-6 fw-semibold mb-2">@lang('Employer') ( <small
-                            class="help-block text-success">@lang('Select an employer user')</small>) </label>
+                    <label class="required fs-6 fw-semibold mb-2">@lang('Staff') ( <small
+                            class="help-block text-success">@lang('Select a staff')</small>) </label>
                     <select name="user_id" class="form-select form-select-solid" data-hide-search="true"
                         data-placeholder="Select a Team Member">
                         @foreach ($employers as $item)

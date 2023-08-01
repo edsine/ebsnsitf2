@@ -43,13 +43,13 @@
     {!! Form::label('uploaded_doc', ' PDF FILE') !!}
 </div>
 
-@hasanyrole('HOD|MD|ED FINANCE & ACCOUNT|SUPERVISOR')
 <div class="form-group col-sm-6 my-4">
     {!! Form::label('comments ', 'Comments:') !!}
     {!! Form::textarea('comments',null, ['class' => 'form-control']) !!}
 </div>
-@endhasanyrole
-@role('SUPERVISOR')
+
+
+@if(isset($unit_head_data))
 <!-- HOD Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('supervisor_status', 'Supervisor Status') !!}
@@ -58,8 +58,9 @@
     {!! Form::radio('supervisor_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
-@endrole
-@role('HOD')
+@endif
+
+@if(isset($department_head_data))
 <!-- HOD Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('hod_status', 'HOD Status') !!}
@@ -68,7 +69,8 @@
     {!! Form::radio('hod_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
-@endrole
+@endif
+
 @role('MD')
 <?php 
 if($dtarequests->hod_status == 1){

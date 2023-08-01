@@ -1,6 +1,6 @@
 <div class="card-body p-5">
     <div class="table-responsive">
-        <table class="table align-middle gs-0 gy-4" id="field-types-table">
+        <table class="table datatable align-middle gs-0 gy-4" id="field-types-table">
             <thead>
             <tr class="fw-bold text-muted bg-light">
                 <th class="min-w-200px">Full Name</th>

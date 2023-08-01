@@ -24,6 +24,7 @@ class NewRolesAndPermissionsTablesSeeder extends Seeder
                     'approve as regional manager',
                     'approve as medical team',
                     'approve as head office',
+                    'approve as hr',
                 ];
 
             $permissions = collect($arrayOfPermissionNames)->map(function ($permission) {

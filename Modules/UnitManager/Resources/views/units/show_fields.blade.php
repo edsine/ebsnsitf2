@@ -10,12 +10,6 @@
     <p>{{ $unit->department ? $unit->department->department_unit : '' }}</p>
 </div>
 
-<!-- unit_head Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('unit_head', 'Unit Head:') !!}
-    <p>{{ $unit->unit_head ? $unit->unit_head->name : '' }}</p>
-</div>
-
 <!-- Created At Field -->
 <div class="col-sm-12">
     {!! Form::label('created_at', 'Created At:') !!}

@@ -5,39 +5,48 @@
  
 
 
+    {{-- <div class="form-group col-sm-6">
+        {!! Form::label('type', 'SELECT LEAVE TYPE:') !!}
+        {!! Form::select('type', $leavetype->pluck('name','id'), null, ['class' => 'form-control form-select', 'required','id'=>'leave_type','readonly'=>true]) !!}
+    
+    </div> --}}
     <div class="form-group col-sm-6">
         {!! Form::label('type', 'SELECT LEAVE TYPE:') !!}
-        {!! Form::select('type', $leavetype->pluck('name','id'), null, ['class' => 'form-control form-select', 'required','id'=>'leave_type']) !!}
+        {!! Form::text('type',  $LeaveRequest->leavetype->name ??  null,  ['class' => 'form-control ', 'required','id'=>'leave_type','readonly'=>true]) !!}
     
     </div>
 
 
 
     
+    {{-- <div class="form-group col-sm-6">
+        {!! Form::label('date_start_new', 'DATE REQUESTED TO COMMENCE PRESENT LEAVE:') !!}
+        {!! Form::text('date_start_new',  $LeaveRequest->pluck('date_start_new','id') ??   null, ['class' => 'form-control ','id'=>'date_start']) !!}
+    </div> --}}
     <div class="form-group col-sm-6">
         {!! Form::label('date_start_new', 'DATE REQUESTED TO COMMENCE PRESENT LEAVE:') !!}
-        {!! Form::date('date_start_new',  $LeaveRequest->pluck('date_start_new','id') ??   null, ['class' => 'form-control ','id'=>'date_start']) !!}
+        {!! Form::text('date_start_new',  $LeaveRequest->date_start_new ??   null, ['class' => 'form-control ','id'=>'date_start','readonly'=>true]) !!}
     </div>
    
     
     <div class="form-group col-sm-6">
         {!! Form::label('number_days', 'NUMBER OF DAYS:') !!}
-        {!! Form::number('number_days', $LeaveRequest->number_days ??  null, ['class' => 'form-control ','readonly'=>true,'id'=>'number_days']) !!}
+        {!! Form::number('number_days', $LeaveRequest->number_days ??  null, ['class' => 'form-control ','readonly'=>true,'id'=>'number_days','readonly'=>true]) !!}
     </div>
     
         <div class="form-group col-sm-6">
             {!! Form::label('daystaken', 'Number of days to take:') !!}
-            {!! Form::number('daystaken',$LeaveRequest->daystaken ??  null, ['class' => 'form-control ','placeholder'=>'input the number of days to take','id'=>'days']) !!}
+            {!! Form::number('daystaken',$LeaveRequest->daystaken ??  null, ['class' => 'form-control ','placeholder'=>'input the number of days to take','id'=>'days','readonly'=>true]) !!}
         </div>
     
     <div class="form-group col-sm-6">
         {!! Form::label('home_address', 'HOME ADDRESS:') !!}
-        {!! Form::text('home_address',$LeaveRequest->home_address ??  null, ['class' => 'form-control ']) !!}
+        {!! Form::text('home_address',$LeaveRequest->home_address ??  null, ['class' => 'form-control','readonly'=>true]) !!}
     </div>
     
     <div class="form-group col-sm-6">
         {!! Form::label('home_number', 'HOUSE NUMBER:') !!}
-        {!! Form::text('home_number', $LeaveRequest->home_number ?? null, ['class' => 'form-control ']) !!}
+        {!! Form::text('home_number', $LeaveRequest->home_number ?? null, ['class' => 'form-control','readonly'=>true]) !!}
     </div>
 
 
@@ -52,7 +61,7 @@
    
     <div class="form-group col-sm-6">
         {!! Form::label('local_council', 'LOCAL COUNCIL/AREA COUNCIL:') !!}
-        {!! Form::text('local_council',$LeaveRequest->local_council ??  null, ['class' => 'form-control ']) !!}
+        {!! Form::text('local_council',$LeaveRequest->local_council ??  null, ['class' => 'form-control','readonly'=>true]) !!}
     </div>
     <div class="form-group col-sm-6">
         {!! Form::label('end_date', 'EXPECTED DATE TO RESUME:') !!}
@@ -60,7 +69,7 @@
     </div>
     <div class="form-group col-sm-6">
         {!! Form::label('state', 'STATE:') !!}
-        {!! Form::select('state', getBranchRegions(), null, ['class' => 'form-control form-select ']) !!}
+        {!! Form::select('state', getBranchRegions(), null, ['class' => 'form-control  ','readonly'=>true]) !!}
     </div>
     
     
@@ -68,68 +77,92 @@
     
     <div class="form-group col-sm-6">
         {!! Form::label('phone_number', 'PHONE NUMBER:') !!}
-        {!! Form::text('phone_number', $LeaveRequest->phone_number ??  null, ['class' => 'form-control ']) !!}
+        {!! Form::text('phone_number', $LeaveRequest->phone_number ??  null, ['class' => 'form-control ','readonly'=>true]) !!}
     </div>
     <div class="form-group col-sm-6">
         {!! Form::label('officer_relieve', 'NAME OF OFFICER TO RELIEVE:') !!}
-        {!! Form::text('officer_relieve', $LeaveRequest->officer_relieve ?? null, ['class' => 'form-control ']) !!}
+        {!! Form::text('officer_relieve', $LeaveRequest->officer_relieve ?? null, ['class' => 'form-control','readonly'=>true]) !!}
     </div>
     
     <!-- Signature Field -->
     <div class="col-sm-4 my-4">
         {!! Form::label('signature_path', 'UPLOAD SIGNATURE PDF ONLY') !!}
-        <div class="form-group">
-        {!! Form::file('signature_path', null, ['class' => 'form-control','accept' => 'image/*']) !!}
+        @if ($LeaveRequest->signature_path)
+<img src="{{ asset('storage/' . $LeaveRequest->signature_path) }}" alt="Signature Of applicant" style="width: 100px;">
+<div class="form-group">
+    {{-- {!! Form::file('signature_path', null, ['class' => 'form-control','accept' => 'image/*','readonly'=>true]) !!} --}}
+    @endif
         </div>
     </div>
 
 
-    <div class="form-group my-5 col-sm-6">
-        {!!Form::button('Update',['class'=>'btn btn-info','id'=>'u']) !!}
+   
+       
+
+        <div class="form-group col-sm-6 my-4">
+            {!! Form::label('comments ', 'Comments:') !!}
+            {!! Form::textarea('comments',null, ['class' => 'form-control']) !!}
         </div>
 
 
+        @if(isset($unit_head_data))
+        <!-- UNIT HEAD  Status Field -->
+        <div class="form-group col-sm-6 my-5">
+            {!! Form::label('supervisor_approval', 'Supervisor Status',['class'=>'h4']) !!} <br>
+            <div class="form-control">
+            {!! Form::radio('supervisor_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            <br>
+            {!! Form::radio('supervisor_approval', 0, true) !!}&nbsp;Unapproved
+            </div>
+        </div>
+        @endif
+        
+        @if(isset($department_head_data))
+        <!-- HOD Status Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('hod_approval', 'HOD Status',['class'=>'h4']) !!}
+            <div class="form-control">
+            {!! Form::radio('hod_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            {!! Form::radio('hod_approval', 0, true) !!}&nbsp;Unapproved
+            </div>
+        </div>
+        @endif
+        
+        @role('MD')
+        <?php 
+        if($leaverequest->hod_approval == 1){
+        ?>
+        <!-- MD Status Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('hod_approval', 'MD Status') !!}
+            <div class="form-control">
+            {!! Form::radio('hod_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            {!! Form::radio('hod_approval', 0, true) !!}&nbsp;Unapproved
+            </div>
+        </div>
+        <?php } ?>
+        @endrole
+        @role('HR')
+        <?php 
+        if($leaverequest->supervisor_approval == 1 && $leaverequest->hod_approval == 1){
+        ?>
+        <!-- Account Status Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('hr_approval', 'HUMAN RESOURCE') !!}
+            <div class="">
+            {!! Form::radio('hr_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            {!! Form::radio('hr_approval', 0, true) !!}&nbsp;Unapproved
+            </div>
+        </div>
+        <?php } ?>
+        @endrole
+
+      
 
 
 
-<!-- Description Field -->
 
 
-@can(['approve as md_hr', 'approve as leave_officer', 'approve as supervisor_office','approve as approve_status'])
-<!-- Regional Manager Status Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('md_hr', 'MD HR') !!}
-    <div class="">
-    {!! Form::radio('md_hr', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-    {!! Form::radio('md_hr', 0, true) !!}&nbsp;Unapproved
-    </div>
-</div>
-
-<!-- Head Office Status Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('leave_officer', 'Head Office Status') !!}
-    <div class="">
-    {!! Form::radio('leave_officer', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-    {!! Form::radio('leave_officer', 0, true) !!}&nbsp;Unapproved
-    </div>
-</div>
-<div class="form-group col-sm-6">
-    {!! Form::label('supervisor_office', 'Supervisor OFFICER') !!}
-    <div class="">
-    {!! Form::radio('supervisor_office', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-    {!! Form::radio('supervisor_office', 0, true) !!}&nbsp;Unapproved
-    </div>
-</div>
-
-<!-- APPROVE STATUS Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('approve_status', 'Approved Status') !!}
-    <div class="">
-    {!! Form::radio('approve_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-    {!! Form::radio('approve_status', 0, true) !!}&nbsp;Unapproved
-    </div>
-</div>
-@endcan
 
  
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
