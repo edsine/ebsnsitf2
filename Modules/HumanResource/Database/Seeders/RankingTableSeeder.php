@@ -17,7 +17,7 @@ class RankingTableSeeder extends Seeder
     public function run()
     {
        // Model::unguard();
-       DB::table('ranking')->delete();
+       DB::table('rankings')->delete();
         $rank=[
             [
                 'name'=>'General Manager'
@@ -46,7 +46,7 @@ class RankingTableSeeder extends Seeder
 
 
         ];
-        DB::table('ranking')->insert($rank);
+        DB::table('rankings')->insert($rank);
 
         // Ranking::create('name','');
         // Ranking::create('name','Deputy General Manager');
