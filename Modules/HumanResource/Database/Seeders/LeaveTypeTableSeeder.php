@@ -20,6 +20,10 @@ class LeaveTypeTableSeeder extends Seeder
         DB::table('leavetype')->delete();
         $leave_types = [
             [
+                'name'=> "SELECT LEAVE TYPE ",
+                'duration' => 0
+            ],
+            [
                 'name'=> 'PATERNITY LEAVE',
                 'duration' => 2
             ],

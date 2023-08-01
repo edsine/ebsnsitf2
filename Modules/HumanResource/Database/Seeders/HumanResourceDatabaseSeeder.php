@@ -18,6 +18,6 @@ class HumanResourceDatabaseSeeder extends Seeder
        // Model::unguard();
         
         $this->call(LeaveTypeTableSeeder::class);
-       // $this->call(RankingTableSeeder::class);
+       $this->call(RankingTableSeeder::class);
     }
 }
