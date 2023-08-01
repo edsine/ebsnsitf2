@@ -350,11 +350,9 @@
         });
 
         $(document).ready(function () {
-            var htmlStr = '<tr class="item" style="display: table-row;">															<th class="min-w-200px text-end rounded-end"></th>
-														</tr>';
+            var htmlStr = '<tr class="item" style="display: table-row;">															<th class="min-w-200px text-end rounded-end"></th></tr>';
             var commonComponent = $(htmlStr).filter("tr").load('{{ route('io_field_template') }}');
-            var relationStr = '<tr class="relationItem" style="display: table-row;">															<th class="min-w-200px text-end rounded-end"></th>
-														</tr>';
+            var relationStr = '<tr class="relationItem" style="display: table-row;">															<th class="min-w-200px text-end rounded-end"></th></tr>';
             var relationComponent = $(relationStr).filter("tr").load('{{ route('io_relation_field_template') }}');
 
             $("#btnAdd").on("click", function () {
