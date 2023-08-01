@@ -4,25 +4,25 @@
             <thead>
             <tr>
                 <th> RANK</th>
-                
+                <th>DURATION</th>
                 
                 <th colspan="3">Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($rank as $position)
+            @foreach($leavetype as $leaves)
                 <tr>
-                    <td>{{ $position->name }}</td>
-                   
+                    <td>{{ $leaves->name }}</td>
+                    <td>{{ $leaves->duration }}</td>
                     <td>     
-                    {!! Form::open(['route' => ['ranking.destroy', $position->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['leave_type.destroy', $leaves->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            {{-- <a href="{{ route('ranking.show', [$position->id]) }}"
+                            <a href="{{ route('leave_type.show', [$leaves->id]) }}"
                                class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
-                            </a> --}}
-                            <a href="{{ route('ranking.edit', [$position->id]) }}"
-                               class='btn btn-default btn-xs' title="EDIT THE RANK">
+                            </a>
+                            <a href="{{ route('leave_type.edit', [$leaves->id]) }}"
+                               class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
                             {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
@@ -37,7 +37,7 @@
 
     <div class="card-footer clearfix">
         <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' =>  $rank]) 
+            @include('adminlte-templates::common.paginate', ['records' =>  $leavetype]) 
         </div>
     </div>
 </div>

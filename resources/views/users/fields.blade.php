@@ -4,6 +4,25 @@
     {!! Form::select('rank',$rank , null, ['class' => 'form-control form-select']) !!}
 </div>
 
+<!-- Role Field -->
+<div class="col-sm-4">
+    
+    {!! Form::label('roles', 'Roles') !!}
+    <div class="form-group">
+    {{-- {!! Form::select('roles[]',$roles,null, ['multiple' => true,'class' => 'form-control']) !!} --}}
+    {!! Form::select('roles[]',$roles,null, ['class' => 'form-control form-select']) !!}
+
+    </div>
+</div>
+
+<!-- Email Field -->
+<div class="form-group col-sm-4">
+    
+    {!! Form::label('email', 'Email') !!}
+    {!! Form::email('email', null, ['class' => 'form-control']) !!}
+</div>
+
+
 <!-- First Name Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('first_name', 'First Name') !!}
@@ -18,28 +37,17 @@
 
 <!-- Last Name Field -->
 <div class="form-group col-sm-4">
+     
     {!! Form::label('last_name', 'Last Name') !!}
     {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Email Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('email', 'Email') !!}
-    {!! Form::email('email', null, ['class' => 'form-control']) !!}
-</div>
 
-<!-- Role Field -->
-<div class="col-sm-6">
-    {!! Form::label('roles', 'Roles') !!}
-    <div class="form-group">
-    {{-- {!! Form::select('roles[]',$roles,null, ['multiple' => true,'class' => 'form-control']) !!} --}}
-    {!! Form::select('roles[]',$roles,null, ['class' => 'form-control form-select']) !!}
 
-    </div>
-</div>
 
 <!-- Password Field -->
 <div class="form-group col-sm-6">
+    
     {!! Form::label('password', 'Password') !!}
     {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
@@ -51,7 +59,7 @@
 </div>
 
 <!-- Checkbox Field -->
-<div class="form-group col-sm-12">
+<div class="form-group col-sm-12 my-3">
     <div class="form-check">
         {!! Form::hidden('checkbox', 0, ['class' => 'form-check-input']) !!}
         {!! Form::checkbox('checkbox', '1', null, ['id' => 'newCheckbox', 'class' => 'form-check-input']) !!}
