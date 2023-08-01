@@ -3,7 +3,7 @@
         <table class="table" id="departments-table">
             <thead>
             <tr>
-                <th> RANK</th>
+                <th> LEAVE NAME </th>
                 <th>DURATION</th>
                 
                 <th colspan="3">Action</th>

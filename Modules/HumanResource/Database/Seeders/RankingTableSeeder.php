@@ -3,6 +3,7 @@
 namespace Modules\HumanResource\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Modules\HumanResource\Models\Ranking;
 
@@ -16,7 +17,7 @@ class RankingTableSeeder extends Seeder
     public function run()
     {
        // Model::unguard();
-       \DB::table('ranking')->delete();
+       DB::table('ranking')->delete();
         $rank=[
             [
                 'name'=>'General Manager'
@@ -24,9 +25,28 @@ class RankingTableSeeder extends Seeder
             [
                 'name'=>'Assitant General Manager'
             ],
+            [
+                'name'=>'Principal Manager'
+            ],
+            [
+                'name'=>'Senior Manager'
+            ],
+            [
+                'name'=>' Manager'
+            ],
+            [
+                'name'=>'Assitant Manager'
+            ],
+            [
+                'name'=>'Officer 1'
+            ],
+            [
+                'name'=>'Officer 2'
+            ],
+
 
         ];
-        \DB::table('ranking')->insert($rank);
+        DB::table('ranking')->insert($rank);
 
         // Ranking::create('name','');
         // Ranking::create('name','Deputy General Manager');

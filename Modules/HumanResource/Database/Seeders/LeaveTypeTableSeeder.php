@@ -3,6 +3,7 @@
 namespace Modules\HumanResource\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -16,10 +17,19 @@ class LeaveTypeTableSeeder extends Seeder
     public function run()
     {
         // Model::unguard();
-        \DB::table('leavetype')->delete();
+        DB::table('leavetype')->delete();
         $leave_types = [
             [
-                'name' => 'SICK LEAVE',
+                'name'=> 'PATERNITY LEAVE',
+                'duration' => 2
+            ],
+            
+            [
+                'name' =>'SICK LEAVE',
+                'duration' => 2
+            ]
+            ,[
+                'name' => 'PARTERNITY',
                 'duration' => 2
             ],
             [
@@ -27,20 +37,8 @@ class LeaveTypeTableSeeder extends Seeder
                 'duration' => 4
             ]
         ];
-        \DB::table('leavetype')->insert($leave_types);
-        // LeaveType::create('name','SICK LEAVE');
-        // LeaveType::create('name','PERSONAL LEAVE');
-        // LeaveType::create('name','PATERNITY LEAVE');
-        // LeaveType::create('name','MATERNITY LEAVE');
-        // LeaveType::create('name','FOOTBALL LEAVE');
-        // LeaveType::create('name','PARTY LEAVE');
-        // LeaveType::create('name','ANNUAL LEAVE');
-        // LeaveType::create('name','REST LEAVE');
-        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        // DB::table('leavetype')->truncate();
-        // DB::statement('SET FOREIGN_KEY_CHECKS=1');
-
-        // LeaveType::factory(10)->create();
+        DB::table('leavetype')->insert($leave_types);
+        
         
     }
 }
