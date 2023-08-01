@@ -98,7 +98,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
         }
         
         //return view('humanresource::leaverequest.index',compact(['department_head_data','leaverequest','unit_head_data']));
-        return view('humanresource::leaverequest.index',compact(['leaverequest']));
+        return view('humanresource::leaverequest.home',compact(['leaverequest']));
     }
 
     /**
