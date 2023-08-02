@@ -44,7 +44,7 @@
         <div class="clearfix"></div>
 
         <div class="card">
-            @include('users.table')
+            @include('users.myown')
         </div>
     </div>
 @endsection

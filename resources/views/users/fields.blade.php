@@ -215,6 +215,16 @@
         {!! Form::label('about_me', 'About Me') !!}
         {!! Form::textarea('about_me', null, ['class' => 'form-control']) !!}
     </div>
+
+    {{-- do for only admins --}}
+    <div class="form-group  form-check col-sm-4">
+        {!! Form::label('status', 'STATUS OF USER ') !!}
+        <br>
+        <input type="radio" name="status" value="1"  class=" form-radio-input">
+        <label for="status1">APPROVE</label>
+        <input type="radio" name="status" value="0" class="form-radio-input">
+        <label for="status2">DISAPPROVE</label>
+    </div>
     
    {{--  <!-- Total Received Email Field -->
     <div class="form-group col-sm-4">
