@@ -34,7 +34,13 @@
                             Not Specified
                             @endif
                         </td>
-                        <td>{{ $employer->state->name }}</td>
+                        <td>
+                            @if($employer->company_state)
+                            {{ $employer->state->name }}
+                            @else
+                            Not Specified
+                            @endif
+                        </td>
                         <td>{{ $employer->business_area }}</td>
                         <td>
                             @if ($employer->status == 1)

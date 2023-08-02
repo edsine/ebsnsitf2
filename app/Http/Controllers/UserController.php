@@ -75,10 +75,12 @@ class UserController extends AppBaseController
                 ->orWhere('last_name', 'like', '%' . $request->search . '%')
                 ->orWhere('email', 'like', '%' . $request->search . '%');
         }
+        $pusers= $users->where('status',0)->paginate(10);
+        $ausers= $users->where('status',1)->paginate(10);
         // $users = $this->userRepository->paginate(10);
         $users = $users->paginate(10);
 
-        return view('users.index')->with('users', $users);
+        return view('users.index',compact('users','pusers','ausers'));
     }
 
     /**
@@ -282,6 +284,17 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
+
+    //  public function activeusers(){
+    //     $puser=$this->userRepository
+    //     ->where('status',0)->get();
+    //     $auser=$this->userRepository
+    //     ->where('status',1)->get();
+
+    //     return view('userstatus.index', compact('auser','puser'));
+    //  }
+
+
     public function destroy($id)
     {
         $user = $this->userRepository->find($id);
