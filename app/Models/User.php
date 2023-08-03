@@ -30,10 +30,8 @@ class User extends Authenticatable implements Auditable
         'first_name',
         'middle_name',
         'last_name',
-        'ranking_id',
         'rank',
-        
-        'statusz'
+        'status'
     ];
 
     /**

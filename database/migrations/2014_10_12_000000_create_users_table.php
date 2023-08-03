@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('rank')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('statusz')->default(0);
+            $table->integer('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
             
