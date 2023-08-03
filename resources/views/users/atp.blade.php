@@ -4,16 +4,10 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <h1>
-                    Create Branches
+                        ACTIVATE STAFF 
                     </h1>
-                </div>
-                <div class="col-sm-6">
-                    <a class="btn btn-default float-end"
-                       href="{{ route('branches.index') }}">
-                        Back
-                    </a>
                 </div>
             </div>
         </div>
@@ -25,19 +19,17 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'branches.store']) !!}
+            {!! Form::model($user, ['route' => ['users.update', $user->userId], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
 
             <div class="card-body">
-
                 <div class="row">
-                    @include('shared::branches.fields')
+                    {{-- @include('users.fields') --}}
                 </div>
-
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('branches.index') }}" class="btn btn-default"> Cancel </a>
+                {!! Form::submit('SUBMIT', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('users.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
             {!! Form::close() !!}

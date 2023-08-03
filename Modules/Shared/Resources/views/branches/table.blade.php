@@ -21,7 +21,7 @@
                 @foreach ($branches as $branch)
                     <tr>
                         <td>{{ $branch->branch_name }}</td>
-                        <td>{{ getBranchRegions()[$branch->branch_region] }}</td>
+                        <td> {{ !empty($branch->region->name) ? $branch->region->name  : 'NILL' }}</td>
                         <td>{{ $branch->branch_code }}</td>
                         <td>{{ $branch->last_ecsnumber }}</td>
                         <td>{{ getRanks()[$branch->highest_rank] }}</td>

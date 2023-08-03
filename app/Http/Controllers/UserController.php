@@ -75,8 +75,9 @@ class UserController extends AppBaseController
                 ->orWhere('last_name', 'like', '%' . $request->search . '%')
                 ->orWhere('email', 'like', '%' . $request->search . '%');
         }
-        $pusers= $users->where('status',0)->paginate(10);
-        $ausers= $users->where('status',1)->paginate(10);
+        $pusers= User::where('status',0)->paginate(10);
+        $ausers= User::where('status',1)->paginate(10);
+       
         // $users = $this->userRepository->paginate(10);
         $users = $users->paginate(10);
 
