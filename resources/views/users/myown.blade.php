@@ -45,6 +45,12 @@
         
       </tbody>
     </table>
+    <div class="card-footer clearfix">
+        <div class="float-right">
+            @include('adminlte-templates::common.paginate', ['records' => $users])
+        </div>
+    </div>
+      </div>
 </div>
 
 </div>
@@ -89,17 +95,17 @@
 
 
         </table>
+        
+        
+        
+        <div class="card-footer clearfix">
+            <div class="float-right">
+                @include('adminlte-templates::common.paginate', ['records' => $users])
+            </div>
+        </div>
+          </div>
     </div>
 </div>
 </div>
 
-
-
-
-<div class="card-footer clearfix">
-    <div class="float-right">
-        @include('adminlte-templates::common.paginate', ['records' => $users])
-    </div>
-</div>
-  </div>
   

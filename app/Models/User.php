@@ -32,7 +32,7 @@ class User extends Authenticatable implements Auditable
         'last_name',
         'ranking_id',
         'rank',
-        'status',
+        
         'statusz'
     ];
 
@@ -53,7 +53,7 @@ class User extends Authenticatable implements Auditable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'status'=>'integer',
+        'statusz'=>'integer',
     ];
 
     public function getFullName()
