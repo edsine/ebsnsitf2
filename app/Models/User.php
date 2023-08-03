@@ -25,12 +25,15 @@ class User extends Authenticatable implements Auditable
     protected $fillable = [
         'name',
         'email',
+        'ranking_id',
         'password',
         'first_name',
         'middle_name',
         'last_name',
         'ranking_id',
-        'rank'
+        'rank',
+        'status',
+        'statusz'
     ];
 
     /**
@@ -50,6 +53,7 @@ class User extends Authenticatable implements Auditable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'status'=>'integer',
     ];
 
     public function getFullName()
