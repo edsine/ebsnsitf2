@@ -1,4 +1,4 @@
-<div class="card-body p-5">
+{{-- <div class="card-body p-5">
     <div class="table-responsive">
         <table class="table datatable align-middle gs-0 gy-4" id="field-types-table">
             <thead>
@@ -37,14 +37,11 @@
     </div>
 
     <div class="card-footer clearfix">
-
-        <script>
-            $(document).ready( function () {
-    $('#field-types-table').DataTable();
-} );
-        </script>
         <div class="float-right">
             @include('adminlte-templates::common.paginate', ['records' => $users])
         </div>
     </div>
-</div>
+</div> --}}
+
+
+

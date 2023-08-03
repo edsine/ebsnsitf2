@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Support\Facades\DB;
 
-class LeaveType extends Seeder
+class HumanResourceDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +17,7 @@ class LeaveType extends Seeder
     {
        // Model::unguard();
         
-
-       // $this->call(LeaveType::class);
+        $this->call(LeaveTypeTableSeeder::class);
+       $this->call(RankingTableSeeder::class);
     }
 }

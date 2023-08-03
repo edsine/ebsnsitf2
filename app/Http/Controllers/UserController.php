@@ -67,9 +67,20 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->paginate(10);
+        $users = User::orderBy('created_at', 'DESC');
 
-        return view('users.index')->with('users', $users);
+        if ($request->filled('search')) {
+            $users->where('first_name', 'like', '%' . $request->search . '%')
+                ->orWhere('middle_name', 'like', '%' . $request->search . '%')
+                ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                ->orWhere('email', 'like', '%' . $request->search . '%');
+        }
+        $pusers= $users->where('statusz',0)->paginate(10);
+        $ausers= $users->where('statusz',1)->paginate(10);
+        // $users = $this->userRepository->paginate(10);
+        $users = $users->paginate(10);
+
+        return view('users.index',compact('users','pusers','ausers'));
     }
 
     /**
@@ -273,6 +284,17 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
+
+    //  public function activeusers(){
+    //     $puser=$this->userRepository
+    //     ->where('status',0)->get();
+    //     $auser=$this->userRepository
+    //     ->where('status',1)->get();
+
+    //     return view('userstatus.index', compact('auser','puser'));
+    //  }
+
+
     public function destroy($id)
     {
         $user = $this->userRepository->find($id);

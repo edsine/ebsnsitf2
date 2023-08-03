@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Modules\Shared\Repositories\BranchRepository;
 use App\Repositories\UserRepository;
+use Modules\Shared\Models\Department;
 
 class DepartmentController extends AppBaseController
 {
@@ -39,8 +40,15 @@ class DepartmentController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $departments = $this->departmentRepository->paginate(10);
+        // $departments = $this->departmentRepository->paginate(10);
+        $departments = Department::orderBy('created_at', 'desc');
+        if ($request->filled('search')) {
+            $departments->where('department_unit', 'like', '%' . $request->search . '%')
+                ->orWhere('description', 'like', '%' . $request->search . '%')
+                ->orWhere('branch_id', 'like', '%' . $request->search . '%');
+        }
 
+        $departments = $departments->paginate(10);
         return view('shared::departments.index')
             ->with('departments', $departments);
     }
@@ -136,14 +144,14 @@ class DepartmentController extends AppBaseController
         $department = $this->departmentRepository->update($request->all(), $id);
 
         $department_head_id = $request->input("user_id");
-        
+
         $input['department_id'] = $id;
         $input['user_id'] = $department_head_id;
 
         $department_id = $this->departmentHeadRepository->findByDepartmentId($id);
 
         $this->departmentHeadRepository->update($input, $department_id->id);
-        
+
 
         Flash::success('Department updated successfully.');
 

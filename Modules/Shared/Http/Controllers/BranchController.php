@@ -9,9 +9,10 @@ use App\Repositories\UserRepository;
 use Modules\Shared\Repositories\BranchRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Modules\Shared\Models\Branch;
 use Modules\Shared\Repositories\DepartmentRepository;
 use Modules\UnitManager\Repositories\RegionRepository;
-use Modules\Shared\Models\Branch;
+
 
 class BranchController extends AppBaseController
 {
@@ -40,8 +41,22 @@ class BranchController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $branches = Branch::with("region")->paginate(10);
+        $branches = Branch::with("region")->orderBy('branch_name', 'DESC');
+        // $branches = $this->branchRepository->paginate(10);
+        if ($request->filled('search')) {
+            $branches->where('branch_name', 'like', '%' . $request->search . '%')
+                ->orWhere('branch_region', 'like', '%' . $request->search . '%')
+                ->orWhere('branch_code', 'like', '%' . $request->search . '%')
+                ->orWhere('last_ecsnumber', 'like', '%' . $request->search . '%')
+                ->orWhere('highest_rank', 'like', '%' . $request->search . '%')
+                ->orWhere('staff_strength', 'like', '%' . $request->search . '%')
+                ->orWhere('managing_id', 'like', '%' . $request->search . '%')
+                ->orWhere('branch_email', 'like', '%' . $request->search . '%')
+                ->orWhere('branch_phone', 'like', '%' . $request->search . '%')
+                ->orWhere('branch_address', 'like', '%' . $request->search . '%');
+        }
 
+        $branches = $branches->paginate(10);
         return view('shared::branches.index')
             ->with('branches', $branches);
     }

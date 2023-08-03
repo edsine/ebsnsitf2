@@ -6,11 +6,11 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>
-                       THE  Rank
+                       NAME OF LEAVE 
                     </h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-default float-right" href="{{ route('ranking.index') }}">
+                    <a class="btn btn-default float-right" href="{{ route('leave_type.index') }}">
                         Back
                     </a>
                 </div>

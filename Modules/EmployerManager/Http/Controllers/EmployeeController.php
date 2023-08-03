@@ -5,9 +5,12 @@ namespace Modules\EmployerManager\Http\Controllers;
 use Modules\EmployerManager\Http\Requests\CreateEmployeeRequest;
 use Modules\EmployerManager\Http\Requests\UpdateEmployeeRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\LocalGovt;
+use App\Models\State;
 use Modules\EmployerManager\Repositories\EmployeeRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Modules\EmployerManager\Models\Employer;
 
 class EmployeeController extends AppBaseController
 {
@@ -38,6 +41,15 @@ class EmployeeController extends AppBaseController
         return view('employermanager::employees.create');
     }
 
+    public function createEmployee(Request $request, $id)
+    {
+        $employerData = Employer::findorFail($id);
+        $state = State::where('status', 1)->get();
+        $local_govt = LocalGovt::where('status', 1)->get();
+        $employer = $employerData->id;
+        return view('employermanager::employees.create', compact('employer','state', 'local_govt'));
+    }
+
     /**
      * Store a newly created Employee in storage.
      */
@@ -58,6 +70,8 @@ class EmployeeController extends AppBaseController
     public function show($id)
     {
         $employee = $this->employeeRepository->find($id);
+        $state = State::where('status', 1)->get();
+        $local_govt = LocalGovt::where('status', 1)->get();
 
         if (empty($employee)) {
             Flash::error('Employee not found');
@@ -65,7 +79,7 @@ class EmployeeController extends AppBaseController
             return redirect(route('employees.index'));
         }
 
-        return view('employermanager::employees.show')->with('employee', $employee);
+        return view('employermanager::employees.show', compact('state', 'local_govt', 'employee'));
     }
 
     /**
@@ -74,6 +88,9 @@ class EmployeeController extends AppBaseController
     public function edit($id)
     {
         $employee = $this->employeeRepository->find($id);
+        $employer = $employee->employer_id;
+        $state = State::where('status', 1)->get();
+        $local_govt = LocalGovt::where('status', 1)->get();
 
         if (empty($employee)) {
             Flash::error('Employee not found');
@@ -81,7 +98,7 @@ class EmployeeController extends AppBaseController
             return redirect(route('employees.index'));
         }
 
-        return view('employermanager::employees.edit')->with('employee', $employee);
+        return view('employermanager::employees.edit', compact('employer','state', 'local_govt'))->with('employee', $employee);
     }
 
     /**
