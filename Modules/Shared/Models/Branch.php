@@ -120,12 +120,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
         'managing_id',
         'branch_email',
         'branch_phone',
-        'branch_address'
+        'branch_address',
+        'region_id'
     ];
 
     protected $casts = [
         'branch_name' => 'string',
-        'branch_region' => 'integer',
+        'region_id' => 'integer',
         'branch_code' => 'string',
         'last_ecsnumber' => 'string',
         'highest_rank' => 'integer',
@@ -138,7 +139,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
     public static array $rules = [
         'branch_name' => 'required|unique:branches,branch_name',
-        'branch_region' => 'required',
+        'region_id' => 'required',
         'branch_code' => 'required|unique:branches,branch_code',
         'highest_rank' => 'required',
        // 'staff_strength' => 'required',
@@ -151,5 +152,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
     public function manager(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Models\User::class, 'managing_id', 'id');
+    }
+
+    public function region(): \Illuminate\Database\Eloquent\Relations\hasOne
+    {
+        return $this->hasOne(\Modules\UnitManager\Models\Region::class, 'id', 'region_id');
     }
 }

@@ -7,7 +7,7 @@
 <!-- Branch Region Field -->
 <div class="col-sm-12">
     {!! Form::label('branch_region', 'Branch Region:') !!}
-    <p>{{ getBranchRegions()[$branch->branch_region] }}</p>
+    <p>{{ !empty($branch->region->name) ? $branch->region->name  : 'NILL' }}</p>
 </div>
 
 <!-- Branch Code Field -->
