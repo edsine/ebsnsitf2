@@ -217,15 +217,25 @@
     </div>
 
     {{-- do for only admins --}}
-    <div class="form-group  form-check col-sm-4">
+    {{-- <div class="form-group  form-check col-sm-4">
         {!! Form::label('status', 'STATUS OF USER ') !!}
         <br>
         <input type="radio" name="status" value="1"  class=" form-radio-input">
         <label for="status1">APPROVE</label>
         <input type="radio" name="status" value="0" class="form-radio-input">
         <label for="status2">DISAPPROVE</label>
-    </div>
+    </div> --}}
     
+    <div class="form-group col-sm-4">
+        {!! Form::label('statusz', 'Status Of User') !!}
+        <div class="">
+        {!! Form::radio('statusz', 0, false) !!}&nbsp;Disapprove&nbsp;&nbsp;
+        {!! Form::radio('statusz', 1, true) !!}&nbsp;Approve
+        </div>
+    
+    </div>
+    </div>
+
    {{--  <!-- Total Received Email Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('total_received_email', 'Total Received Email') !!}
