@@ -58,6 +58,11 @@
     {!! Form::radio('supervisor_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
+@else
+
+<div class="alert alert-danger" role="alert">        
+Please login as a unit head to approve this requisition
+</div>
 @endif
 
 @if(isset($department_head_data))
@@ -69,6 +74,10 @@
     {!! Form::radio('hod_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
+@else
+<div class="alert alert-danger" role="alert">        
+    Please login as a H.O.D to approve this requisition
+    </div>
 @endif
 
 @role('MD')
@@ -83,6 +92,11 @@ if($dtarequests->hod_status == 1){
     {!! Form::radio('md_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
+<?php } else {
+   ?>
+<div class="alert alert-danger" role="alert">        
+    H.O.D must approve first before MD can proceed with approval
+    </div>
 <?php } ?>
 @endrole
 @role('ED FINANCE & ACCOUNT')
@@ -97,7 +111,12 @@ if($dtarequests->hod_status == 1 && $dtarequests->md_status == 1){
     {!! Form::radio('account_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
-<?php } ?>
+<?php }else {
+    ?>
+ <div class="alert alert-danger" role="alert">        
+     H.O.D and MD must approve first before ED FINANCE & ACCOUNT can proceed with approval
+     </div>
+ <?php } ?>
 @endrole
 @role('ED FINANCE & ACCOUNT')
 <!-- Approval Status Field -->

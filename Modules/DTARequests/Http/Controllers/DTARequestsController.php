@@ -62,7 +62,7 @@ class DTARequestsController extends AppBaseController
     {
         $user_id = Auth::id();
         $department = $this->staffRepository->getByUserId($user_id);
-        $department_id = $department->department_id;
+        $department_id = isset($department->department_id) ? $department->department_id : null;
         $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($user_id, $department_id);
 
         
