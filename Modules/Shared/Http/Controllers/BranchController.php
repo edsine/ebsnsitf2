@@ -41,6 +41,7 @@ class BranchController extends AppBaseController
      */
     public function index(Request $request)
     {
+      
         $branches = Branch::with("region")->orderBy('branch_name', 'DESC');
         // $branches = $this->branchRepository->paginate(10);
         if ($request->filled('search')) {

@@ -156,11 +156,11 @@
     </div>
     
     <!-- Created By Field -->
-    <div class="form-group col-sm-4">
+    {{-- <div class="form-group col-sm-4">
         {!! Form::label('created_by', 'Created By') !!}
         {!! Form::text('created_by', null, ['class' => 'form-control']) !!}
     </div>
-    
+     --}}
     <!-- Date Approved Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('date_approved', 'Date Approved') !!}
@@ -168,32 +168,32 @@
     </div>
     
 </div>
-<div  style="display: flex;">
+{{-- <div  style="display: flex;">
     <!-- Approved By Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('approved_by', 'Approved By') !!}
         {!! Form::text('approved_by', null, ['class' => 'form-control']) !!}
-    </div>
+    </div> --}}
     
     <!-- Security Key Field -->
-    <div class="form-group col-sm-4">
+    {{-- <div class="form-group col-sm-4">
         {!! Form::label('security_key', 'Security Key') !!}
         {!! Form::text('security_key', null, ['class' => 'form-control']) !!}
     </div>
-    
+     --}}
     <!-- Date Modified Field -->
-    <div class="form-group col-sm-4">
+    {{-- <div class="form-group col-sm-4">
         {!! Form::label('date_modified', 'Date Modified') !!}
         {!! Form::date('date_modified', null, ['class' => 'form-control']) !!}
-    </div>
+    </div> --}}
     
 </div>
 <div  style="display: flex;">
     <!-- Modified By Field -->
-    <div class="form-group col-sm-4">
+    {{-- <div class="form-group col-sm-4">
         {!! Form::label('modified_by', 'Modified By') !!}
         {!! Form::text('modified_by', null, ['class' => 'form-control']) !!}
-    </div>
+    </div> --}}
     
     <!-- Office Position Field -->
     <div class="form-group col-sm-4">
@@ -229,8 +229,8 @@
     <div class="form-group col-sm-4">
         {!! Form::label('statusz', 'Status Of User') !!}
         <div class="">
-        {!! Form::radio('statusz', 0, false) !!}&nbsp;Disapprove&nbsp;&nbsp;
-        {!! Form::radio('statusz', 1, true) !!}&nbsp;Approve
+        {!! Form::radio('statusz', 0, false) !!}&nbsp;Disapprove
+        {!! Form::radio('statusz', 1, true) !!}&nbsp;Approve&nbsp;&nbsp;
         </div>
     
     </div>
