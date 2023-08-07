@@ -57,14 +57,6 @@
 
 
 
-    {{-- <div class="form-group col-sm-6">
-        {!! Form::label('street_number', 'STREET NUMBER:') !!}
-        {!! Form::text('street_number',  null, ['class' => 'form-control ']) !!}
-    </div> --}}
-    {{-- <div class="form-group col-sm-6">
-        {!! Form::label('district', 'DISTRICT:') !!}
-        {!! Form::text('district',  null, ['class' => 'form-control ']) !!}
-    </div> --}}
     <div class="form-group col-sm-6">
         {!! Form::label('local_council', 'LOCAL COUNCIL/AREA COUNCIL:') !!}
         {!! Form::text('local_council',  null, ['class' => 'form-control ']) !!}
@@ -151,14 +143,15 @@
     <script>
         $(document).ready(function() {
             $('#leave_type').on('click', function() {
-          const selectedId = $(this).val();          
+          const selectedId = $(this).val(); 
+          const host = window.location.protocol+'//'+location.host;  
+          //alert(host);       
        if (selectedId !== '') {
                     $.ajax({
-                        url: `http://localhost:8000/leave_request_data/get-data/${selectedId}`,
+                        url: host+`/leave_request_data/get-data/${selectedId}`,
                         type: 'GET',
                         data: {id: selectedId},
                         dataType: 'json',
-                        //headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                         success: function(response) {
                             var du = JSON.stringify(response.duration);
                             $('#number_days').val('');

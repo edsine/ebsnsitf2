@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 
 use Response;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use Laracasts\Flash\Flash;
+use Illuminate\Http\Request;
 use App\Notifications\UserCreated;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -15,18 +15,20 @@ use Spatie\Permission\Models\Role;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Repositories\StaffRepository;
 
+use App\Repositories\StaffRepository;
+use Modules\Shared\Models\Department;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Modules\WorkflowEngine\Models\Staff;
+use Modules\HumanResource\Models\Ranking;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Notification;
-use Modules\HumanResource\Models\Ranking;
 use Modules\Shared\Repositories\BranchRepository;
 use Modules\Shared\Repositories\DepartmentRepository;
 use Modules\HumanResource\Repositories\RankingRepository;
-
 
 class UserController extends AppBaseController
 {
@@ -67,8 +69,9 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = User::orderBy('created_at', 'DESC');
+        $users = $this->userRepository->getAllTablesData();//User::orderBy('created_at', 'DESC');
 
+        $uid=Auth::user()->user_id;
         if ($request->filled('search')) {
             $users->where('first_name', 'like', '%' . $request->search . '%')
                 ->orWhere('middle_name', 'like', '%' . $request->search . '%')
@@ -77,11 +80,20 @@ class UserController extends AppBaseController
         }
         $pusers= User::where('status',0)->paginate(10);
         $ausers= User::where('status',1)->paginate(10);
+        
        
+        // $depart='SELECT * from  thetable name INNER JOIN the other table on user_id=employed_id';
+        
+        // $role= '';
+        // $branch = '';
+
         // $users = $this->userRepository->paginate(10);
-        $users = $users->paginate(10);
+        //$users = $users->paginate(10);
+
+        //$users_data = $this->userRepository->getAllTablesData();
 
         return view('users.index',compact('users','pusers','ausers'));
+         //dd($users_data);
     }
 
     /**
@@ -178,6 +190,18 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
+
+    //  public function statusedit()
+    //  {
+
+    //     //$users = $this->userRepository->getByUserId($id);
+
+
+    // // return view('users.statuschanging',compact('users'));
+    //  return view('users.statuschanging');
+    //  }
+     
+
     public function edit($id)
     {
 
@@ -211,8 +235,43 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
+    //bring out icon for approve
+
+public function myedit($id){
+   
+    $user = $this->userRepository->getByUserId($id);
+    if (empty($user)) {
+        Flash::error('User not a staff so it can not be edited');
+
+        return redirect(route('users.index'));
+    }
+    return view('users.myedit',compact('user'));
+
+
+}
+
+public function myupdate($id,UpdateUserRequest $request)
+{
+    $user = $this->userRepository->getByUserId($id);
+    if (empty($user)) {
+        Flash::error('User not found');
+
+        return redirect(route('users.index'));
+    }
+    $input =  $request->all();
+    $input['user_id'] = $user->userId;
+    $this->staffRepository->update($input, $user->staff_id);
+    
+    $user = $this->userRepository->update($input, $id);
+    Flash::success('User Status updated successfully.');
+
+    return redirect(route('users.index'));
+}
+
+    
     public function update($id, UpdateUserRequest $request)
     {
+       
 
         $user = $this->userRepository->getByUserId($id);
 
@@ -267,7 +326,7 @@ class UserController extends AppBaseController
 
         //$user->assignRole($request->input('roles'));
 
-        $user->roles()->detach();
+       $user->roles()->detach();
         $user->assignRole($role);
 
 
