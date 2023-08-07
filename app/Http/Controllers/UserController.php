@@ -94,7 +94,7 @@ class UserController extends AppBaseController
         //$users_data = $this->userRepository->getAllTablesData();
 
         return view('users.index',compact('users','pusers','ausers'));
-         //dd($users_data);
+        
     }
 
     /**
