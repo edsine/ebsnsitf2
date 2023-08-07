@@ -4,25 +4,6 @@
     {!! Form::select('rank',$rank , null, ['class' => 'form-control form-select']) !!}
 </div>
 
-<!-- Role Field -->
-<div class="col-sm-4">
-    
-    {!! Form::label('roles', 'Roles') !!}
-    <div class="form-group">
-    {{-- {!! Form::select('roles[]',$roles,null, ['multiple' => true,'class' => 'form-control']) !!} --}}
-    {!! Form::select('roles[]',$roles,null, ['class' => 'form-control form-select']) !!}
-
-    </div>
-</div>
-
-<!-- Email Field -->
-<div class="form-group col-sm-4">
-    
-    {!! Form::label('email', 'Email') !!}
-    {!! Form::email('email', null, ['class' => 'form-control']) !!}
-</div>
-
-
 <!-- First Name Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('first_name', 'First Name') !!}
@@ -37,17 +18,29 @@
 
 <!-- Last Name Field -->
 <div class="form-group col-sm-4">
-     
+    
     {!! Form::label('last_name', 'Last Name') !!}
     {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Email Field -->
+<div class="form-group col-sm-4">
+    {!! Form::label('email', 'Email') !!}
+    {!! Form::email('email', null, ['class' => 'form-control']) !!}
+</div>
 
+<!-- Role Field -->
+<div class="col-sm-4 ">
+    {!! Form::label('roles', 'Roles') !!}
+    <div class="form-group">
+    {{-- {!! Form::select('roles[]',$roles,null, ['multiple' => true,'class' => 'form-control']) !!} --}}
+    {!! Form::select('roles[]',$roles,null, ['class' => 'form-control form-select']) !!}
 
+    </div>
+</div>
 
 <!-- Password Field -->
 <div class="form-group col-sm-6">
-    
     {!! Form::label('password', 'Password') !!}
     {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
@@ -59,7 +52,7 @@
 </div>
 
 <!-- Checkbox Field -->
-<div class="form-group col-sm-12 my-3">
+<div class="form-group col-sm-12">
     <div class="form-check">
         {!! Form::hidden('checkbox', 0, ['class' => 'form-check-input']) !!}
         {!! Form::checkbox('checkbox', '1', null, ['id' => 'newCheckbox', 'class' => 'form-check-input']) !!}
@@ -159,28 +152,28 @@
     {{-- <div class="form-group col-sm-4">
         {!! Form::label('created_by', 'Created By') !!}
         {!! Form::text('created_by', null, ['class' => 'form-control']) !!}
-    </div>
-     --}}
-    <!-- Date Approved Field -->
-    <div class="form-group col-sm-4">
-        {!! Form::label('date_approved', 'Date Approved') !!}
-        {!! Form::date('date_approved', null, ['class' => 'form-control']) !!}
-    </div>
-    
-</div>
-{{-- <div  style="display: flex;">
-    <!-- Approved By Field -->
-    <div class="form-group col-sm-4">
-        {!! Form::label('approved_by', 'Approved By') !!}
-        {!! Form::text('approved_by', null, ['class' => 'form-control']) !!}
     </div> --}}
     
+    <!-- Date Approved Field -->
+    {{-- <div class="form-group col-sm-4">
+        {!! Form::label('date_approved', 'Date Approved') !!}
+        {!! Form::date('date_approved', null, ['class' => 'form-control']) !!}
+    </div> --}}
+    
+</div>
+<div  style="display: flex;">
+    <!-- Approved By Field -->
+    {{-- <div class="form-group col-sm-4">
+        {!! Form::label('approved_by', 'Approved By') !!}
+        {!! Form::text('approved_by', null, ['class' => 'form-control']) !!}
+    </div>
+     --}}
     <!-- Security Key Field -->
     {{-- <div class="form-group col-sm-4">
         {!! Form::label('security_key', 'Security Key') !!}
         {!! Form::text('security_key', null, ['class' => 'form-control']) !!}
-    </div>
-     --}}
+    </div> --}}
+    
     <!-- Date Modified Field -->
     {{-- <div class="form-group col-sm-4">
         {!! Form::label('date_modified', 'Date Modified') !!}
@@ -193,8 +186,8 @@
     {{-- <div class="form-group col-sm-4">
         {!! Form::label('modified_by', 'Modified By') !!}
         {!! Form::text('modified_by', null, ['class' => 'form-control']) !!}
-    </div> --}}
-    
+    </div>
+     --}}
     <!-- Office Position Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('office_position', 'Office Position') !!}
@@ -215,27 +208,7 @@
         {!! Form::label('about_me', 'About Me') !!}
         {!! Form::textarea('about_me', null, ['class' => 'form-control']) !!}
     </div>
-
-    {{-- do for only admins --}}
-    {{-- <div class="form-group  form-check col-sm-4">
-        {!! Form::label('status', 'STATUS OF USER ') !!}
-        <br>
-        <input type="radio" name="status" value="1"  class=" form-radio-input">
-        <label for="status1">APPROVE</label>
-        <input type="radio" name="status" value="0" class="form-radio-input">
-        <label for="status2">DISAPPROVE</label>
-    </div> --}}
     
-    <div class="form-group col-sm-4">
-        {!! Form::label('statusz', 'Status Of User') !!}
-        <div class="">
-        {!! Form::radio('statusz', 0, false) !!}&nbsp;Disapprove
-        {!! Form::radio('statusz', 1, true) !!}&nbsp;Approve&nbsp;&nbsp;
-        </div>
-    
-    </div>
-    </div>
-
    {{--  <!-- Total Received Email Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('total_received_email', 'Total Received Email') !!}

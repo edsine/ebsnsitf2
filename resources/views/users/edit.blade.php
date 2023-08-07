@@ -23,7 +23,9 @@
 
             <div class="card-body">
                 <div class="row">
-                    @include('users.fields')
+                    {{-- @include('users.fields') --}}
+                    @include('users.fields');
+                    {{-- do a different view in persnal , then put the edit to change the edit button --}}
                 </div>
             </div>
 

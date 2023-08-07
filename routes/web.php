@@ -6,6 +6,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,11 +48,17 @@ Route::post('api/fetch-locals', [DropdownController::class, 'fetchLocal']);
 
 Auth::routes();
 
+
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('myedit/{id}', [UserController::class, 'myedit'])->name('myedit');
+    Route::put('myedit/{id}', [UserController::class, 'myupdate'])->name('myupdate');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    
    
-    Route::get('/active',[UserController::class,'getactive'])->name('active');
-    Route::get('/pending',[UserController::class,'getpending'])->name('pending');
+
+
+    Route::get('/active', [UserController::class,'getactive'])->name('active');
+    Route::get('/pending', [UserController::class,'getpending'])->name('pending');
     
 });
