@@ -26,6 +26,7 @@ use App\Notifications\DTARequested;
 
 
 
+
 class DTARequestsController extends AppBaseController
 {
 
@@ -81,8 +82,8 @@ class DTARequestsController extends AppBaseController
         }
 
         return view('dtarequests::dtarequests.index')->with(['department_head_data'=> $department_head_data,'dtarequests'=> $dtarequests,'unit_head_data'=>$unit_head_data]);
- 
-       
+    
+       //return dd(Auth::user());
     }
 
     /**
