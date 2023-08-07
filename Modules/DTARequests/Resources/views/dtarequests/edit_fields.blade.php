@@ -83,7 +83,7 @@ if($dtarequests->hod_status == 1){
     {!! Form::radio('md_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
-<?php } ?>
+<?php }  ?>
 @endrole
 @role('ED FINANCE & ACCOUNT')
 <?php 

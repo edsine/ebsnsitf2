@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                        ACTIVATE STAFF 
+                        UPDATE STAFF STATUS
                     </h1>
                 </div>
             </div>
@@ -19,16 +19,27 @@
 
         <div class="card">
 
-            {!! Form::model($user, ['route' => ['users.update', $user->userId], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
+            {!! Form::model($user, ['route' => ['myupdate', $user->userId], 'method' => 'put','enctype' => 'multipart/form-data']) !!}
 
             <div class="card-body">
                 <div class="row">
-                    {{-- @include('users.fields') --}}
+                    
+<div class="form-group col-sm-4">
+    {!! Form::label('status', 'Change Staff Status') !!}
+    <div class="">
+        {!! Form::radio('status', 1,false) !!}&nbsp;APPROVE
+    {!! Form::radio('status', 0,true) !!}&nbsp;DISAPPROVE&nbsp;&nbsp;
+   
+    </div>
+
+</div>
+</div> 
+                    
                 </div>
             </div>
 
-            <div class="card-footer">
-                {!! Form::submit('SUBMIT', ['class' => 'btn btn-primary']) !!}
+            <div class="card-footer mt-6">
+                {!! Form::submit('UPDATE', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ route('users.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
@@ -37,3 +48,4 @@
         </div>
     </div>
 @endsection
+

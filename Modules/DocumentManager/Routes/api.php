@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +35,9 @@ Route::prefix('documentmanager')->group(function () {
     Route::resource('correspondences', Modules\DocumentManager\Http\Controllers\API\CorrespondenceAPIController::class)
         ->except(['create', 'edit']);
 
-    Route::resource('correspondence-has-users', Modules\DocumentManager\Http\Controllers\API\CorrespondenceHasUserAPIController::class)
-        ->except(['create', 'edit']);
+    // Route::resource('correspondence-has-users', Modules\DocumentManager\Http\Controllers\API\CorrespondenceHasUserAPIController::class)
+    //     ->except(['create', 'edit']);
 
-    Route::resource('correspondence-has-departments', Modules\DocumentManager\Http\Controllers\API\CorrespondenceHasDepartmentAPIController::class)
-        ->except(['create', 'edit']);
+//     Route::resource('correspondence-has-departments', Modules\DocumentManager\Http\Controllers\API\CorrespondenceHasDepartmentAPIController::class)
+//         ->except(['create', 'edit']);
 });

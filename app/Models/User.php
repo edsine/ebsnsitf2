@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\HumanResource\Models\Ranking;
+use Modules\Shared\Models\Branch;
+use Modules\Shared\Models\Department;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
@@ -51,7 +53,7 @@ class User extends Authenticatable implements Auditable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'statusz'=>'integer',
+        'status'=>'integer',
     ];
 
     public function getFullName()
@@ -72,7 +74,5 @@ class User extends Authenticatable implements Auditable
     }
     public function ranking(){
         return $this->belongsTo(Ranking::class,'ranking_id','id');
-    }
-
-    
+    }    
 }
