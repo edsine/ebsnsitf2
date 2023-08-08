@@ -148,7 +148,7 @@
         <!--begin::Body-->
         <div class="mb-0">
             <!--begin::Text-->
-            <div class="fs-6 text-gray-600 mb-5">Thank you for completing the form! Your Employer has been successfully
+            <div class="fs-6 text-gray-600 mb-5">Thank you for completing the form! Click Submit and Your User will be Successfully
                 Created</div>
             <!--end::Text-->
             <!--begin::Alert-->
@@ -207,7 +207,7 @@
         </button>
     </div>
     <!--end::Wrapper-->
-    
+
     <!--begin::Wrapper-->
     <div>
         <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
