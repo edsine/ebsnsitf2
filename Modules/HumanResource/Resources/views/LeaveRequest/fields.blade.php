@@ -1,8 +1,3 @@
-<div class="alert alert-danger d-none" id="notificationAlert" role="alert">
-    <!-- Notification message will be displayed here -->
-</div>
-
-
 <!--start::Step 1-->
 <div class="current" data-kt-stepper-element="content">
     @csrf
@@ -13,6 +8,9 @@
             </h2>
             <div class="text-muted fw-semibold fs-6">Fields exclusive for admin users.
                 <a href="#" class="link-primary fw-bold">Admin privileges</a>.
+            </div>
+            <div class="alert alert-danger d-none" id="notificationAlert" role="alert">
+                <!-- Notification message will be displayed here -->
             </div>
         </div>
         <div class="fv-row">
@@ -41,6 +39,13 @@
                 <div class="form-group col-sm-6">
                     {!! Form::label('daystaken', 'Number of days to take:') !!}
                     {!! Form::number('daystaken', null, ['class' => 'form-control form-control-solid border border-2 ','placeholder'=>'input the number of days to take','id'=>'days']) !!}
+                </div>
+                <div class="form-group col-sm-6">
+                    {!! Form::label('end_date', 'EXPECTED DATE TO RESUME:') !!}
+                    {!! Form::text('end_date', null, ['class' => 'form-control form-control-solid border border-2 ','placeholder'=>'the date for you to resume','id'=>'end_date','readonly'=>true]) !!}
+                </div>
+                <div class="form-group my-5 col-sm-6">
+                    {!!Form::button('Update',['class'=>'btn btn-info','id'=>'u']) !!}
                 </div>
             </div>
         </div>
@@ -77,10 +82,7 @@
                     {!! Form::label('local_council', 'LOCAL COUNCIL/AREA COUNCIL:') !!}
                     {!! Form::text('local_council', null, ['class' => 'form-control form-control-solid border border-2 ']) !!}
                 </div>
-                <div class="form-group col-sm-6">
-                    {!! Form::label('end_date', 'EXPECTED DATE TO RESUME:') !!}
-                    {!! Form::text('end_date', null, ['class' => 'form-control form-control-solid border border-2 ','placeholder'=>'the date for you to resume','id'=>'end_date','readonly'=>true]) !!}
-                </div>
+
             </div>
         </div>
     </div>
@@ -148,7 +150,7 @@
         <!--begin::Body-->
         <div class="mb-0">
             <!--begin::Text-->
-            <div class="fs-6 text-gray-600 mb-5">Thank you for completing the form! Your Employer has been successfully
+            <div class="fs-6 text-gray-600 mb-5">Thank you for completing the form! Click Submit and Your User will be Successfully
                 Created</div>
             <!--end::Text-->
             <!--begin::Alert-->
@@ -207,7 +209,7 @@
         </button>
     </div>
     <!--end::Wrapper-->
-    
+
     <!--begin::Wrapper-->
     <div>
         <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
@@ -237,8 +239,8 @@
     $(document).ready(function() {
         $('#leave_type').on('click', function() {
             const selectedId = $(this).val();
-            const atp =location.protocol + '//' + location.host;
-            
+            const atp = location.protocol + '//' + location.host;
+
             if (selectedId !== '') {
                 $.ajax({
                     url: `${atp}/leave_request_data/get-data/${selectedId}`,
