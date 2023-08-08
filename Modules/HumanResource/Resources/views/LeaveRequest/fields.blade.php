@@ -237,9 +237,11 @@
     $(document).ready(function() {
         $('#leave_type').on('click', function() {
             const selectedId = $(this).val();
+            const atp =location.protocol + '//' + location.host;
+            
             if (selectedId !== '') {
                 $.ajax({
-                    url: `http://localhost:8000/leave_request_data/get-data/${selectedId}`,
+                    url: `${atp}/leave_request_data/get-data/${selectedId}`,
                     type: 'GET',
                     data: {
                         id: selectedId
