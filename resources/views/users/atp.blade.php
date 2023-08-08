@@ -56,13 +56,14 @@
                             </td> --}}
                             <td style="width: 120px">
                                 {!! Form::open(['route' => ['users.destroy', $p->id], 'method' => 'delete']) !!}
-                                <div class='btn-group'>
+                                <div class='btn-group' id="aa">
                                     <a href="{{ route('users.show', [$p->id]) }}" class='btn btn-default btn-xs'>
                                         <i class="far fa-eye"></i>
                                     </a>
                                     <a href="{{ route('users.edit', [$p->id]) }}" class='btn btn-default btn-xs'>
                                         <i class="far fa-edit"></i>
                                     </a>
+                                    <i class="click-icon fas fa-chevron-down"></i>
                                     {{-- <a href="{{ route('myedit', [$p->id]) }}" class='btn btn-default btn-xs'>
                                         <i class="fas fa-toggle-on text-bg-secondary" title="change status" ></i>
                                     </a> --}}
@@ -124,13 +125,14 @@
                     </td> --}}
                     <td style="width: 120px">
                         {!! Form::open(['route' => ['users.destroy', $p->id], 'method' => 'delete']) !!}
-                        <div class='btn-group'>
+                        <div class='btn-group' id="aa">
                             <a href="{{ route('users.show', [$p->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
                             <a href="{{ route('users.edit', [$p->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
+                            <i class="click-icon fas fa-chevron-down"></i>
                             {{-- <a href="{{ route('myedit', [$p->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="fas fa-toggle-on text-bg-secondary" title="change status" ></i>
                             </a> --}}
@@ -202,8 +204,19 @@
             </div>
         </div> --}}
 
+
+
+
+        
     </div>
 </div>
+<script>
+       $(document).ready(function () {
+        $(".click-icon").click(function () {
+            $(this).siblings("a").toggle();
+        });
+    });
+</script>
 
 
 
