@@ -44,7 +44,7 @@
         <div class="clearfix"></div>
 
         <div class="card">
-            @include('users.pendingusers')
+            @include('users.atp')
         </div>
     </div>
 @endsection

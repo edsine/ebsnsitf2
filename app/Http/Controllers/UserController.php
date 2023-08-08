@@ -59,6 +59,7 @@ class UserController extends AppBaseController
         $this->staffRepository = $staffRepo;
         $this->rankRepository=$rankRepo;
     }
+    
 
     /**
      * Display a listing of the User.
@@ -70,6 +71,7 @@ class UserController extends AppBaseController
     public function index(Request $request)
     {
         $users = $this->userRepository->getAllTablesData();//User::orderBy('created_at', 'DESC');
+        $norole= $this->userRepository->myuserswithoutroles(); 
 
         $uid=Auth::user()->user_id;
         if ($request->filled('search')) {
@@ -78,24 +80,16 @@ class UserController extends AppBaseController
                 ->orWhere('last_name', 'like', '%' . $request->search . '%')
                 ->orWhere('email', 'like', '%' . $request->search . '%');
         }
-        $pusers= User::where('status',0)->paginate(10);
-        $ausers= User::where('status',1)->paginate(10);
+        // $pusers= User::where('status',0)->paginate(10);
+        // $ausers= User::where('status',1)->paginate(10);
         
         
-       
-        // $depart='SELECT * from  thetable name INNER JOIN the other table on user_id=employed_id';
-        
-        // $role= '';
-        // $branch = '';
+      
 
-        // $users = $this->userRepository->paginate(10);
-        //$users = $users->paginate(10);
-
-        //$users_data = $this->userRepository->getAllTablesData();
-
-        return view('users.index',compact('users','pusers','ausers'));
+        return view('users.index',compact('users','norole'));
         
     }
+    // return view('users.index',compact('users','pusers','ausers'));
 
     /**
      * Show the form for creating a new User.
