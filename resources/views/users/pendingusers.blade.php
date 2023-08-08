@@ -1,10 +1,10 @@
 <div class="container mt-5">
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link text-primary" href="#allstaff" data-bs-toggle="tab">All Staff</a>
+            <a class="nav-link text-primary active" href="#allstaff" data-bs-toggle="tab">All Staff</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active " href="#pending" data-bs-toggle="tab">Pending Staff</a>
+            <a class="nav-link  " href="#pending" data-bs-toggle="tab">Pending Staff</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-primary" href="#approve" data-bs-toggle="tab">Approved Staff</a>
@@ -14,7 +14,7 @@
     <div class="tab-content">
 
         <!-- All Staff Table -->
-        <div class="tab-pane fade show active" id="allstaff">
+        <div class="tab-pane fade show active " id="allstaff">
             <div class="table-responsive">
                 <table class="table mt-3 table-striped table-hover table-bordered">
                     <thead>
@@ -24,6 +24,7 @@
                             <th scope="col"> Role</th>
                             <th scope="col"> Department</th>
                             <th scope="col">Branch</th>
+                            <th scope="col">Approval Status</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -80,7 +81,7 @@
         </div>
 
         <!-- Pending Staff Table -->
-        <div class="tab-pane fade" id="pending">
+        <div class="tab-pane fade " id="pending">
             <div class="table-responsive">
                 <table class="table mt-3 table-striped table-hover table-bordered">
                     <thead>
@@ -122,7 +123,7 @@
         </div>
 
         <!-- Approved Staff Table -->
-        <div class="tab-pane fade" id="approve">
+        <div class="tab-pane fade " id="approve">
             <div class="table-responsive">
                 <table class="table mt-3 table-striped table-hover table-bordered">
                     <thead>

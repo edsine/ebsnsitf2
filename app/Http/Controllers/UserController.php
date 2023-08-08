@@ -81,6 +81,7 @@ class UserController extends AppBaseController
         $pusers= User::where('status',0)->paginate(10);
         $ausers= User::where('status',1)->paginate(10);
         
+        
        
         // $depart='SELECT * from  thetable name INNER JOIN the other table on user_id=employed_id';
         
@@ -93,7 +94,7 @@ class UserController extends AppBaseController
         //$users_data = $this->userRepository->getAllTablesData();
 
         return view('users.index',compact('users','pusers','ausers'));
-         //dd($users_data);
+        
     }
 
     /**
