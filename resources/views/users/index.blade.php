@@ -2,7 +2,8 @@
 
 @push('page_css')
     <link href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
-@endpush
+
+    @endpush
 
 @section('content')
     <section class="content-header">

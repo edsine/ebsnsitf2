@@ -70,26 +70,29 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->getAllTablesData();//User::orderBy('created_at', 'DESC');
+        $users = $this->userRepository->getAllTablesData();
         $norole= $this->userRepository->myuserswithoutroles(); 
 
         $uid=Auth::user()->user_id;
         if ($request->filled('search')) {
-            $users->where('first_name', 'like', '%' . $request->search . '%')
-                ->orWhere('middle_name', 'like', '%' . $request->search . '%')
-                ->orWhere('last_name', 'like', '%' . $request->search . '%')
-                ->orWhere('email', 'like', '%' . $request->search . '%');
+            
+                $users->where('first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('middle_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
         }
-        // $pusers= User::where('status',0)->paginate(10);
-        // $ausers= User::where('status',1)->paginate(10);
-        
-        
-      
+            if($request->filled('search')){
 
+            
+                $norole->where('first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('middle_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            }
         return view('users.index',compact('users','norole'));
         
     }
-    // return view('users.index',compact('users','pusers','ausers'));
+   
 
     /**
      * Show the form for creating a new User.
