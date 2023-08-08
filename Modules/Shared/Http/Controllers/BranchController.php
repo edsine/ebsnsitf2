@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Modules\Shared\Models\Branch;
 use Modules\Shared\Repositories\DepartmentRepository;
+use Modules\UnitManager\Repositories\RegionRepository;
+
 
 class BranchController extends AppBaseController
 {
@@ -23,11 +25,15 @@ class BranchController extends AppBaseController
     /** @var UserRepository $userRepository*/
     private $userRepository;
 
-    public function __construct(BranchRepository $branchRepo, DepartmentRepository $departmentRepo, UserRepository $userRepo)
+     /** @var RegionRepository $regionRepository*/
+     private $regionRepository;
+
+    public function __construct(RegionRepository $regionRepo, BranchRepository $branchRepo, DepartmentRepository $departmentRepo, UserRepository $userRepo)
     {
         $this->branchRepository = $branchRepo;
         $this->departmentRepository = $departmentRepo;
         $this->userRepository = $userRepo;
+        $this->regionRepository = $regionRepo;
     }
 
     /**
@@ -35,7 +41,8 @@ class BranchController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $branches = Branch::orderBy('branch_name', 'DESC');
+      
+        $branches = Branch::with("region")->orderBy('branch_name', 'DESC');
         // $branches = $this->branchRepository->paginate(10);
         if ($request->filled('search')) {
             $branches->where('branch_name', 'like', '%' . $request->search . '%')
@@ -62,7 +69,9 @@ class BranchController extends AppBaseController
     {
         $users = $this->userRepository->all()->pluck('email', 'id');
         $users->prepend('Select user', '');
-        return view('shared::branches.create')->with('users', $users);
+        $regions = $this->regionRepository->all()->pluck('name', 'id');
+        $regions->prepend('Select region', '');
+        return view('shared::branches.create')->with(['users'=> $users,'regions'=>$regions]);
     }
 
     /**
@@ -84,7 +93,7 @@ class BranchController extends AppBaseController
      */
     public function show($id)
     {
-        $branch = $this->branchRepository->find($id);
+        $branch = Branch::with("region")->find($id);
 
         if (empty($branch)) {
             Flash::error('Branch not found');
@@ -110,7 +119,9 @@ class BranchController extends AppBaseController
 
         $users = $this->userRepository->all()->pluck('email', 'id');
         $users->prepend('Select user', '');
-        return view('shared::branches.edit')->with(['branch' => $branch, 'users' => $users]);
+        $regions = $this->regionRepository->all()->pluck('name', 'id');
+        $regions->prepend('Select region', '');
+        return view('shared::branches.edit')->with(['branch' => $branch, 'users' => $users, 'regions' => $regions]);
     }
 
     /**

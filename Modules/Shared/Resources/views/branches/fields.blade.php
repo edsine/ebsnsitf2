@@ -6,8 +6,8 @@
 
 <!-- Branch Region Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('branch_region', 'Branch Region:') !!}
-    {!! Form::select('branch_region', getBranchRegions(), null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::label('region_id', 'Branch Region:') !!}
+    {!! Form::select('region_id', $regions, null, ['class' => 'form-control custom-select']) !!}
 </div>
 
 <!-- Branch Code Field -->
