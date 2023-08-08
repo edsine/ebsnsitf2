@@ -20,7 +20,7 @@
         <div class="card">
 
             {!! Form::model($user, ['route' => ['users.update', $user->userId], 'method' => 'patch','enctype' => 'multipart/form-data']) !!}
-
+            <a href="{{ route('users.index') }}" class="btn btn-default"> Bank </a>
             <div class="card-body">
                 <div class="row">
                     {{-- @include('users.fields') --}}
