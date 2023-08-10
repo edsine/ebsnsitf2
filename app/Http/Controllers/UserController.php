@@ -59,6 +59,7 @@ class UserController extends AppBaseController
         $this->staffRepository = $staffRepo;
         $this->rankRepository=$rankRepo;
     }
+    
 
     /**
      * Display a listing of the User.
@@ -69,33 +70,29 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->getAllTablesData();//User::orderBy('created_at', 'DESC');
+        $users = $this->userRepository->getAllTablesData();
+        $norole= $this->userRepository->myuserswithoutroles(); 
 
         $uid=Auth::user()->user_id;
         if ($request->filled('search')) {
-            $users->where('first_name', 'like', '%' . $request->search . '%')
-                ->orWhere('middle_name', 'like', '%' . $request->search . '%')
-                ->orWhere('last_name', 'like', '%' . $request->search . '%')
-                ->orWhere('email', 'like', '%' . $request->search . '%');
+            
+                $users->where('first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('middle_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
         }
-        $pusers= User::where('status',0)->paginate(10);
-        $ausers= User::where('status',1)->paginate(10);
-        
-        
-       
-        // $depart='SELECT * from  thetable name INNER JOIN the other table on user_id=employed_id';
-        
-        // $role= '';
-        // $branch = '';
+            if($request->filled('search')){
 
-        // $users = $this->userRepository->paginate(10);
-        //$users = $users->paginate(10);
-
-        //$users_data = $this->userRepository->getAllTablesData();
-
-        return view('users.index',compact('users','pusers','ausers'));
+            
+                $norole->where('first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('middle_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            }
+        return view('users.index',compact('users','norole'));
         
     }
+   
 
     /**
      * Show the form for creating a new User.

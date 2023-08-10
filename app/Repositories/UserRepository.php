@@ -72,7 +72,20 @@ class UserRepository extends BaseRepository
         ->join('branches', 'staff.branch_id', '=', 'branches.id')
         ->select('users.id', 'roles.name as role', 'users.first_name', 'users.middle_name', 'users.last_name', 'users.email', 'users.status','departments.department_unit','branches.branch_name')
         // ->where('user_id', $id)
-        ->paginate(1);
+        ->paginate(10);
     }
 
+      public function myuserswithoutroles() 
+    {
+        return DB::table('users')
+        ->leftJoin('staff', 'users.id', '=', 'staff.user_id')
+        ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+        ->whereNull('model_has_roles.role_id')
+        ->join('departments', 'staff.department_id', '=', 'departments.id')
+        ->join('branches', 'staff.branch_id', '=', 'branches.id')
+        ->select('users.id', DB::raw("NULL as role"), 'users.first_name', 'users.middle_name', 'users.last_name', 'users.email', 'users.status', 'departments.department_unit', 'branches.branch_name')
+        
+        ->paginate(10);
+   
+    }
 }
