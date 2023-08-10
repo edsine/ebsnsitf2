@@ -6,7 +6,7 @@
 
     /* Light green color on main menu hover */
     .menu-link:hover {
-        background-color: lightgreen;
+        background-color: #7fc89f;
     }
 
     /* Light grey color on submenu active */
