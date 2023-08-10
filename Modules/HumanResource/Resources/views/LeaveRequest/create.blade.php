@@ -127,7 +127,7 @@
             <!--begin::Content-->
             <div class="card d-flex flex-row-fluid flex-center">
                 <!--begin::Form-->
-                <form class="card-body py-20 w-100 mw-xl-700px px-9" id="kt_create_account_form" method="post" action="{{route('employers.store')}}">
+                <form class="card-body py-20 w-100 mw-xl-700px px-9" id="kt_create_account_form" method="post" action="{{route('leave_request.index')}}">
                     @include('humanresource::leaverequest.fields')
                 </form>
                 <!--end::Form-->
