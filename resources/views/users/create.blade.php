@@ -39,7 +39,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">First Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -63,7 +63,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Second Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -87,7 +87,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Third Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -111,7 +111,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Fourth Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -135,7 +135,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Fifth Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -176,7 +176,7 @@
             <!--begin::Content-->
             <div class="card d-flex flex-row-fluid flex-center">
                 <!--begin::Form-->
-                <form class="card-body py-20 w-100 mw-xl-700px px-9" id="kt_create_account_form" method="post" action="{{route('employers.store')}}">
+                <form class="card-body py-20 w-100 mw-xl-700px px-9" id="kt_create_account_form" method="post" action="{{route('users.index')}}">
                     @include('users.fields')
                 </form>
                 <!--end::Form-->
