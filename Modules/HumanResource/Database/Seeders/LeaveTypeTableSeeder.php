@@ -24,21 +24,33 @@ class LeaveTypeTableSeeder extends Seeder
                 'duration' => 0
             ],
             [
-                'name'=> 'PATERNITY LEAVE',
-                'duration' => 2
+                'name'=> 'CASUAL LEAVE',
+                'duration' => 7
             ],
             
             [
                 'name' =>'SICK LEAVE',
-                'duration' => 2
+                'duration' => 90
             ]
             ,[
-                'name' => 'PARTERNITY',
-                'duration' => 2
+                'name' => 'EXAMINATION LEAVE',
+                'duration' => 10
             ],
             [
-                'name' => 'PERSONAL LEAVE',
-                'duration' => 4
+                'name' => 'STUDY LEAVE',
+                'duration' => 180
+            ],
+            [
+                'name' => 'SPECIAL LEAVE FOR PILGRIMAGE',
+                'duration' => 30
+            ],
+            [
+                'name' => 'COMPASSIONATE LEAVE',
+                'duration' => 14
+            ],
+            [
+                'name' => 'LEAVE OF ABSCENCE',
+                'duration' => 365
             ]
         ];
         DB::table('leavetype')->insert($leave_types);
