@@ -6,7 +6,7 @@
         <!--begin::Heading-->
         <div class="pb-10 pb-lg-15">
             <!--begin::Title-->
-            <h2 class="fw-bold d-flex align-items-center text-dark">Employer and company Details
+            <h2 class="fw-bold d-flex align-items-center text-dark">Employer and Company Details
                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
                     title="Fill all field before proceeding to the next please"></i>
             </h2>
@@ -80,7 +80,7 @@
         <!--begin::Heading-->
         <div class="pb-10 pb-lg-15">
             <!--begin::Title-->
-            <h2 class="fw-bold text-dark">Account Info</h2>
+            <h2 class="fw-bold text-dark">Company Information</h2>
             <!--end::Title-->
             <!--begin::Notice-->
             <div class="text-muted fw-semibold fs-6">If you need more info, please check out
@@ -128,7 +128,7 @@
         <!--begin::Heading-->
         <div class="pb-10 pb-lg-12">
             <!--begin::Title-->
-            <h2 class="fw-bold text-dark">Business Details</h2>
+            <h2 class="fw-bold text-dark">Account Details</h2>
             <!--end::Title-->
             <!--begin::Notice-->
             <div class="text-muted fw-semibold fs-6">If you need more info, please check out
@@ -251,7 +251,7 @@
         <!--begin::Heading-->
         <div class="pb-8 pb-lg-10">
             <!--begin::Title-->
-            <h2 class="fw-bold text-dark">Your Are Done!</h2>
+            <h2 class="fw-bold text-dark">Business Status Details</h2>
             <!--end::Title-->
         </div>
         <!--end::Heading-->

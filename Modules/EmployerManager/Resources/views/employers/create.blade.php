@@ -39,7 +39,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">First Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+                                    <div class="stepper-desc fw-semibold">Employer and company Details</div>
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -63,7 +63,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Second Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+                                    <div class="stepper-desc fw-semibold">Setup Company Info</div>
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -135,7 +135,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Fifth Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+                                    <div class="stepper-desc fw-semibold">Setup Status Details</div>
                                 </div>
                                 <!--end::Label-->
                             </div>

@@ -2,10 +2,10 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6 my-4" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
-        <a href="{{ route('home') }}">
-            <img alt="Logo" src="{{asset('assets/media/logos/NSITF-logo.png')}}" class="h-70px app-sidebar-logo-default" />
+        <a style= "padding-left: 60px" href="{{ route('home') }}">
+            <img alt="Logo" src="{{asset('assets/media/logos/NSITF-logo.png')}}" class="h-80px app-sidebar-logo-default" />
             <img alt="Logo" src="{{asset('assets/media/logos/NSITF-logo.png')}}" class="h-50px app-sidebar-logo-minimize" />
-            <span class="brand-text font-weight-light app-sidebar-logo-default" style="font-size: 30px; color: #000">{{ config('app.name') }}</span>
+            <!-- <span class="brand-text font-weight-light app-sidebar-logo-default" style="font-size: 30px; color: #000">{{ config('app.name') }}</span> -->
         </a>
         <!--end::Logo image-->
         <!--begin::Sidebar toggle-->
