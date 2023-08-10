@@ -469,8 +469,10 @@
                         <!--begin::Author-->
                         <div class="d-flex align-items-center">
                             <!--begin::Avatar-->
-                            <div class="symbol symbol-50 me-4">
-                                <span class="symbol-label" style="background-image:url(assets/media/avatars/300-6.jpg);"></span>
+                            <div class="symbol symbol-35px me-3">
+                                <div class="symbol-label bg-light-danger">
+                                    <span class="text-danger">ES</span>
+                                </div>
                             </div>
                             <!--end::Avatar-->
                             <div class="pe-5">
@@ -623,8 +625,10 @@
                         <!--begin::Author-->
                         <div class="d-flex align-items-center">
                             <!--begin::Avatar-->
-                            <div class="symbol symbol-50 me-4">
-                                <span class="symbol-label" style="background-image:url(assets/media/avatars/300-1.jpg);"></span>
+                            <div class="symbol symbol-35px me-3">
+                                <div class="symbol-label bg-light-danger">
+                                    <span class="text-danger">MS</span>
+                                </div>
                             </div>
                             <!--end::Avatar-->
                             <div class="pe-5">
@@ -778,7 +782,7 @@
                         <div class="d-flex align-items-center">
                             <!--begin::Avatar-->
                             <div class="symbol symbol-50 me-4">
-                                <span class="symbol-label" style="background-image:url(assets/media/avatars/300-5.jpg);"></span>
+                                <span class="symbol-label" style="background-image:url(assets/media/avatars/blank.png);"></span>
                             </div>
                             <!--end::Avatar-->
                             <div class="pe-5">
@@ -934,22 +938,22 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <tags class="tagify  form-control border-0" tabindex="-1">
-                                <tag title="e.smith@kpmg.com.au" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag tagify--noAnim" value="1" name="Emma Smith" avatar="avatars/300-6.jpg" email="e.smith@kpmg.com.au">
+                                <tag title="e.smith@kpmg.com.au" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag tagify--noAnim" value="1" name="Emma Smith" avatar="avatars/blank.png" email="e.smith@kpmg.com.au">
                                     <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                                     <div class="d-flex align-items-center">
-                                        <div class="tagify__tag__avatar-wrap ps-0"><img onerror="this.style.visibility='hidden'" class="rounded-circle w-25px me-2" src="assets/media/avatars/300-6.jpg"></div><span class="tagify__tag-text">Emma Smith</span>
+                                        <div class="tagify__tag__avatar-wrap ps-0"><img onerror="this.style.visibility='hidden'" class="rounded-circle w-25px me-2" src="assets/media/avatars/blank.png"></div><span class="tagify__tag-text">Emma Smith</span>
                                     </div>
                                 </tag>
-                                <tag title="max@kt.com" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag tagify--noAnim" value="2" name="Max Smith" avatar="avatars/300-1.jpg" email="max@kt.com">
+                                <tag title="max@kt.com" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag tagify--noAnim" value="2" name="Max Smith" avatar="avatars/blank.png" email="max@kt.com">
                                     <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                                     <div class="d-flex align-items-center">
-                                        <div class="tagify__tag__avatar-wrap ps-0"><img onerror="this.style.visibility='hidden'" class="rounded-circle w-25px me-2" src="assets/media/avatars/300-1.jpg"></div><span class="tagify__tag-text">Max Smith</span>
+                                        <div class="tagify__tag__avatar-wrap ps-0"><img onerror="this.style.visibility='hidden'" class="rounded-circle w-25px me-2" src="assets/media/avatars/blank.png"></div><span class="tagify__tag-text">Max Smith</span>
                                     </div>
                                 </tag>
-                                <tag title="sean@dellito.com" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag tagify--noAnim" value="3" name="Sean Bean" avatar="avatars/300-5.jpg" email="sean@dellito.com">
+                                <tag title="sean@dellito.com" contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag tagify--noAnim" value="3" name="Sean Bean" avatar="avatars/blank.png" email="sean@dellito.com">
                                     <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                                     <div class="d-flex align-items-center">
-                                        <div class="tagify__tag__avatar-wrap ps-0"><img onerror="this.style.visibility='hidden'" class="rounded-circle w-25px me-2" src="assets/media/avatars/300-5.jpg"></div><span class="tagify__tag-text">Sean Bean</span>
+                                        <div class="tagify__tag__avatar-wrap ps-0"><img onerror="this.style.visibility='hidden'" class="rounded-circle w-25px me-2" src="assets/media/avatars/blank.png"></div><span class="tagify__tag-text">Sean Bean</span>
                                     </div>
                                 </tag><span contenteditable="" tabindex="0" data-placeholder="​" aria-placeholder="" class="tagify__input" role="textbox" aria-autocomplete="both" aria-multiline="false"></span>
                                 ​
