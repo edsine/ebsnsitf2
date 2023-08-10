@@ -6,7 +6,7 @@
 
 
         <li class="nav-item">
-            <a class="nav-link  " href="#pending" data-bs-toggle="tab">PENDING STAFF </a>
+            <a class="nav-link "  href="#pending" data-bs-toggle="tab"> PENDING STAFF </a>
         </li>
         {{-- <li class="nav-item">
             <a class="nav-link text-primary" href="#approve" data-bs-toggle="tab">Approved Staff</a>
@@ -112,7 +112,7 @@
                    @endif
                 
                 </td> --}}
-                <td>Not yet assigned a role</td>
+                <td >Not yet assigned a role</td>
                    
                     <td>{!! $p->department_unit !!}</td>
                     <td>{!! $p->branch_name !!}</td>
