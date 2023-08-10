@@ -1,13 +1,44 @@
-<!-- HTML Code -->
+<style>
+    /* Space between main menu items */
+    .main-menu-item {
+        margin-bottom: 40px;
+    }
+
+    /* Light green color on main menu hover */
+    .menu-link:hover {
+        background-color: lightgreen;
+    }
+
+    /* Light grey color on submenu active */
+    .menu-sub-accordion>.menu-item.show>.menu-link {
+        background-color: lightgrey;
+    }
+
+    /* Space between main menu and submenu */
+    .menu-item.show>.menu-sub {
+        margin-top: 10px;
+    }
+
+    /* Add borders to submenus */
+    .menu-sub {
+        background-color: #f1f1f1;
+        /* Gray background for the entire submenu */
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin-top: 5px;
+    }
+</style>
+
+
+
+<!-- Begin::Menu-Code -->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
     <!--begin::Menu wrapper-->
     <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
-
         <!--begin::Menu-->
         <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="kt_app_sidebar_menu" data-kt-menu="true">
-
-            <!-- Main Menu 1: Dashboards -->
-            <div class="menu-item">
+            <!--Start Main Menu 1: Dashboards -->
+            <div class="menu-item main-menu-item">
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -28,9 +59,10 @@
                     @include('layouts.dashboard')
                 </div>
             </div>
+            <!--End Main Menu 1: Operational Tasks -->
 
-            <!-- Main Menu 2: My Tasks -->
-            <div class="menu-item">
+            <!--Start Main Menu 2: My Tasks -->
+            <div class="menu-item main-menu-item">
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
@@ -47,11 +79,14 @@
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     @include('shared::layouts.menu')
+                    @include('documentmanager::layouts.menu')
+                    @include('dtarequests::layouts.menu')
                 </div>
             </div>
+            <!--End Main Menu 2: Operational Tasks -->
 
-            <!-- Main Menu 3: General Tasks -->
-            <div class="menu-item">
+            <!--Start Main Menu 3: General Tasks -->
+            <div class="menu-item main-menu-item">
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/finance/fin001.svg-->
@@ -63,20 +98,19 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">General Tasks</span>
+                    <span class="menu-title">Operational Tasks</span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    @include('documentmanager::layouts.menu')
                     @include('claimscompensation::layouts.menu')
                     @include('employermanager::layouts.menu')
-                    @include('dtarequests::layouts.menu')
                     @include('humanresource::layouts.menu')
                 </div>
             </div>
+            <!--End Main Menu 3: Operational Tasks -->
 
-            <!-- Main Menu 4: Operational Tasks -->
-            <div class="menu-item">
+            <!--Start Main Menu 4: Operational Tasks -->
+            <div class="menu-item main-menu-item">
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
@@ -88,19 +122,42 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">Operational Tasks</span>
+                    <span class="menu-title">General Tasks</span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     @include('layouts.user')
                 </div>
             </div>
+            <!--End Main Menu 4: Operational Tasks -->
+
+            <!--Start Main Menu 5: Operational Tasks -->
+            <div class="menu-item main-menu-item">
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z" fill="currentColor"></path>
+                                <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">MailBox</span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    @include('layouts.mailmenu')
+                </div>
+            </div>
+            <!--End Main Menu 5: Operational Tasks -->
         </div>
         <!--end::Menu-->
     </div>
     <!--end::Menu wrapper-->
 </div>
-
+<!-- End::Menu-Code -->
 
 <!-- JavaScript Code -->
 <script>
