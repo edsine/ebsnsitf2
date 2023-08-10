@@ -33,4 +33,19 @@ class HomeController extends Controller
         $data = $data->paginate(10);
         return view('home', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
     }
+
+    // Mail Demo UI
+    public function composeMail()
+    {
+        return view('composemail');
+    }
+    public function mailInbox()
+    {
+        return view('mailinbox');
+    }
+
+    public function viewReplyMail()
+    {
+        return view('viewreplymail');
+    }
 }
