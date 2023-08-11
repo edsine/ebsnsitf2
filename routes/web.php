@@ -46,6 +46,13 @@ Route::put('profile/{id}', [ProfileController::class, 'update'])->name('profile-
 //Route::resource('roles', RoleController::class)->middleware('auth');
 Route::post('api/fetch-locals', [DropdownController::class, 'fetchLocal']);
 
+
+// Demo Mail UI Route
+Route::get('/composemail', [HomeController::class, 'composeMail'])->name('compose_mail');
+Route::get('/mailinbox', [HomeController::class, 'mailInbox'])->name('mail_inbox');
+Route::get('/viewreplymail', [HomeController::class, 'viewReplyMail'])->name('view_reply_mail');
+
+
 Auth::routes();
 
 
