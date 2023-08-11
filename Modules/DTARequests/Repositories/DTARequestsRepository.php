@@ -21,7 +21,7 @@ class DTARequestsRepository extends BaseRepository
         'head_office_status',
         'medical_team_status'
     ];
-//DTARequestsRepository
+    //DTARequestsRepository
     public function getFieldsSearchable(): array
     {
         return $this->fieldSearchable;
@@ -53,14 +53,14 @@ class DTARequestsRepository extends BaseRepository
 
     public function isUnitHeadInSameDepartment($loggedInUserId, $departmentId)
     {
-        
+
         // Check if there is any other user with the role of 'unit_head' in the same department
         $unitHeadUserId = DB::table('unit_heads')
-        ->select('staff.user_id')
-        ->join('staff', 'unit_heads.user_id', '=', 'staff.user_id')
-        ->where('staff.department_id', $departmentId)
-        ->where('unit_heads.user_id', '!=', $loggedInUserId) // Exclude the logged-in user from the result
-        ->value('staff.user_id');
+            ->select('staff.user_id')
+            ->join('staff', 'unit_heads.user_id', '=', 'staff.user_id')
+            ->where('staff.department_id', $departmentId)
+            ->where('unit_heads.user_id', '!=', $loggedInUserId) // Exclude the logged-in user from the result
+            ->value('staff.user_id');
 
         return $unitHeadUserId;
     }
@@ -70,14 +70,19 @@ class DTARequestsRepository extends BaseRepository
         $d = intval($departmentId);
         $u = intval($loggedInUserId);
         // Check if there is any other user with the role of 'unit_head' in the same department
-        $unitHeadUserId = DB::table('unit_heads')
-        ->select('users.id','users.first_name', 'users.last_name', 'users.email')
-        ->join('staff', 'unit_heads.user_id', '=', 'staff.user_id')
-        ->join('users', 'staff.user_id', '=', 'users.id')
-        ->where('staff.department_id', $d)
-        ->where('unit_heads.user_id', '!=', $u) // Exclude the logged-in user from the result
-        ->first();
+        /* $unitHeadUserId = DB::table('unit_heads')
+            ->select('users.id', 'users.first_name', 'users.last_name', 'users.email')
+            ->join('staff', 'unit_heads.user_id', '=', 'staff.user_id')
+            ->join('users', 'staff.user_id', '=', 'users.id')
+            ->where('staff.department_id', $d)
+            ->where('unit_heads.user_id', '!=', $u) // Exclude the logged-in user from the result
+            ->first(); */
         //->value('users.id','users.first_name', 'users.last_name', 'users.email');
+        $unitHeadUserId = UnitHead::with('user')
+                ->join('staff', 'unit_heads.user_id', '=', 'staff.user_id')
+                ->where('staff.department_id', $d)
+                ->where('unit_heads.user_id', '!=', $u)
+                ->first();
 
         return $unitHeadUserId;
     }
