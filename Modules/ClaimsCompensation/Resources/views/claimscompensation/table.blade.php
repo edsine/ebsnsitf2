@@ -7,9 +7,9 @@
                 <th>Description</th>
                 <th>Branch</th>
                 <th>Documents</th>
-                <th>Regional Manager Status</th>
-                <th>Head Office Status</th>
-                <th>Medical Team Status</th>
+                <th>Regional Manager Status (SUPERVISOR)</th>
+                <th>Head Office Status (MD)</th>
+                <th>Medical Team Status (HEALTH)</th>
                 <th colspan="3">Action</th>
             </tr>
             </thead>

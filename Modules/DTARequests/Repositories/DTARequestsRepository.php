@@ -6,6 +6,7 @@ use Modules\DTARequests\Models\DTARequests;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Modules\UnitManager\Models\UnitHead;
 
 
 class DTARequestsRepository extends BaseRepository
@@ -45,7 +46,8 @@ class DTARequestsRepository extends BaseRepository
 
     public function getByUnitHeadId($id)
     {
-        return DB::table('dta_requests')->where('unit_head_id', $id)->paginate(10);
+        //return DB::table('dta_requests')->where('unit_head_id', $id)->paginate(10);
+        return DTARequests::where('unit_head_id', $id)->paginate(10);
     }
 
 

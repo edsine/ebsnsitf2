@@ -21,9 +21,8 @@ use Modules\DTARequests\Http\Requests\UpdateDTARequests;
 use Modules\UnitManager\Repositories\UnitHeadRepository;
 use Modules\DTARequests\Repositories\DTAReviewRepository;
 use Modules\DTARequests\Repositories\DTARequestsRepository;
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\DTARequested;
-
+//use Illuminate\Support\Facades\Notification;
+//use App\Notifications\DTARequested;
 
 
 
@@ -63,7 +62,7 @@ class DTARequestsController extends AppBaseController
     {
         $user_id = Auth::id();
         $department = $this->staffRepository->getByUserId($user_id);
-        $department_id = isset($department->department_id) ? $department->department_id : null;
+        $department_id = $department->department_id;
         $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($user_id, $department_id);
 
         
@@ -71,7 +70,7 @@ class DTARequestsController extends AppBaseController
         $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
         $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
 
-        if (!empty($user_id) && $user_id != $unit_head_id) {
+       /*  if (!empty($user_id) && $user_id != $unit_head_id) {
             # code...
             $dtarequests = $this->dtaRequestsRepository->getByUserId($user_id);
             //$dtarequests = $this->dtaRequestsRepository->paginate(10);
@@ -79,11 +78,12 @@ class DTARequestsController extends AppBaseController
             # code...
             $dtarequests = $this->dtaRequestsRepository->getByUnitHeadId($unit_head_id);
             //$dtarequests = $this->dtaRequestsRepository->paginate(10);
-        }
+        } */
+        $dtarequests = $this->dtaRequestsRepository->paginate(10);
 
         return view('dtarequests::dtarequests.index')->with(['department_head_data'=> $department_head_data,'dtarequests'=> $dtarequests,'unit_head_data'=>$unit_head_data]);
-    
-       //return dd(Auth::user());
+ 
+       
     }
 
     /**
@@ -164,7 +164,7 @@ class DTARequestsController extends AppBaseController
 
         $unit_head = $this->dtaRequestsRepository->getUnitHeadInfo($uid, $department_id);
         // Send notification to unit head about the dta request
-        Notification::send($unit_head, new UserCreated($unit_head));
+        //Notification::send($unit_head, new DTARequested($unit_head));
 
 
         Flash::success('DTA Requests saved successfully.');
@@ -175,7 +175,7 @@ class DTARequestsController extends AppBaseController
     }
 
     /**
-     * Show the specified resource.
+     * Show the specified resource. 
      * @param int $id
      * @return Renderable
      */
