@@ -75,7 +75,7 @@
                             </a>
                             <a title="Approve this DTA request" href="{{ route('dtarequests.edit', [$dtarequests->id]) }}"
                                class='btn btn-default btn-xs'>
-                                <i class="far fa-edit"></i>Approve
+                                <i class="far fa-edit"></i>
                             </a>
                             {{-- {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!} --}}
                         </div>

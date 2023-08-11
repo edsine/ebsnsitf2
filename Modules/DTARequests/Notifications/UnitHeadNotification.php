@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Notifications;
+namespace Modules\DTARequests\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Modules\DTARequests\Models\DTARequests;
 
-class DTARequested extends Notification
+class UnitHeadNotification extends Notification
 {
     use Queueable;
-
-    private $_user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct()
     {
-        $this->_user = $user;
+        //
     }
 
     /**
@@ -43,13 +42,11 @@ class DTARequested extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('Hello ' . $notifiable->first_name . ' ' . $notifiable->last_name . ',')
+            ->line('You have been assigned as a unit head.')
             ->line('You have a new DTA request from EBS NSITF portal')
-            ->line('Email: ' . $notifiable->email)
-            ->line('Password: ' . "Your email account password that was used to open an account for you")
             ->line('You can use this details to login and access your dashboard.')
-            ->line('Thank you.')
-            ->line('E-NSITF');
+            ->action('View Dashboard', url('/dtarequests/dtarequests'))
+            ->line('Thank you for using our application!');
     }
 
     /**

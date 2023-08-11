@@ -76,7 +76,7 @@
                 <div class="d-flex flex-column col-md-12 mb-8 fv-row my-3">
                     <div class="form-check">
                         {!! Form::hidden('checkbox', 0, ['class' => 'form-check-input']) !!}
-                        {!! Form::checkbox('checkbox', '1', null, ['id' => 'newCheckbox', 'class' => 'form-check-input']) !!}
+                        {!! Form::checkbox('checkbox', '1', 1, ['id' => 'newCheckbox', 'class' => 'form-check-input']) !!}
                         {!! Form::label('checkbox', 'Check this box if you want to register this user as a staff', ['class' => 'form-check-label']) !!}
                     </div>
                 </div>

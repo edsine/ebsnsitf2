@@ -84,7 +84,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
 
         $user_id = Auth::id();
         $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
-       $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+       //$department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
 
        //$unit_head_id = $this->leaverequestRepository->isUnitHeadInSameDepartment($user_id, $department_id);
 

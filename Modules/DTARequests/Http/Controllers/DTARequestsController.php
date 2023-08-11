@@ -22,8 +22,7 @@ use Modules\UnitManager\Repositories\UnitHeadRepository;
 use Modules\DTARequests\Repositories\DTAReviewRepository;
 use Modules\DTARequests\Repositories\DTARequestsRepository;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\DTARequested;
-
+use Modules\DTARequests\Notifications\DTARequested;
 
 
 
@@ -38,6 +37,9 @@ class DTARequestsController extends AppBaseController
 
     /** @var DTAReviewRepository $dtaReviewRepository*/
     private $dtaReviewRepository;
+
+    /** @var StaffRepository $staffRepository*/
+    private $staffRepository;
 
     /** @var UnitHeadRepository $unitHeadRepository*/
     private $unitHeadRepository;
@@ -63,13 +65,13 @@ class DTARequestsController extends AppBaseController
     {
         $user_id = Auth::id();
         $department = $this->staffRepository->getByUserId($user_id);
-        $department_id = isset($department->department_id) ? $department->department_id : null;
+        $department_id = $department->department_id;
         $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($user_id, $department_id);
 
-        
 
-        $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
-        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+
+        $unit_head_data = UnitHead::with('user')->where('user_id', $user_id)->first();
+        $department_head_data = DepartmentHead::with('user')->where('user_id', $user_id)->first();
 
         if (!empty($user_id) && $user_id != $unit_head_id) {
             # code...
@@ -80,10 +82,9 @@ class DTARequestsController extends AppBaseController
             $dtarequests = $this->dtaRequestsRepository->getByUnitHeadId($unit_head_id);
             //$dtarequests = $this->dtaRequestsRepository->paginate(10);
         }
+        //$dtarequests = $this->dtaRequestsRepository->paginate(10);
 
-        return view('dtarequests::dtarequests.index')->with(['department_head_data'=> $department_head_data,'dtarequests'=> $dtarequests,'unit_head_data'=>$unit_head_data]);
-    
-       //return dd(Auth::user());
+        return view('dtarequests::dtarequests.index')->with(['department_head_data' => $department_head_data, 'dtarequests' => $dtarequests, 'unit_head_data' => $unit_head_data]);
     }
 
     /**
@@ -93,37 +94,39 @@ class DTARequestsController extends AppBaseController
     public function create()
     {
         $user_id = Auth::id();
-        
+
         $department = $this->staffRepository->getByUserId($user_id);
-        if(!$department){
+        if (!$department) {
             Flash::error('Admin can not add new DTA Request. DTA request should be added by a staff only');
             return redirect(route('dtarequests.index'));
-        } else{
-            
-        $department_id = $department->department_id;
-
-        $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($user_id, $department_id);
-
-        $unit_head_department = $this->staffRepository->getByUserId($unit_head_id);
-        $unit_head_department_id = $unit_head_department->department_id;
-
-
-        if ($unit_head_department_id == $department_id) {
-            # code...
-            $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
-        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
-
-        $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
-        $branches->prepend('Select branch', '');
-        return view('dtarequests::dtarequests.create')->with(['department_head_data'=>$department_head_data, 'branches'=> $branches,'unit_head_data'=>$unit_head_data]);
-    
         } else {
-            # code...
-            Flash::error('You can not create a DTA request because there is no unit head in your department.');
-            return redirect(route('dtarequests.index'));
+
+            $department_id = $department->department_id;
+
+            $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($user_id, $department_id);
+            if (!$unit_head_id) {
+                Flash::error("You can not add new dta request because you don'\t have a unit head in your department. Contact administrator for assistance.");
+                return redirect(route('dtarequests.index'));
+            }
+
+            $unit_head_department = $this->staffRepository->getByUserId($unit_head_id);
+            $unit_head_department_id = $unit_head_department->department_id;
+
+
+            if ($unit_head_department_id == $department_id) {
+                # code...
+                $unit_head_data = UnitHead::with('user')->where('user_id', $user_id)->first();
+                $department_head_data = DepartmentHead::with('user')->where('user_id', $user_id)->first();
+
+                $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
+                $branches->prepend('Select branch', '');
+                return view('dtarequests::dtarequests.create')->with(['department_head_data' => $department_head_data, 'branches' => $branches, 'unit_head_data' => $unit_head_data]);
+            } else {
+                # code...
+                Flash::error('You can not create a DTA request because there is no unit head in your department.');
+                return redirect(route('dtarequests.index'));
+            }
         }
-        
-    }
     }
 
     /**
@@ -137,45 +140,50 @@ class DTARequestsController extends AppBaseController
         $input = $request->all();
         $uid = Auth::id();
         $staff_id = $this->staffRepository->getByUserId($uid);
-        if(!$staff_id){
+        if (!$staff_id) {
             Flash::error('Admin can not add new DTA Request. DTA request should be added by a staff only');
             return redirect(route('dtarequests.index'));
-        } else{
+        } else {
             $department = $this->staffRepository->getByUserId($uid);
             $department_id = $department->department_id;
-        $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($uid, $department_id);
+            $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($uid, $department_id);
 
-        $input['staff_id'] = isset($staff_id) ? $staff_id->id : 0;
-        $input['user_id'] = $uid;
-        $input['unit_head_id'] = $unit_head_id;
-        $input['hod_status'] = 0;
-        $input['supervisor_status'] = 0;
-        $input['md_status'] = 0;
-        $input['approval_status'] = 0;
+            $input['staff_id'] = isset($staff_id) ? $staff_id->id : 0;
+            $input['user_id'] = $uid;
+            $input['unit_head_id'] = $unit_head_id;
+            $input['hod_status'] = 0;
+            $input['supervisor_status'] = 0;
+            $input['md_status'] = 0;
+            $input['approval_status'] = 0;
 
-        if ($request->hasFile('uploaded_doc')) {
-            $file = $request->file('uploaded_doc');
-            $fileName = $file->hashName();
-            $path = $file->store('public');
-            $input['uploaded_doc'] = $fileName;
+            if ($request->hasFile('uploaded_doc')) {
+                $file = $request->file('uploaded_doc');
+                $fileName = $file->hashName();
+                $path = $file->store('public');
+                $input['uploaded_doc'] = $fileName;
+            }
+
+            $dtarequests = $this->dtaRequestsRepository->create($input);
+
+            $unitHeadUser = $this->dtaRequestsRepository->getUnitHeadInfo($uid, $department_id);
+            
+
+            if ($unitHeadUser) {
+                $user = $unitHeadUser->user;
+
+                // Assuming User model has a method to send email notifications
+                $user->sendUnitHeadNotification(); // You need to implement this method in your User model
+            }
+
+
+            Flash::success('DTA Requests saved successfully.');
+
+            return redirect(route('dtarequests.index'));
         }
-
-        $dtarequests = $this->dtaRequestsRepository->create($input);
-
-        $unit_head = $this->dtaRequestsRepository->getUnitHeadInfo($uid, $department_id);
-        // Send notification to unit head about the dta request
-        Notification::send($unit_head, new UserCreated($unit_head));
-
-
-        Flash::success('DTA Requests saved successfully.');
-
-        return redirect(route('dtarequests.index'));
-    }
-
     }
 
     /**
-     * Show the specified resource.
+     * Show the specified resource. 
      * @param int $id
      * @return Renderable
      */
@@ -208,12 +216,12 @@ class DTARequestsController extends AppBaseController
         }
 
         $user_id = Auth::id();
-        $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
-        $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
+        $unit_head_data = UnitHead::with('user')->where('user_id', $user_id)->first();
+        $department_head_data = DepartmentHead::with('user')->where('user_id', $user_id)->first();
 
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
-        return view('dtarequests::dtarequests.edit')->with(['department_head_data' => $department_head_data,'unit_head_data' => $unit_head_data,'dtarequests' => $dtarequests, 'branches' => $branches]);
+        return view('dtarequests::dtarequests.edit')->with(['department_head_data' => $department_head_data, 'unit_head_data' => $unit_head_data, 'dtarequests' => $dtarequests, 'branches' => $branches]);
     }
     /**
      * Update the specified resource in storage.

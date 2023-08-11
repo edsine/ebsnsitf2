@@ -10,10 +10,10 @@ use Modules\ClaimsCompensation\Http\Requests\CreateClaimsCompensationRequest;
 use Modules\ClaimsCompensation\Http\Requests\UpdateClaimsCompensationRequest;
 use App\Http\Controllers\AppBaseController;
 use Modules\ClaimsCompensation\Repositories\ClaimsCompensationRepository;
-use Flash;
 use Modules\Shared\Repositories\BranchRepository;
 use App\Http\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
+use Laracasts\Flash\Flash;
 
 class ClaimsCompensationController extends AppBaseController
 {
