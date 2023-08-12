@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-end" href="{{ route('users.create') }}">
-                        Add New
+                        Add User
                     </a>
                 </div>
             </div>

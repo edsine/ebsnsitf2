@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 
-use Response;
+use view;
 
+use Response;
 use App\Models\User;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
@@ -13,11 +14,11 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Repositories\RoleRepository;
+
 use App\Repositories\UserRepository;
-
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Hash;
 use App\Repositories\StaffRepository;
 use Modules\Shared\Models\Department;
 use App\Http\Requests\CreateUserRequest;
@@ -122,11 +123,12 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
 
-        
+       
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-       $input['ranking_id']=$request->rank;
+       // $input['ranking_id']=$request->ranking_id;
+        
         //Create a new user
         $user = $this->userRepository->create($input);
 
@@ -189,25 +191,22 @@ class UserController extends AppBaseController
      * @return Response
      */
 
-    //  public function statusedit()
-    //  {
-
-    //     //$users = $this->userRepository->getByUserId($id);
-
-
-    // // return view('users.statuschanging',compact('users'));
-    //  return view('users.statuschanging');
-    //  }
+    
      
 
     public function edit($id)
     {
 
         $user = $this->userRepository->getByUserId($id);
-        $rank= $this->rankRepository->all()->pluck('name','id');
+        //$rank= $this->rankRepository->all()->pluck('name','id');
 
         $branch = $this->branchRepository->all()->pluck('branch_name', 'id');
+        
         $department = $this->departmentRepository->all()->pluck('department_unit', 'id');
+
+        //$staff= Staff::findOrFail($id);
+        //$rank=Ranking::all();
+        $rank= Ranking::all()->pluck('name','id');
 
         if (empty($user)) {
             Flash::error('User not a staff so it can not be edited');
@@ -235,36 +234,36 @@ class UserController extends AppBaseController
      */
     //bring out icon for approve
 
-public function myedit($id){
+// public function myedit($id){
    
-    $user = $this->userRepository->getByUserId($id);
-    if (empty($user)) {
-        Flash::error('User not a staff so it can not be edited');
+//     $user = $this->userRepository->getByUserId($id);
+//     if (empty($user)) {
+//         Flash::error('User not a staff so it can not be edited');
 
-        return redirect(route('users.index'));
-    }
-    return view('users.myedit',compact('user'));
+//         return redirect(route('users.index'));
+//     }
+//     return view('users.myedit',compact('user'));
 
 
-}
+// }
 
-public function myupdate($id,UpdateUserRequest $request)
-{
-    $user = $this->userRepository->getByUserId($id);
-    if (empty($user)) {
-        Flash::error('User not found');
+// public function myupdate($id,UpdateUserRequest $request)
+// {
+//     $user = $this->userRepository->getByUserId($id);
+//     if (empty($user)) {
+//         Flash::error('User not found');
 
-        return redirect(route('users.index'));
-    }
-    $input =  $request->all();
-    $input['user_id'] = $user->userId;
-    $this->staffRepository->update($input, $user->staff_id);
+//         return redirect(route('users.index'));
+//     }
+//     $input =  $request->all();
+//     $input['user_id'] = $user->userId;
+//     $this->staffRepository->update($input, $user->staff_id);
     
-    $user = $this->userRepository->update($input, $id);
-    Flash::success('User Status updated successfully.');
+//     $user = $this->userRepository->update($input, $id);
+//     Flash::success('User Status updated successfully.');
 
-    return redirect(route('users.index'));
-}
+//     return redirect(route('users.index'));
+// }
 
     
     public function update($id, UpdateUserRequest $request)
