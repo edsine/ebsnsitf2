@@ -20,12 +20,12 @@
                 <!-- Role Field -->
                 <div class="d-flex flex-column col-md-12 mb-8 fv-row">
                     {!! Form::label('roles', 'Roles') !!}
-                    {!! Form::select('roles[]',$roles,null, ['class' => 'form-control form-control-solid border border-2 form-select']) !!}
+                    {!! Form::select('roles[]',$roles,$user->roles->pluck('name','id'), ['class' => 'form-control form-control-solid border border-2 form-select']) !!}
                 </div>
 
                 <!-- Email Field -->
                 <div class="d-flex flex-column col-md-12 mb-8 fv-row">
-                    {!! Form::label('email', 'Email') !!}
+                    {!! Form::label('email', 'Email Address') !!}
                     {!! Form::email('email', null, ['class' => 'form-control form-control-solid border border-2']) !!}
                 </div>
                 <!-- First Name Field -->
