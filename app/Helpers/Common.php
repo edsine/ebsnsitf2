@@ -1,7 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Modules\Shared\Models\Department;
+use Illuminate\Support\Facades\Session;
 
+
+function getDepartmentData()
+{
+    $departmentIds = Department::pluck('id')->toArray();
+
+    $s_deptId = intval(session('department_id'));
+    $sessionDepartmentId = $s_deptId;
+
+    $departmentIdsToCheck = [5, 6, 9, 16];
+
+    $departmentIdsToCheck1 = [1, 5, 6, 9, 16];
+    $hrIdToCheck = [22];
+
+    return [
+        'departmentIds' => $departmentIds,
+        'sessionDepartmentId' => $sessionDepartmentId,
+        'departmentIdsToCheck' => $departmentIdsToCheck,
+        'departmentIdsToCheck1' => $departmentIdsToCheck1,
+        'hrIdToCheck' => $hrIdToCheck,
+    ];
+}
 
 function getBranchRegions()
 {
@@ -92,12 +115,12 @@ function getRanks()
 
 function checkPermission($permission)
 {
-    $user = Auth::user();
+    /* $user = Auth::user();
     if($user->can($permission))
     {
         return true;
     }
-    return false;
+    return false; */
 }
 
 function enum_employer_status()

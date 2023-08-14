@@ -30,7 +30,9 @@
 </style>
 
 
-
+@php
+$departmentData = getDepartmentData();
+@endphp
 <!-- Begin::Menu-Code -->
 <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
     <!--begin::Menu wrapper-->
@@ -78,9 +80,8 @@
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    @include('shared::layouts.menu')
-                    @include('documentmanager::layouts.menu')
-                    @include('dtarequests::layouts.menu')
+                    @include('employermanager::layouts.menu')
+                    
                 </div>
             </div>
             <!--End Main Menu 2: Operational Tasks -->
@@ -102,9 +103,10 @@
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    @include('claimscompensation::layouts.menu')
-                    @include('employermanager::layouts.menu')
-                    @include('humanresource::layouts.menu')
+                    @include('documentmanager::layouts.menu')
+                    
+                    
+                    
                 </div>
             </div>
             <!--End Main Menu 3: Operational Tasks -->
@@ -126,7 +128,12 @@
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
+                    @if (in_array($departmentData['sessionDepartmentId'], $departmentData['hrIdToCheck']))
+                    @include('dtarequests::layouts.menu')
+                    @include('humanresource::layouts.menu')
+                    @endif
                     @include('layouts.user')
+                    
                 </div>
             </div>
             <!--End Main Menu 4: Operational Tasks -->
