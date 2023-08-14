@@ -57,6 +57,7 @@
                             </div>
                             <!--end:Menu item-->
                         </div>
+                        
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
@@ -145,6 +146,13 @@
                         </div>
                         <!--end:Menu sub-->
                     </div>
+                    @include('shared::layouts.menu')
+                    <a href="{{route('ranking') }}" class="menu-link {{ Request::is('ranking*') ? 'active' : '' }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title"> Rank Structure </span>
+                    </a>
                     <!--end:Menu item-->
 
                 </div>
