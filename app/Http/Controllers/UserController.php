@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 
-use Response;
+use view;
 
+use Response;
 use App\Models\User;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
@@ -13,11 +14,11 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Repositories\RoleRepository;
+
 use App\Repositories\UserRepository;
-
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Hash;
 use App\Repositories\StaffRepository;
 use Modules\Shared\Models\Department;
 use App\Http\Requests\CreateUserRequest;
@@ -70,28 +71,48 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = $this->userRepository->getAllTablesData();
-        $norole= $this->userRepository->myuserswithoutroles(); 
-
-        $uid=Auth::user()->user_id;
-        if ($request->filled('search')) {
-            
-                $users->where('first_name', 'like', '%' . $request->search . '%')
-                    ->orWhere('middle_name', 'like', '%' . $request->search . '%')
-                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
-                    ->orWhere('email', 'like', '%' . $request->search . '%');
-        }
-            if($request->filled('search')){
-
-            
-                $norole->where('first_name', 'like', '%' . $request->search . '%')
-                    ->orWhere('middle_name', 'like', '%' . $request->search . '%')
-                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
-                    ->orWhere('email', 'like', '%' . $request->search . '%');
-            }
-        return view('users.index',compact('users','norole'));
+        $usersQuery = DB::table('users')
+            ->join('staff', 'users.id', '=', 'staff.user_id')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->join('departments', 'staff.department_id', '=', 'departments.id')
+            ->join('branches', 'staff.branch_id', '=', 'branches.id')
+            ->select('users.id', 'roles.name as role', 'users.first_name', 'users.middle_name', 'users.last_name', 'users.email', 'users.status','departments.department_unit','branches.branch_name');
         
+        $noroleQuery = DB::table('users')
+            ->leftJoin('staff', 'users.id', '=', 'staff.user_id')
+            ->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->whereNull('model_has_roles.role_id')
+            ->join('departments', 'staff.department_id', '=', 'departments.id')
+            ->join('branches', 'staff.branch_id', '=', 'branches.id')
+            ->select('users.id', DB::raw("NULL as role"), 'users.first_name', 'users.middle_name', 'users.last_name', 'users.email', 'users.status', 'departments.department_unit', 'branches.branch_name');
+    
+        $uid = Auth::user()->user_id;
+    
+        if ($request->filled('search')) {
+            $searchTerm = '%' . $request->search . '%';
+    
+            $usersQuery->where(function ($query) use ($searchTerm) {
+                $query->where('first_name', 'like', $searchTerm)
+                    ->orWhere('middle_name', 'like', $searchTerm)
+                    ->orWhere('last_name', 'like', $searchTerm)
+                    ->orWhere('email', 'like', $searchTerm);
+            });
+    
+            $noroleQuery->where(function ($query) use ($searchTerm) {
+                $query->where('first_name', 'like', $searchTerm)
+                    ->orWhere('middle_name', 'like', $searchTerm)
+                    ->orWhere('last_name', 'like', $searchTerm)
+                    ->orWhere('email', 'like', $searchTerm);
+            });
+        }
+    
+        $users = $usersQuery->paginate(10);
+        $norole = $noroleQuery->paginate(10);
+    
+        return view('users.index', compact('users', 'norole'));
     }
+    
    
 
     /**
@@ -102,6 +123,7 @@ class UserController extends AppBaseController
     public function create()
 
     {
+        
         // $rank=Ranking::pluck('name','id')->all();
         $rank=$this->rankRepository->all()->pluck('name','id');
         $roles = Role::pluck('name', 'id')->all();
@@ -119,14 +141,16 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
+
     public function store(CreateUserRequest $request)
     {
-
-        
-
+ 
+       
         $input = $request->all();
+    
         $input['password'] = Hash::make($input['password']);
-       $input['ranking_id']=$request->rank;
+       
+        
         //Create a new user
         $user = $this->userRepository->create($input);
 
@@ -189,25 +213,21 @@ class UserController extends AppBaseController
      * @return Response
      */
 
-    //  public function statusedit()
-    //  {
-
-    //     //$users = $this->userRepository->getByUserId($id);
-
-
-    // // return view('users.statuschanging',compact('users'));
-    //  return view('users.statuschanging');
-    //  }
+    
      
 
+    //$rank= $this->rankRepository->all()->pluck('name','id');
     public function edit($id)
     {
 
         $user = $this->userRepository->getByUserId($id);
-        $rank= $this->rankRepository->all()->pluck('name','id');
 
         $branch = $this->branchRepository->all()->pluck('branch_name', 'id');
+        
         $department = $this->departmentRepository->all()->pluck('department_unit', 'id');
+
+        
+        $rank= Ranking::all()->pluck('name','id');
 
         if (empty($user)) {
             Flash::error('User not a staff so it can not be edited');
@@ -235,41 +255,11 @@ class UserController extends AppBaseController
      */
     //bring out icon for approve
 
-public function myedit($id){
-   
-    $user = $this->userRepository->getByUserId($id);
-    if (empty($user)) {
-        Flash::error('User not a staff so it can not be edited');
-
-        return redirect(route('users.index'));
-    }
-    return view('users.myedit',compact('user'));
-
-
-}
-
-public function myupdate($id,UpdateUserRequest $request)
-{
-    $user = $this->userRepository->getByUserId($id);
-    if (empty($user)) {
-        Flash::error('User not found');
-
-        return redirect(route('users.index'));
-    }
-    $input =  $request->all();
-    $input['user_id'] = $user->userId;
-    $this->staffRepository->update($input, $user->staff_id);
-    
-    $user = $this->userRepository->update($input, $id);
-    Flash::success('User Status updated successfully.');
-
-    return redirect(route('users.index'));
-}
 
     
     public function update($id, UpdateUserRequest $request)
     {
-       
+    //    dd($request->all());
 
         $user = $this->userRepository->getByUserId($id);
 
@@ -381,4 +371,5 @@ public function myupdate($id,UpdateUserRequest $request)
     {
         echo "I am here! " . $id;
     }
+
 }

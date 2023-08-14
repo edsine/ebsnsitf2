@@ -71,7 +71,7 @@ class UserRepository extends BaseRepository
         ->join('departments', 'staff.department_id', '=', 'departments.id')
         ->join('branches', 'staff.branch_id', '=', 'branches.id')
         ->select('users.id', 'roles.name as role', 'users.first_name', 'users.middle_name', 'users.last_name', 'users.email', 'users.status','departments.department_unit','branches.branch_name')
-        // ->where('user_id', $id)
+     
         ->paginate(10);
     }
 
@@ -88,4 +88,6 @@ class UserRepository extends BaseRepository
         ->paginate(10);
    
     }
+
+    
 }

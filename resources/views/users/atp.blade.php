@@ -1,24 +1,24 @@
 <div class="container mt-5">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link text-primary active" href="#allstaff" data-bs-toggle="tab">APPROVED STAFF</a>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-primary active" id="tab1-tab" href="#allstaff" data-bs-toggle="tab" role="tab" aria-controls="tab1" aria-selected="true">APPROVED STAFF</a>
         </li>
 
 
-        <li class="nav-item">
-            <a class="nav-link "  href="#pending" data-bs-toggle="tab"> PENDING STAFF </a>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link " id="tab2-tab" href="#pending" role="tab" data-bs-toggle="tab" aria-controls="tab2" aria-selected="false"> PENDING STAFF </a>
         </li>
         {{-- <li class="nav-item">
             <a class="nav-link text-primary" href="#approve" data-bs-toggle="tab">Approved Staff</a>
         </li> --}}
     </ul>
 
-    <div class="tab-content">
+    <div class="tab-content" id="myTabContent" >
 
         <!-- All Staff Table -->
-        <div class="tab-pane fade show active " id="allstaff">
+        <div class="tab-pane fade show active" id="allstaff"   role="tabpanel" aria-labelledby="tab1-tab">
             <div class="table-responsive">
-                <table class="table mt-3 table-striped table-hover table-bordered">
+                <table class="table mt-3 table-striped table-hover table-bordered" id="mytable1">
                     <thead>
                         <tr>
                             <th scope="col">Full Name</th>
@@ -83,10 +83,11 @@
             </div>
         </div>
 
+
 <!-- PENDING Table -->
-<div class="tab-pane fade " id="pending">
+<div class="tab-pane fade " id="pending" role="tabpanel" aria-labelledby="tab2-tab">
     <div class="table-responsive">
-        <table class="table mt-3 table-striped table-hover table-bordered">
+        <table class="table mt-3 table-striped table-hover table-bordered" id="mytable2">
             <thead>
                 <tr>
                     <th scope="col">Full Name</th>
@@ -152,71 +153,17 @@
     </div>
 </div>
 
+<script>
 
-
-
-
-
-
-
-
-
-
-        <!-- Pending Staff Table -->
-        {{-- <div class="tab-pane fade " id="pending">
-            <div class="table-responsive">
-                <table class="table mt-3 table-striped table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pusers as $p) --}}
-                        {{-- <tr>
-                            <td>{!! $p->first_name.' '.$p->middle_name.' '.$p->last_name !!}</td>
-                            <td>{!! $p->email !!}</td>
-                             --}}
-                            {{-- <td style="width: 120px">
-                                {!! Form::open(['route' => ['users.destroy', $p->id], 'method' => 'delete']) !!}
-                                <div class='btn-group'>
-                                    <a href="{{ route('users.show', [$p->id]) }}" class='btn btn-default btn-xs'>
-                                        <i class="far fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('users.edit', [$p->id]) }}" class='btn btn-default btn-xs'>
-                                        <i class="far fa-edit"></i>
-                                    </a> --}}
-                                    {{-- {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!} --}}
-                                {{-- </div>
-                                {!! Form::close() !!}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div class="card-footer clearfix">
-                    <div class="float-right">
-                        @include('adminlte-templates::common.paginate', ['records' => $pusers])
-                    </div> --}}
-                {{-- </div>
-            </div>
-        </div> --}}
-
-
-
+$(document).ready(function() {
+    $('#mytable1').DataTable(); 
+    $('#mytable2').DataTable(); 
+});
+// </script>
 
         
     </div>
 </div>
-{{-- <script>
-       $(document).ready(function () {
-        $(".click-icon").click(function () {
-            $(this).siblings("a").toggle();
-        });
-    });
-</script> --}}
 
 
 

@@ -4,6 +4,7 @@ namespace Modules\HumanResource\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ranking extends Model
@@ -21,9 +22,9 @@ class Ranking extends Model
         'name'=>'required'
    ];
 
-   public function users(){
-    
-    $this->hasOne(User::class,'ranking_id','id');
+   public function staff(): \Illuminate\Database\Eloquent\Relations\HasMany
+   {
+       return $this->hasMany(staff::class);
    }
     
     // protected static function newFactory()

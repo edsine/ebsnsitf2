@@ -7,15 +7,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Notifications\Notifiable;
+use Modules\DTARequests\Notifications\UnitHeadNotification;
+use Illuminate\Notifications\Notification;
+
 
  class DTARequests extends Model implements Auditable
 {
     use SoftDeletes;
     use HasFactory;
     use AuditingAuditable;
+    use Notifiable;
+
     public $table = 'dta_requests';
 
     public $primarykey='id';
+
     public $fillable = [
         'staff_id',
         'user_id',
@@ -62,4 +69,9 @@ use OwenIt\Auditing\Contracts\Auditable;
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
     }
+
+    /* public function sendUnitHeadNotification()
+    {
+    $this->notify(new UnitHeadNotification());
+    } */
 }

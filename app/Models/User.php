@@ -14,6 +14,10 @@ use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 use Modules\WorkflowEngine\Models\Staff;
+use Illuminate\Notifications\Notification;
+use Modules\UnitManager\Models\UnitHead;
+use Modules\DTARequests\Notifications\UnitHeadNotification;
+
 
 class User extends Authenticatable implements Auditable
 {
@@ -25,15 +29,13 @@ class User extends Authenticatable implements Auditable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
-        'ranking_id',
         'password',
         'first_name',
         'middle_name',
         'last_name',
-        'rank',
-        'status'
+        'status',
+        
     ];
 
     /**
@@ -53,7 +55,7 @@ class User extends Authenticatable implements Auditable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'status'=>'integer',
+        'status' => 'integer',
     ];
 
     public function getFullName()
@@ -68,11 +70,39 @@ class User extends Authenticatable implements Auditable
         return $full_name;
     }
 
-    public function staff(): \Illuminate\Database\Eloquent\Relations\HasOne
+    /* public function staff(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Staff::class);
+    } */
+
+    // public function ranking()
+    // {
+    //     return $this->belongsTo(Ranking::class, 'ranking_id', 'id');
+    // }
+
+    /**
+     * Route notifications for the mail channel.
+     *
+     * @return string
+     */
+    public function staff()
     {
         return $this->hasOne(Staff::class);
     }
-    public function ranking(){
-        return $this->belongsTo(Ranking::class,'ranking_id','id');
-    }    
+
+    public function unitHead()
+    {
+        return $this->hasOne(UnitHead::class);
+    }
+
+    public function routeNotificationForMail(Notification $notification): array|string
+    {
+        // Return email address only...
+        return $this->email;
+    }
+
+    public function sendUnitHeadNotification()
+    {
+        $this->notify(new UnitHeadNotification());
+    }
 }

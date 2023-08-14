@@ -38,7 +38,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">First Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+                                    <div style="display: none;" class="stepper-desc fw-semibold">Setup Account Details</div>
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -62,7 +62,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Second Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+                                    <div style="display: none;" class="stepper-desc fw-semibold">Setup Account Details</div>
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -86,7 +86,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Third Step</h3>
-                                    <div class="stepper-desc fw-semibold">Setup Account Details</div>
+                                    <div style="display: none;" class="stepper-desc fw-semibold">Setup Account Details</div>
                                 </div>
                                 <!--end::Label-->
                             </div>
@@ -110,7 +110,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Completed</h3>
-                                    <div class="stepper-desc fw-semibold">Woah, we are here</div>
+                                    <div style="display: none;" class="stepper-desc fw-semibold">Woah, we are here</div>
                                 </div>
                                 <!--end::Label-->
                             </div>

@@ -37,7 +37,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 
     public function user(): \Illuminate\Database\Eloquent\Relations\hasOne
     {
-        return $this->hasOne(\App\Models\User::class);
+        return $this->hasOne(\Modules\Shared\Models\DepartmentHead::class,"department_id","id");
     }
     public function department(): \Illuminate\Database\Eloquent\Relations\hasOne
     {

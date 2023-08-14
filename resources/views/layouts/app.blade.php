@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>{{ config('app.name') }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    
+
     {{-- <style>
         #aa a{
             display: none
@@ -20,10 +20,10 @@
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet">
-     <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"> 
-    
-    
-  
+    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet">
+
+
+
     <!-- Start::bootstrap-sweet-alert -->
     <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
     <!-- end::bootstrap-sweet-alert -->
@@ -119,9 +119,10 @@
     <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script> 
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
+    <script src="{{ asset('assets/js/custom/apps/inbox/listing.js') }}"></script>
     <script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
     <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
@@ -132,12 +133,12 @@
     <!--end::Custom Javascript-->
     <!--end::Javascript-->
     <script src="{{ asset('assets/js/custom/utilities/modals/create-account.js') }}">
-        </script>
-      
+    </script>
 
-        @stack('third_party_scripts')
 
-        @stack('page_scripts')
+    @stack('third_party_scripts')
+
+    @stack('page_scripts')
 
 </body>
 

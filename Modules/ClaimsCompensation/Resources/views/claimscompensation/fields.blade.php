@@ -22,9 +22,11 @@
     <div class="form-group">
     {!! Form::file('images',null, ['class' => 'form-control','accept' => 'image/*']) !!}
     </div>
+    <?php $claimscompensation = isset($claimscompensations->images) ? $claimscompensations->images : ""; ?>
+    <img style="width: 100%;height: 150px" src="{{ url('storage/') }}{!! '/'.$claimscompensation !!}" alt="Image document">
 </div>
 
-@role('REGIONAL MANAGER')
+@role('SUPERVISOR')
 <!-- Regional Manager Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('regional_manager_status', 'Regional Manager Status') !!}
@@ -44,7 +46,7 @@
     </div>
 </div>
 @endrole
-@role('HSC')
+@role('HEALTH')
 <!-- Medical Team Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('medical_team_status', 'Medical Team Status') !!}
