@@ -123,6 +123,7 @@ class UserController extends AppBaseController
     public function create()
 
     {
+        
         // $rank=Ranking::pluck('name','id')->all();
         $rank=$this->rankRepository->all()->pluck('name','id');
         $roles = Role::pluck('name', 'id')->all();
@@ -140,12 +141,13 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
+
     public function store(CreateUserRequest $request)
     {
-
+ 
        
-
         $input = $request->all();
+    
         $input['password'] = Hash::make($input['password']);
        
         
