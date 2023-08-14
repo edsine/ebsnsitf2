@@ -6,11 +6,13 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Modules\DTARequests\Models\DTARequests;
+
 
 class UnitHeadNotification extends Notification
 {
     use Queueable;
+
+    private $user;
 
     /**
      * Create a new notification instance.
@@ -22,24 +24,21 @@ class UnitHeadNotification extends Notification
         //
     }
 
-    /**
+     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
-     * @return array
+     * @return array<int, string>
      */
-    public function via($notifiable)
+
+    public function via(object $notifiable): array
     {
         return ['mail'];
     }
 
     /**
      * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
             ->line('You have been assigned as a unit head.')
@@ -49,13 +48,12 @@ class UnitHeadNotification extends Notification
             ->line('Thank you for using our application!');
     }
 
-    /**
+   /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
-     * @return array
+     * @return array<string, mixed>
      */
-    public function toArray($notifiable)
+    public function toArray(object $notifiable): array
     {
         return [
             //

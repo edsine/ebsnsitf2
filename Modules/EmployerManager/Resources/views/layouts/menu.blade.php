@@ -1,7 +1,7 @@
 <!--begin:Menu item-->
-<div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
+{{-- <div data-kt-menu-trigger="click" class="menu-item here menu-accordion"> --}}
     <!--begin:Menu link-->
-    <span class="menu-link">
+   {{--  <span class="menu-link">
         <span class="menu-icon">
             <!--begin::Svg Icon | path: icons/duotune/files/fil025.svg-->
             <span class="svg-icon svg-icon-3">
@@ -19,12 +19,14 @@
         </span>
         <span class="menu-title">Employer Management</span>
         <span class="menu-arrow"></span>
-    </span>
+    </span> --}}
     <!--end:Menu link-->
     <!--begin:Menu sub-->
-    <div class="menu-sub menu-sub-accordion">
+   {{--  <div class="menu-sub menu-sub-accordion"> --}}
         <!--begin:Menu item-->
+       
         <div class="menu-item">
+            @if (in_array($departmentData['sessionDepartmentId'], $departmentData['departmentIdsToCheck']))
             <!--begin:Menu link-->
             <a href="{{ route('employers.index') }}" class="menu-link {{ Request::is('employers*') ? 'active' : '' }}">
                 <span class="menu-bullet">
@@ -38,10 +40,20 @@
                 </span>
                 <span class="menu-title">Employees</span>
             </a>
+            @endif
+            @if (in_array($departmentData['sessionDepartmentId'], $departmentData['departmentIdsToCheck']))
+            <a href="{{ route('employers.index') }}" class="menu-link {{ Request::is('employers*') ? 'active' : '' }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Certificates</span>
+            </a>
+            @endif
+            @include('claimscompensation::layouts.menu')
             <!--end:Menu link-->
         </div>
         <!--end:Menu item-->
-    </div>
+    {{-- </div> --}}
     <!--end:Menu sub-->
-</div>
+{{-- </div> --}}
 <!--end:Menu item-->

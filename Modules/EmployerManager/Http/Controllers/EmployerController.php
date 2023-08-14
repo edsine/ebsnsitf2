@@ -34,8 +34,7 @@ class EmployerController extends AppBaseController
         $state = State::where('status', 1)->get();
         $local_govt = LocalGovt::where('status', 1)->get();
         $employers = Employer::orderBy('created_at', 'DESC');
-        // dd($employerRepo);
-
+        
         if ($request->filled('search')) {
             $employers->where('ecs_number', 'like', '%' . $request->search . '%')
                 ->orWhere('company_name', 'like', '%' . $request->search . '%')

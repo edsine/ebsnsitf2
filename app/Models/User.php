@@ -95,6 +95,12 @@ class User extends Authenticatable implements Auditable
         return $this->hasOne(UnitHead::class);
     }
 
+    public function routeNotificationForMail(Notification $notification): array|string
+    {
+        // Return email address only...
+        return $this->email;
+    }
+
     public function sendUnitHeadNotification()
     {
         $this->notify(new UnitHeadNotification());
