@@ -39,6 +39,9 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/hradmin', [HomeController::class, 'hradmin'])->name('hradmin');
+Route::get('/financeadmin', [HomeController::class, 'financeadmin'])->name('financeadmin');
+Route::get('/claimsadmin', [HomeController::class, 'claimsadmin'])->name('claimsadmin');
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/view-profile', [ProfileController::class, 'showProfile'])->name('view-profile');
 Route::put('profile/{id}', [ProfileController::class, 'update'])->name('profile-update');
