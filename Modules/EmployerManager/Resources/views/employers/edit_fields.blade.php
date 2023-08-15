@@ -162,6 +162,10 @@
         'placeholder' => 'Enter Status',
     ]) !!}
 </div>
+<div class="d-flex flex-column col-md-6 mb-8 fv-row">
+    {!! Form::label('branch_id', 'Branch') !!}
+    {!! Form::select('branch_id',$branches,null, ['class' => 'form-control form-control-solid border border-2']) !!}
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

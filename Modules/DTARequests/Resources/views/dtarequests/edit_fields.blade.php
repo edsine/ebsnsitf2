@@ -33,7 +33,10 @@
     {!! Form::textarea('purpose_travel',null, ['class' => 'form-control','readonly' => true]) !!}
 </div>
 
-
+{{-- <div class="form-group col-sm-6 my-4">
+    {!! Form::label('branch_id', 'Branch') !!}
+    {!! Form::select('branch_id',$branches,null, ['class' => 'form-control form-control-solid border border-2']) !!}
+</div> --}}
 <!-- document fields -->
 <div class="col-sm-4 my-5">
     <span class="text-danger">UPLOAD ALL NECESSARY SUPPORTING DOCUMENT INCLUDING RECIEPT AND INVOICE(SCAN ALL AS SINGLE DOC IN PDF FORMAT)</span>
