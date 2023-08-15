@@ -1,4 +1,4 @@
-<!--begin:Menu item-->
+{{-- <!--begin:Menu item-->
 <div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
     <!--begin:Menu link-->
     <span class="menu-link">
@@ -35,3 +35,11 @@
     <!--end:Menu sub-->
 </div>
 <!--end:Menu item-->
+ --}}
+
+ <a href="{{ route('claimscompensation.index') }}" class="menu-link {{ Request::is('claimscompensation*') ? 'active' : '' }}">
+    <span class="menu-bullet">
+        <span class="bullet bullet-dot"></span>
+    </span>
+    <span class="menu-title">Claims Notificatons</span>
+</a>

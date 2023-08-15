@@ -22,7 +22,8 @@ use Modules\UnitManager\Repositories\UnitHeadRepository;
 use Modules\DTARequests\Repositories\DTAReviewRepository;
 use Modules\DTARequests\Repositories\DTARequestsRepository;
 use Illuminate\Support\Facades\Notification;
-use Modules\DTARequests\Notifications\DTARequested;
+use Modules\DTARequests\Notifications\UnitHeadNotification;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 
@@ -144,6 +145,7 @@ class DTARequestsController extends AppBaseController
             Flash::error('Admin can not add new DTA Request. DTA request should be added by a staff only');
             return redirect(route('dtarequests.index'));
         } else {
+            try {
             $department = $this->staffRepository->getByUserId($uid);
             $department_id = $department->department_id;
             $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($uid, $department_id);
@@ -172,13 +174,19 @@ class DTARequestsController extends AppBaseController
                 $user = $unitHeadUser->user;
 
                 // Assuming User model has a method to send email notifications
-                $user->sendUnitHeadNotification(); // You need to implement this method in your User model
+                //$user->sendUnitHeadNotification(); 
+               $user->notify(new UnitHeadNotification($user));
             }
 
 
             Flash::success('DTA Requests saved successfully.');
 
             return redirect(route('dtarequests.index'));
+        } catch (ModelNotFoundException $e) {
+            Flash::error('Request not successful. ' .$e);
+
+            return redirect(route('dtarequests.index'));
+        }
         }
     }
 
