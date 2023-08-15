@@ -30,7 +30,7 @@ class UpdateUserRequest extends FormRequest
           //'email'    => 'required|email|unique:users,email,'.$id,
         //   'password' => 'confirmed',
         //   'roles'  => 'required'
-        'status'=>'required'
+        // 'status'=>'required'
         ];
 
         return $rules;

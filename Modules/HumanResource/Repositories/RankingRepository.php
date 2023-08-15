@@ -2,8 +2,9 @@
 
 namespace Modules\HumanResource\Repositories;
 
-use Modules\HumanResource\Models\Ranking;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\BaseRepository;
+use Modules\HumanResource\Models\Ranking;
 
 
 class RankingRepository extends BaseRepository
@@ -35,5 +36,10 @@ class RankingRepository extends BaseRepository
 
         return $query->where('id', $id)->first();
     }
+    // public function geteditrank($id){
+    //     return DB::table('rankings')
+    //     ->join('staff','rankings.id','=','staff.ranking_id');
+
+    // }
     
 }

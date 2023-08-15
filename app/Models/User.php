@@ -29,15 +29,13 @@ class User extends Authenticatable implements Auditable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
-        'ranking_id',
         'password',
         'first_name',
         'middle_name',
         'last_name',
-        'rank',
-        'status'
+        'status',
+        
     ];
 
     /**
@@ -77,10 +75,10 @@ class User extends Authenticatable implements Auditable
         return $this->hasOne(Staff::class);
     } */
 
-    public function ranking()
-    {
-        return $this->belongsTo(Ranking::class, 'ranking_id', 'id');
-    }
+    // public function ranking()
+    // {
+    //     return $this->belongsTo(Ranking::class, 'ranking_id', 'id');
+    // }
 
     /**
      * Route notifications for the mail channel.
