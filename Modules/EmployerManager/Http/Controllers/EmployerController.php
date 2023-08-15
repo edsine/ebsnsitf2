@@ -10,19 +10,25 @@ use App\Models\State;
 use App\Models\User;
 use Modules\EmployerManager\Repositories\EmployerRepository;
 use Illuminate\Http\Request;
-use Flash;
+use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\DB;
 use Modules\EmployerManager\Models\Employee;
 use Modules\EmployerManager\Models\Employer;
+use Modules\Shared\Repositories\BranchRepository;
+use Illuminate\Support\Facades\Auth;
 
 class EmployerController extends AppBaseController
 {
     /** @var EmployerRepository $employerRepository*/
     private $employerRepository;
 
-    public function __construct(EmployerRepository $employerRepo)
+    /** @var $branchRepository BranchRepository */
+    private $branchRepository;
+
+    public function __construct(EmployerRepository $employerRepo, BranchRepository $branchRepo)
     {
         $this->employerRepository = $employerRepo;
+        $this->branchRepository = $branchRepo;
     }
 
     /**
@@ -33,7 +39,9 @@ class EmployerController extends AppBaseController
 
         $state = State::where('status', 1)->get();
         $local_govt = LocalGovt::where('status', 1)->get();
-        $employers = Employer::orderBy('created_at', 'DESC');
+        
+        $s_branchId = intval(session('branch_id'));
+        $employers = Employer::where('branch_id', $s_branchId)->orderBy('created_at', 'DESC');
         
         if ($request->filled('search')) {
             $employers->where('ecs_number', 'like', '%' . $request->search . '%')
@@ -63,7 +71,10 @@ class EmployerController extends AppBaseController
 
         $employers = User::get();
 
-        return view('employermanager::employers.create', compact('employers','state', 'local_govt'));
+        $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
+        $branches->prepend('Select branch', '');
+
+        return view('employermanager::employers.create', compact('employers','state', 'local_govt', 'branches'));
     }
 
     /**
@@ -72,7 +83,7 @@ class EmployerController extends AppBaseController
     public function store(CreateEmployerRequest $request)
     {
         $input = $request->all();
-        $input['created_by'] =  \Auth::user()->id;
+        $input['created_by'] =  Auth::user()->id;
 
         $employer = $this->employerRepository->create($input);
 
@@ -117,7 +128,10 @@ class EmployerController extends AppBaseController
             return redirect(route('employers.index'));
         }
 
-        return view('employermanager::employers.edit', compact('employer','employers','state', 'local_govt'));
+        $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
+        $branches->prepend('Select branch', '');
+
+        return view('employermanager::employers.edit', compact('branches','employer','employers','state', 'local_govt'));
     }
 
     /**
@@ -126,7 +140,7 @@ class EmployerController extends AppBaseController
     public function update($id, UpdateEmployerRequest $request)
     {
         $employer = $this->employerRepository->find($id);
-        $employer['updated_by'] =  \Auth::user()->id;
+        $employer['updated_by'] =  Auth::user()->id;
         $employer->save();
 
         if (empty($employer)) {
@@ -150,7 +164,7 @@ class EmployerController extends AppBaseController
     public function destroy($id)
     {
         $employer = $this->employerRepository->find($id);
-        $employer['deleted_by'] = \Auth::user()->id;
+        $employer['deleted_by'] = Auth::user()->id;
         $employer->save();
 
         if (empty($employer)) {

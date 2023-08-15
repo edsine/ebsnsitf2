@@ -9,7 +9,7 @@ use App\Models\LocalGovt;
 use App\Models\State;
 use Modules\EmployerManager\Repositories\EmployeeRepository;
 use Illuminate\Http\Request;
-use Flash;
+use Laracasts\Flash\Flash;
 use Modules\EmployerManager\Models\Employer;
 
 class EmployeeController extends AppBaseController
@@ -27,7 +27,8 @@ class EmployeeController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $employees = $this->employeeRepository->paginate(10);
+        $s_branchId = intval(session('branch_id'));
+        $employees = Employer::where('branch_id', $s_branchId)->orderBy('created_at', 'DESC')->paginate(10);//$this->employeeRepository->paginate(10);
 
         return view('employermanager::employees.index')
             ->with('employees', $employees);

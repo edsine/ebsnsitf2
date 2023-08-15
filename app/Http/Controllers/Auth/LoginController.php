@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Modules\WorkflowEngine\Models\Staff;
+use Modules\Shared\Models\Branch;
 
 class LoginController extends Controller
 {
@@ -52,6 +53,7 @@ class LoginController extends Controller
     if ($staff) {
         // Store department_id in the session
         Session::put('department_id', $staff->department_id);
+        Session::put('branch_id', $staff->branch_id);
     }
 
     // Redirect to the intended page or any desired route

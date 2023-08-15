@@ -47,6 +47,7 @@ class DTARequestsRepository extends BaseRepository
     public function getByUnitHeadId($id)
     {
         //return DB::table('dta_requests')->where('unit_head_id', $id)->paginate(10);
+       // $s_branchId = intval(session('branch_id'));
         return DTARequests::where('unit_head_id', $id)->paginate(10);
     }
 
