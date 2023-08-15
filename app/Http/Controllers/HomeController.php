@@ -33,6 +33,39 @@ class HomeController extends Controller
         $data = $data->paginate(10);
         return view('home', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
     }
+    public function hradmin()
+    {
+        
+        $registered_employers = Employer::where('status', 1)->count();
+        $pending_employers = Employer::where('status', 2)->count();
+        $registered_employees = Employee::where('status', 1)->count();
+        $pending_employees = Employee::where('status', 2)->count();
+        $data = Employer::where('status', 1);
+        $data = $data->paginate(10);
+        return view('hradmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
+    }
+    public function financeadmin()
+    {
+        
+        $registered_employers = Employer::where('status', 1)->count();
+        $pending_employers = Employer::where('status', 2)->count();
+        $registered_employees = Employee::where('status', 1)->count();
+        $pending_employees = Employee::where('status', 2)->count();
+        $data = Employer::where('status', 1);
+        $data = $data->paginate(10);
+        return view('financeadmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
+    }
+    public function claimsadmin()
+    {
+        
+        $registered_employers = Employer::where('status', 1)->count();
+        $pending_employers = Employer::where('status', 2)->count();
+        $registered_employees = Employee::where('status', 1)->count();
+        $pending_employees = Employee::where('status', 2)->count();
+        $data = Employer::where('status', 1);
+        $data = $data->paginate(10);
+        return view('claimsadmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
+    }
 
     // Mail Demo UI
     public function composeMail()

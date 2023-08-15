@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     
 }
 
+
 );
 Route::prefix('ranking')->group(function(){
     Route::get('/','RankingController@index')->name('ranking');
