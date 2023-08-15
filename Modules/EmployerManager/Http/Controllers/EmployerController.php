@@ -48,9 +48,12 @@ class EmployerController extends AppBaseController
                 ->orWhere('status', 'like', '%' . $request->search . '%');
         }
 
+        $pendingstaff= Employer::where('status',0)->paginate(10);
+        $activestaff=Employer::where('status',1)->paginate(10);
+        // shehu comment down
         // $employers = $this->employerRepository->paginate(10);
         $employers = $employers->paginate(10);
-        return view('employermanager::employers.index', compact('employers', 'state', 'local_govt'));
+        return view('employermanager::employers.index', compact('employers', 'state', 'local_govt','pendingstaff','activestaff'));
     }
 
     /**
