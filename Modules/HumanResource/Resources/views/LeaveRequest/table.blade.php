@@ -25,7 +25,7 @@
                     <td>{{ $leaves->leavetype ? $leaves->leavetype->name : ''}}</td>
 
                     <td>{{ $leaves->date_start_new}}</td>
-                    <td>{{ $leaves->number_days }}</td>
+                    <td>{{ $leaves->daystaken }}</td>
                     
                     <td>{{ $leaves->officer_relieve }}</td>
                     <td>{{ $leaves->end_date }}</td>
