@@ -2,7 +2,7 @@
     @csrf
     <div class="w-100">
         <div class="pb-10 pb-lg-15">
-            <h2 class="fw-bold d-flex align-items-center text-dark">Setup Personal Information
+            <h2 class="fw-bold d-flex align-items-center text-dark">
                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Provide accurate personal details"></i>
             </h2>
             <div class="text-muted fw-semibold fs-6">For security reasons, your information is safe.

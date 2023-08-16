@@ -110,7 +110,7 @@
                                 <!--begin::Label-->
                                 <div class="stepper-label">
                                     <h3 class="stepper-title">Completed</h3>
-                                    <div style="display: none;" class="stepper-desc fw-semibold">Woah, we are here</div>
+                                    <div style="display: none;" class="stepper-desc fw-semibold"></div>
                                 </div>
                                 <!--end::Label-->
                             </div>

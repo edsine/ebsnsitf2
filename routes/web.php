@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\DropdownController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
@@ -65,8 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     
-   
-
+ 
+Route::get('certicate',[CertificateController::class,'index'])->name('certicate');
 
     Route::get('/active', [UserController::class,'getactive'])->name('active');
     Route::get('/pending', [UserController::class,'getpending'])->name('pending');
