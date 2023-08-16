@@ -38,6 +38,7 @@ Route::post('generator_builder/generate-from-file', '\InfyOm\GeneratorBuilder\Co
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::get('/html_email', [UserController::class, 'html_email'])->name('html_email');
 
 
 Route::group(['middleware' => ['auth']], function () {

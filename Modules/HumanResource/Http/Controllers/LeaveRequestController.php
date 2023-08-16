@@ -262,7 +262,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
 
         $input = $request->all();
         $user_id = Auth::id();
-        $input['staff_id'] = $user_id;
+        //$input['staff_id'] = $user_id;
         $input['comments'] = $input['comments'];
 
         if ($request->hasFile('signature_path')) {

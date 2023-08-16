@@ -26,6 +26,7 @@
                     <th class="min-w-200px">State</th>
                     <th class="min-w-200px">Business Area</th>
                     <th class="min-w-200px">Status</th>
+                    <th class="min-w-200px">Payment Status</th>
 
                     <th class="min-w-120px" colspan="1">Action</th>
                 </tr>
@@ -60,6 +61,13 @@
                                 Registered
                             @else
                                 Pending
+                            @endif
+                        </td>
+                        <td>
+                            @if ($employer->paid_registration == 1)
+                            <span class="btn btn-sm btn-success">Paid</span>
+                            @else
+                            <span class="btn btn-sm btn-danger">Pending</span>
                             @endif
                         </td>
 
