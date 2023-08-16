@@ -26,10 +26,12 @@ use App\Http\Requests\UpdateUserRequest;
 use Modules\WorkflowEngine\Models\Staff;
 use Modules\HumanResource\Models\Ranking;
 use App\Http\Controllers\AppBaseController;
+use App\Mail\EBSMail;
 use Illuminate\Support\Facades\Notification;
 use Modules\Shared\Repositories\BranchRepository;
 use Modules\Shared\Repositories\DepartmentRepository;
 use Modules\HumanResource\Repositories\RankingRepository;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends AppBaseController
 {
@@ -113,7 +115,21 @@ class UserController extends AppBaseController
         return view('users.index', compact('users', 'norole'));
     }
     
-   
+    public function html_email() {
+        $mailData = [
+            'title' => 'Mail from nsitf.gov.ng',
+            'body' => 'This is for testing email using smtp.'
+        ];
+         
+       $send = Mail::to('tacticshustle@gmail.com')->send(new EBSMail($mailData));
+           
+        if($send){
+            echo "Great! HTML mail successfully send!";
+        }else{
+            echo "Sorry! HTML mail not sent!";
+        }
+        
+    }
 
     /**
      * Show the form for creating a new User.
