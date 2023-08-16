@@ -3,11 +3,15 @@
     @csrf
     <div class="w-100">
         <div class="pb-10 pb-lg-15">
-            <h2 class="fw-bold d-flex align-items-center text-dark">Admin-Only Fields
+            <h2 class="fw-bold d-flex align-items-center text-dark">
                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Additional fields for admin users"></i>
             </h2>
-            <div class="text-muted fw-semibold fs-6">Fields exclusive for admin users.
-                <a href="#" class="link-primary fw-bold">Admin privileges</a>.
+            <div class="text-muted fw-semibold fs-6"><!-- Check if a user is authenticated before displaying their name -->
+                @if (Auth::check())
+                    <p>Hello,  {{ Auth::user()->first_name }}</p>
+                @endif
+                
+                <a href="#" class="link-primary fw-bold"></a>.
             </div>
             <div class="alert alert-danger d-none" id="notificationAlert" role="alert">
                 <!-- Notification message will be displayed here -->
@@ -59,11 +63,11 @@
     @csrf
     <div class="w-100">
         <div class="pb-10 pb-lg-15">
-            <h2 class="fw-bold d-flex align-items-center text-dark">Admin-Only Fields
+            <h2 class="fw-bold d-flex align-items-center text-dark">
                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Additional fields for admin users"></i>
             </h2>
-            <div class="text-muted fw-semibold fs-6">Fields exclusive for admin users.
-                <a href="#" class="link-primary fw-bold">Admin privileges</a>.
+            <div class="text-muted fw-semibold fs-6">
+                <a href="#" class="link-primary fw-bold"></a>.
             </div>
         </div>
         <div class="fv-row">
@@ -94,11 +98,11 @@
     @csrf
     <div class="w-100">
         <div class="pb-10 pb-lg-15">
-            <h2 class="fw-bold d-flex align-items-center text-dark">Admin-Only Fields
+            <h2 class="fw-bold d-flex align-items-center text-dark">
                 <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Additional fields for admin users"></i>
             </h2>
-            <div class="text-muted fw-semibold fs-6">Fields exclusive for admin users.
-                <a href="#" class="link-primary fw-bold">Admin privileges</a>.
+            <div class="text-muted fw-semibold fs-6">
+                <a href="#" class="link-primary fw-bold"></a>.
             </div>
         </div>
         <div class="fv-row">
@@ -140,7 +144,7 @@
         <!--begin::Heading-->
         <div class="pb-8 pb-lg-10">
             <!--begin::Title-->
-            <h2 class="fw-bold text-dark">Congratulations, you've reached the final step!</h2>
+            <h2 class="fw-bold text-dark">YOU ARE ABOUT APPLYING FOR A LEAVE </h2>
             <!--end::Title-->
             <!--begin::Notice-->
 
@@ -150,63 +154,39 @@
         <!--begin::Body-->
         <div class="mb-0">
             <!--begin::Text-->
-            <div class="fs-6 text-gray-600 mb-5">Thank you for completing the form! Click Submit and Your User will be Successfully
-                Created</div>
-            <!--end::Text-->
-            <!--begin::Alert-->
-            <!--begin::Notice-->
-            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
-                <!--begin::Icon-->
-                <!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
-                <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
-                        <rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="currentColor" />
-                        <rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor" />
-                    </svg>
-                </span>
-                <!--end::Svg Icon-->
-                <!--end::Icon-->
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-stack flex-grow-1">
-                    <!--begin::Content-->
-                    <div class="fw-semibold">
-                        <h4 class="text-gray-900 fw-bold">🎉 Hooray! You've conquered the form wizard! 🎉</h4>
-                        <div class="fs-6 text-gray-700">
-                            <p>Thank you for completing our form in style.</p>
-                            <p>If all information submitted is correct, kindly click the submit button below!</p>
-                            <div class="float-end">
-                                {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <!--end::Content-->
+            <div class="fs-6 text-gray-600 mb-5">CONFIRM BY PRESSING THE APPLY BUTTON 
                 </div>
-                <!--end::Wrapper-->
+                <div class="d-flex justify-content-between">
+
+                    <button type="button" class="btn btn-lg btn-light me-3" data-kt-stepper-action="previous">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
+                        <span class="svg-icon svg-icon-4 me-1">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
+                                <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->Back
+                    </button>
+              
+                <div class="">
+                    {!! Form::submit('Apply', ['class' => 'btn btn-primary']) !!}
+                </div>
             </div>
-            <!--end::Notice-->
-            <!--end::Alert-->
+           
         </div>
         <!--end::Body-->
     </div>
     <!--end::Wrapper-->
 </div>
+
 <!--end::Step 4-->
 
 <!--begin::Actions-->
 <div class="d-flex flex-stack pt-10">
     <!--begin::Wrapper-->
     <div class="mr-2">
-        <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
-            <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
-            <span class="svg-icon svg-icon-4 me-1">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="currentColor" />
-                    <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="currentColor" />
-                </svg>
-            </span>
-            <!--end::Svg Icon-->Back
-        </button>
+      
     </div>
     <!--end::Wrapper-->
 
@@ -231,7 +211,7 @@
 <!--end::Actions-->
 <div class="card-footer">
     <!-- {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!} -->
-    <a href="{{ route('leave_request.index') }}" class="btn btn-default"> Cancel </a>
+    {{-- <a href="{{ route('leave_request.index') }}" class="btn btn-default"> Cancel </a> --}}
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

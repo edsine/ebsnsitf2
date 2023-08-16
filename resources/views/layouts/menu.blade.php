@@ -58,6 +58,21 @@ $departmentData = getDepartmentData();
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
+<<<<<<< HEAD
+                   
+                
+=======
+                   {{--  @if (session('department_id') && session('department_id') ==2)
+                    @include('layouts.hradmin') 
+                 @elseif (session('department_id') && session('department_id')==6)
+                  @include('layouts.financeadmin')
+                 @elseif (session('department_id') && session('department_id')==16)
+                 @include('layouts.claimsadmin')
+                 @else
+                 @include('layouts.dashboard')
+
+                 @endif --}}
+>>>>>>> origin
                     @include('layouts.dashboard')
                 </div>
             </div>
@@ -130,10 +145,12 @@ $departmentData = getDepartmentData();
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                     @if (in_array($departmentData['sessionDepartmentId'], $departmentData['hrIdToCheck']))
                     @include('dtarequests::layouts.menu')
-                    @include('humanresource::layouts.menu')
                     @endif
-                    @include('layouts.user')
+                    @include('humanresource::layouts.menu')
                     
+                    @if (in_array($departmentData['sessionDepartmentId'], $departmentData['hrIdToCheck']) || $departmentData['loggedInUserId'] == 1)
+                    @include('layouts.user')
+                    @endif
                 </div>
             </div>
             <!--End Main Menu 4: Operational Tasks -->

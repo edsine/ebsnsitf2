@@ -16,8 +16,8 @@ return new class extends Migration
     {
         //
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Schema::table('branches', function (Blueprint $table) {
-            $table->foreignId('region_id')->nullable()->constrained('regions')->onDelete('cascade');
+        Schema::table('employees', function (Blueprint $table) {
+            $table->foreignId('branch_id')->nullable()->constrained('branches')->onDelete('cascade');
              
         });
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

@@ -50,6 +50,12 @@ class DTARequestsRepository extends BaseRepository
         return DTARequests::where('unit_head_id', $id)->paginate(10);
     }
 
+    public function getByBranchId($id)
+    {
+        //return DB::table('dta_requests')->where('unit_head_id', $id)->paginate(10);
+        return DTARequests::where('branch_id', $id)->paginate(10);
+    }
+
 
     public function isUnitHeadInSameDepartment($loggedInUserId, $departmentId)
     {

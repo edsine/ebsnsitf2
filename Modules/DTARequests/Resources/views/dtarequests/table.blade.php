@@ -9,7 +9,7 @@
                 <th>TRAVEL DATE</th>
                 <th>ARRIVAL DATE</th>
                 <th>ESTIMATED EXPENSES</th>
-                <th>SUPERVISOR STATUS</th>
+                <th>ACCOUNT OFFICER STATUS</th>
                 <th>HOD STATUS</th>
                 <th>MD STATUS</th>
                 <th>ACCOUNT STATUS</th>

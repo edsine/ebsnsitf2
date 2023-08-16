@@ -40,6 +40,7 @@ public $primarykey='id';
         'leave_officer',
         'daystaken',
         'supervisor_approval',
+        'department_approval',
         'hr_approval',
         'hod_approval',
         'comments'

@@ -3,19 +3,22 @@
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Models\Department;
 use Illuminate\Support\Facades\Session;
-
+use Modules\WorkflowEngine\Models\Staff;
 
 function getDepartmentData()
 {
     $departmentIds = Department::pluck('id')->toArray();
 
     $s_deptId = intval(session('department_id'));
+    $s_branchId = intval(session('branch_id'));
     $sessionDepartmentId = $s_deptId;
+    $sessionBranchId = $s_branchId;
 
     $departmentIdsToCheck = [5, 6, 9, 16];
 
     $departmentIdsToCheck1 = [1, 5, 6, 9, 16];
-    $hrIdToCheck = [22];
+    $hrIdToCheck = [22, 2];
+    $loggedInUserId = Auth::id();
 
     return [
         'departmentIds' => $departmentIds,
@@ -23,7 +26,15 @@ function getDepartmentData()
         'departmentIdsToCheck' => $departmentIdsToCheck,
         'departmentIdsToCheck1' => $departmentIdsToCheck1,
         'hrIdToCheck' => $hrIdToCheck,
+        'loggedInUserId' => $loggedInUserId,
+        'sessionBranchId' => $sessionBranchId,
     ];
+}
+
+function gettingdashboardbyuserid($id){
+    $staff= Staff::where('user_id','=', Auth::user()->staff->id)
+        ->where('department_id', '=', );
+    return $staff;
 }
 
 function getBranchRegions()

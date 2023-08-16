@@ -29,13 +29,7 @@
                 </span>
                 <span class="menu-title">Apply For Leave</span>
             </a>
-            {{-- leave_types --}}
-            <a href="{{ route('atp') }}" class="menu-link {{ Request::is('atp*') ? 'active' : '' }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Leave Type</span>
-            </a>
+           
             
             <!--end:Menu link-->
 			
@@ -46,12 +40,21 @@
                 </span>
                 <span class="menu-title"> Leave status </span>
             </a>
+            @if (in_array($departmentData['sessionDepartmentId'], $departmentData['hrIdToCheck']))
+             {{-- leave_types --}}
+             <a href="{{ route('atp') }}" class="menu-link {{ Request::is('atp*') ? 'active' : '' }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Leave Type</span>
+            </a>
             <a href="#" class="menu-link">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
                 <span class="menu-title"> O.P.E </span>
             </a>
+            @endif
             {{-- <a href="{{route('ranking') }}" class="menu-link {{ Request::is('ranking*') ? 'active' : '' }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>

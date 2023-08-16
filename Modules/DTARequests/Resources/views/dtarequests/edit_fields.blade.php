@@ -33,7 +33,10 @@
     {!! Form::textarea('purpose_travel',null, ['class' => 'form-control','readonly' => true]) !!}
 </div>
 
-
+{{-- <div class="form-group col-sm-6 my-4">
+    {!! Form::label('branch_id', 'Branch') !!}
+    {!! Form::select('branch_id',$branches,null, ['class' => 'form-control form-control-solid border border-2']) !!}
+</div> --}}
 <!-- document fields -->
 <div class="col-sm-4 my-5">
     <span class="text-danger">UPLOAD ALL NECESSARY SUPPORTING DOCUMENT INCLUDING RECIEPT AND INVOICE(SCAN ALL AS SINGLE DOC IN PDF FORMAT)</span>
@@ -52,7 +55,7 @@
 @if(isset($unit_head_data))
 <!-- HOD Status Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('supervisor_status', 'Supervisor Status') !!}
+    {!! Form::label('supervisor_status', 'Account Officer Status') !!}
     <div class="">
     {!! Form::radio('supervisor_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
     {!! Form::radio('supervisor_status', 0, true) !!}&nbsp;Unapproved
@@ -102,7 +105,7 @@ if($dtarequests->hod_status == 1 && $dtarequests->md_status == 1){
 @role('ED FINANCE & ACCOUNT')
 <!-- Approval Status Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('approval_status', 'Approval Status') !!}
+    {!! Form::label('approval_status', 'Confirm Approval') !!}
     <div class="">
     {!! Form::radio('approval_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
     {!! Form::radio('approval_status', 0, true) !!}&nbsp;Unapproved

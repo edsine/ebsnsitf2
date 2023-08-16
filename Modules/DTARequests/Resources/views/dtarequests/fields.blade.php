@@ -32,7 +32,10 @@
     {!! Form::label('purpose_travel ', 'PURPOSE OF TRAVEL:') !!}
     {!! Form::textarea('purpose_travel',null, ['class' => 'form-control']) !!}
 </div>
-
+{{-- <div class="form-group col-sm-6 my-4">
+    {!! Form::label('branch_id', 'Branch') !!}
+    {!! Form::select('branch_id',$branches,null, ['class' => 'form-control form-control-solid border border-2']) !!}
+</div> --}}
 
 <!-- document fields -->
 <div class="col-sm-4 my-5">
