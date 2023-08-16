@@ -11,13 +11,14 @@ use Modules\UnitManager\Http\Requests\UpdateUnitRequest;
 use App\Http\Controllers\AppBaseController;
 use Modules\UnitManager\Repositories\UnitRepository;
 use Modules\UnitManager\Repositories\UnitHeadRepository;
-use Flash;
+use Laracasts\Flash\Flash;
 use App\Repositories\UserRepository;
 use App\Repositories\StaffRepository;
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Repositories\DepartmentRepository;
 use Illuminate\Support\Facades\DB;
 use Modules\UnitManager\Models\UnitHead;
+
 
 
 class UnitController extends AppBaseController

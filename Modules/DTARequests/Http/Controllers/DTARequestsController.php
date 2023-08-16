@@ -70,21 +70,26 @@ class DTARequestsController extends AppBaseController
         $unit_head_id = $this->dtaRequestsRepository->isUnitHeadInSameDepartment($user_id, $department_id);
 
 
-
+        $s_branchId = intval(session('branch_id'));
         $unit_head_data = UnitHead::with('user')->where('user_id', $user_id)->first();
         $department_head_data = DepartmentHead::with('user')->where('user_id', $user_id)->first();
+        $department_head_data1 = !empty($department_head_data->user_id) ? $department_head_data->user_id : 0;
 
-        if (!empty($user_id) && $user_id != $unit_head_id) {
+        if (isset($department_head_data) && isset($unit_head_id) && $user_id == $unit_head_id || $user_id == $department_head_data1 || Auth::user()->hasAnyRole(['MD', 'ED FINANCE & ACCOUNT'])) {
             # code...
-            $dtarequests = $this->dtaRequestsRepository->getByUserId($user_id);
+            $dtarequests = $this->dtaRequestsRepository->getByBranchId($s_branchId);
             //$dtarequests = $this->dtaRequestsRepository->paginate(10);
+            $id ="1";
         } else {
             # code...
-            $dtarequests = $this->dtaRequestsRepository->getByUnitHeadId($unit_head_id);
+
+            $id ="2";
+            //$dtarequests = $this->dtaRequestsRepository->getByUnitHeadId($unit_head_id);
+            $dtarequests = $this->dtaRequestsRepository->getByUserId($user_id);
             //$dtarequests = $this->dtaRequestsRepository->paginate(10);
         }
         //$dtarequests = $this->dtaRequestsRepository->paginate(10);
-
+        // echo  "exh-0n ".$id." /".$unit_head_id;
         return view('dtarequests::dtarequests.index')->with(['department_head_data' => $department_head_data, 'dtarequests' => $dtarequests, 'unit_head_data' => $unit_head_data]);
     }
 
@@ -157,6 +162,10 @@ class DTARequestsController extends AppBaseController
             $input['supervisor_status'] = 0;
             $input['md_status'] = 0;
             $input['approval_status'] = 0;
+            $s_branchId = intval(session('branch_id'));
+            $input['branch_id'] = $s_branchId;
+            $s_depId = intval(session('department_id'));
+            $input['department_id'] = $s_depId;
 
             if ($request->hasFile('uploaded_doc')) {
                 $file = $request->file('uploaded_doc');
@@ -175,7 +184,7 @@ class DTARequestsController extends AppBaseController
 
                 // Assuming User model has a method to send email notifications
                 //$user->sendUnitHeadNotification(); 
-               $user->notify(new UnitHeadNotification($user));
+              // $user->notify(new UnitHeadNotification($user));
             }
 
 
@@ -276,6 +285,10 @@ class DTARequestsController extends AppBaseController
         $input_r['review_status'] = $request->input('approval_status');
         $input_r['created_at'] = now();
         $input_r['updated_at'] = now();
+        $s_branchId = intval(session('branch_id'));
+            $input_r['branch_id'] = $s_branchId;
+            $s_depId = intval(session('department_id'));
+            $input_r['department_id'] = $s_depId;
         $this->dtaReviewRepository->create($input_r);
 
         Flash::success('DTA Requests updated successfully.');

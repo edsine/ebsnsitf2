@@ -120,21 +120,21 @@
         @if(isset($department_head_data))
         <!-- HOD Status Field -->
         <div class="form-group col-sm-6">
-            {!! Form::label('hod_approval', 'HOD Status',['class'=>'h4']) !!}
+            {!! Form::label('department_approval', 'Department Status',['class'=>'h4']) !!}
             <div class="form-control">
-            {!! Form::radio('hod_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-            {!! Form::radio('hod_approval', 0, true) !!}&nbsp;Unapproved
+            {!! Form::radio('department_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+            {!! Form::radio('department_approval', 0, true) !!}&nbsp;Unapproved
             </div>
         </div>
         @endif
         
         @role('MD')
         <?php 
-        if($leaverequest->hod_approval == 1){
+        if($LeaveRequest->department_approval == 1){
         ?>
         <!-- MD Status Field -->
         <div class="form-group col-sm-6">
-            {!! Form::label('hod_approval', 'MD Status') !!}
+            {!! Form::label('hod_approval', 'HOD Status') !!}
             <div class="form-control">
             {!! Form::radio('hod_approval', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
             {!! Form::radio('hod_approval', 0, true) !!}&nbsp;Unapproved
@@ -144,7 +144,7 @@
         @endrole
         @role('HR')
         <?php 
-        if($leaverequest->supervisor_approval == 1 && $leaverequest->hod_approval == 1){
+        if($LeaveRequest->supervisor_approval == 1 && $LeaveRequest->department_approval == 1){
         ?>
         <!-- Account Status Field -->
         <div class="form-group col-sm-6">
