@@ -74,10 +74,11 @@ class DTARequestsController extends AppBaseController
         $unit_head_data = UnitHead::with('user')->where('user_id', $user_id)->first();
         $department_head_data = DepartmentHead::with('user')->where('user_id', $user_id)->first();
         $department_head_data1 = !empty($department_head_data->user_id) ? $department_head_data->user_id : 0;
+        $dtarequests1 = $this->dtaRequestsRepository->getByUserId($user_id);
 
-        if (isset($department_head_data) && isset($unit_head_id) && $user_id == $unit_head_id || $user_id == $department_head_data1 || Auth::user()->hasAnyRole(['MD', 'ED FINANCE & ACCOUNT'])) {
+        if (empty($dtarequests1)) {
             # code...
-            $dtarequests = $this->dtaRequestsRepository->getByBranchId($s_branchId);
+            $dtarequests = $this->dtaRequestsRepository->getByUserId($user_id);
             //$dtarequests = $this->dtaRequestsRepository->paginate(10);
             $id ="1";
         } else {
@@ -85,11 +86,11 @@ class DTARequestsController extends AppBaseController
 
             $id ="2";
             //$dtarequests = $this->dtaRequestsRepository->getByUnitHeadId($unit_head_id);
-            $dtarequests = $this->dtaRequestsRepository->getByUserId($user_id);
+            $dtarequests = $this->dtaRequestsRepository->getByBranchId($s_branchId);
             //$dtarequests = $this->dtaRequestsRepository->paginate(10);
         }
         //$dtarequests = $this->dtaRequestsRepository->paginate(10);
-        // echo  "exh-0n ".$id." /".$unit_head_id;
+        // echo  "exh-0n ".$id." //";
         return view('dtarequests::dtarequests.index')->with(['department_head_data' => $department_head_data, 'dtarequests' => $dtarequests, 'unit_head_data' => $unit_head_data]);
     }
 
