@@ -58,6 +58,10 @@ $departmentData = getDepartmentData();
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
+<<<<<<< HEAD
+                   
+                
+=======
                    {{--  @if (session('department_id') && session('department_id') ==2)
                     @include('layouts.hradmin') 
                  @elseif (session('department_id') && session('department_id')==6)
@@ -68,6 +72,7 @@ $departmentData = getDepartmentData();
                  @include('layouts.dashboard')
 
                  @endif --}}
+>>>>>>> origin
                     @include('layouts.dashboard')
                 </div>
             </div>
