@@ -39,13 +39,22 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/hradmin', [HomeController::class, 'hradmin'])->name('hradmin');
+    Route::get('/financeadmin', [HomeController::class, 'financeadmin'])->name('financeadmin');
+    Route::get('/claimsadmin', [HomeController::class, 'claimsadmin'])->name('claimsadmin');
+});
+
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/hradmin', [HomeController::class, 'hradmin'])->name('hradmin');
-Route::get('/financeadmin', [HomeController::class, 'financeadmin'])->name('financeadmin');
-Route::get('/claimsadmin', [HomeController::class, 'claimsadmin'])->name('claimsadmin');
+
+
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/view-profile', [ProfileController::class, 'showProfile'])->name('view-profile');
 Route::put('profile/{id}', [ProfileController::class, 'update'])->name('profile-update');
+
+
 //Route::resource('users', UserController::class)->middleware('auth');
 //Route::resource('roles', RoleController::class)->middleware('auth');
 Route::post('api/fetch-locals', [DropdownController::class, 'fetchLocal']);

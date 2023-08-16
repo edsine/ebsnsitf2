@@ -58,6 +58,8 @@ $departmentData = getDepartmentData();
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
+                   
+                
                     @include('layouts.dashboard')
                 </div>
             </div>

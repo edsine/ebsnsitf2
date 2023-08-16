@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Modules\Shared\Models\Department;
 use Illuminate\Support\Facades\Session;
-
+use Modules\WorkflowEngine\Models\Staff;
 
 function getDepartmentData()
 {
@@ -29,6 +29,12 @@ function getDepartmentData()
         'loggedInUserId' => $loggedInUserId,
         'sessionBranchId' => $sessionBranchId,
     ];
+}
+
+function gettingdashboardbyuserid($id){
+    $staff= Staff::where('user_id','=', Auth::user()->staff->id)
+        ->where('department_id', '=', );
+    return $staff;
 }
 
 function getBranchRegions()
