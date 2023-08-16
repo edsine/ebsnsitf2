@@ -94,152 +94,311 @@
 
             </div>
 
+            <div class="card card-flush mt-6 mt-xl-9">
+									<!--begin::Card header-->
+									<div class="card-header mt-5">
+										<!--begin::Card title-->
+										<div class="card-title flex-column">
+											<h3 class="fw-bolder mb-1">Project Spendings</h3>
+											<div class="fs-6 text-gray-400">Total $260,300 sepnt so far</div>
+										</div>
+										<!--begin::Card title-->
+										<!--begin::Card toolbar-->
+										<div class="card-toolbar my-1">
+											<!--begin::Select-->
+											<div class="me-6 my-1">
+												<select id="kt_filter_year" name="year" data-control="select2" data-hide-search="true" class="w-125px form-select form-select-solid form-select-sm">
+													<option value="All" selected="selected">All time</option>
+													<option value="thisyear">This year</option>
+													<option value="thismonth">This month</option>
+													<option value="lastmonth">Last month</option>
+													<option value="last90days">Last 90 days</option>
+												</select>
+											</div>
+											<!--end::Select-->
+											<!--begin::Select-->
+											<div class="me-4 my-1">
+												<select id="kt_filter_orders" name="orders" data-control="select2" data-hide-search="true" class="w-125px form-select form-select-solid form-select-sm">
+													<option value="All" selected="selected">All Orders</option>
+													<option value="Approved">Approved</option>
+													<option value="Declined">Declined</option>
+													<option value="In Progress">In Progress</option>
+													<option value="In Transit">In Transit</option>
+												</select>
+											</div>
+											<!--end::Select-->
+											<!--begin::Search-->
+											<div class="d-flex align-items-center position-relative my-1">
+												<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+												<span class="svg-icon svg-icon-3 position-absolute ms-3">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+														<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+													</svg>
+												</span>
+												<!--end::Svg Icon-->
+												<input type="text" id="kt_filter_search" class="form-control form-control-solid form-select-sm w-150px ps-9" placeholder="Search Order" />
+											</div>
+											<!--end::Search-->
+										</div>
+										<!--begin::Card toolbar-->
+									</div>
+									<!--end::Card header-->
+									<!--begin::Card body-->
+									<div class="card-body pt-0">
+										<!--begin::Table container-->
+										<div class="table-responsive">
+											<!--begin::Table-->
+											<table id="kt_profile_overview_table" class="table table-row-bordered table-row-dashed gy-4 align-middle fw-bolder">
+												<!--begin::Head-->
+												<thead class="fs-7 text-gray-400 text-uppercase">
+													<tr>
+														<th class="min-w-250px">Manager</th>
+														<th class="min-w-150px">Date</th>
+														<th class="min-w-90px">Amount</th>
+														<th class="min-w-90px">Status</th>
+														<th class="min-w-50px text-end">Details</th>
+													</tr>
+												</thead>
+												<!--end::Head-->
+												<!--begin::Body-->
+												<tbody class="fs-6">
+													<tr>
+														<td>
+															<!--begin::User-->
+															<div class="d-flex align-items-center">
+																<!--begin::Wrapper-->
+																<div class="me-5 position-relative">
+																	<!--begin::Avatar-->
+																	<div class="symbol symbol-35px symbol-circle">
+																		<img alt="Pic" src="assets/media/avatars/300-6.jpg" />
+																	</div>
+																	<!--end::Avatar-->
+																</div>
+																<!--end::Wrapper-->
+																<!--begin::Info-->
+																<div class="d-flex flex-column justify-content-center">
+																	<a href="" class="fs-6 text-gray-800 text-hover-primary">Emma Smith</a>
+																	<div class="fw-bold text-gray-400">smith@kpmg.com</div>
+																</div>
+																<!--end::Info-->
+															</div>
+															<!--end::User-->
+														</td>
+														<td>Dec 20, 2022</td>
+														<td>$617.00</td>
+														<td>
+															<span class="badge badge-light-danger fw-bolder px-4 py-3">Rejected</span>
+														</td>
+														<td class="text-end">
+															<a href="#" class="btn btn-light btn-sm">View</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<!--begin::User-->
+															<div class="d-flex align-items-center">
+																<!--begin::Wrapper-->
+																<div class="me-5 position-relative">
+																	<!--begin::Avatar-->
+																	<div class="symbol symbol-35px symbol-circle">
+																		<span class="symbol-label bg-light-danger text-danger fw-bold">M</span>
+																	</div>
+																	<!--end::Avatar-->
+																	<!--begin::Online-->
+																	<div class="bg-success position-absolute h-8px w-8px rounded-circle translate-middle start-100 top-100 ms-n1 mt-n1"></div>
+																	<!--end::Online-->
+																</div>
+																<!--end::Wrapper-->
+																<!--begin::Info-->
+																<div class="d-flex flex-column justify-content-center">
+																	<a href="" class="fs-6 text-gray-800 text-hover-primary">Melody Macy</a>
+																	<div class="fw-bold text-gray-400">melody@altbox.com</div>
+																</div>
+																<!--end::Info-->
+															</div>
+															<!--end::User-->
+														</td>
+														<td>Nov 10, 2022</td>
+														<td>$580.00</td>
+														<td>
+															<span class="badge badge-light-warning fw-bolder px-4 py-3">Pending</span>
+														</td>
+														<td class="text-end">
+															<a href="#" class="btn btn-light btn-sm">View</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<!--begin::User-->
+															<div class="d-flex align-items-center">
+																<!--begin::Wrapper-->
+																<div class="me-5 position-relative">
+																	<!--begin::Avatar-->
+																	<div class="symbol symbol-35px symbol-circle">
+																		<img alt="Pic" src="assets/media/avatars/300-1.jpg" />
+																	</div>
+																	<!--end::Avatar-->
+																</div>
+																<!--end::Wrapper-->
+																<!--begin::Info-->
+																<div class="d-flex flex-column justify-content-center">
+																	<a href="" class="fs-6 text-gray-800 text-hover-primary">Max Smith</a>
+																	<div class="fw-bold text-gray-400">max@kt.com</div>
+																</div>
+																<!--end::Info-->
+															</div>
+															<!--end::User-->
+														</td>
+														<td>Jun 24, 2022</td>
+														<td>$516.00</td>
+														<td>
+															<span class="badge badge-light-success fw-bolder px-4 py-3">Approved</span>
+														</td>
+														<td class="text-end">
+															<a href="#" class="btn btn-light btn-sm">View</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<!--begin::User-->
+															<div class="d-flex align-items-center">
+																<!--begin::Wrapper-->
+																<div class="me-5 position-relative">
+																	<!--begin::Avatar-->
+																	<div class="symbol symbol-35px symbol-circle">
+																		<img alt="Pic" src="assets/media/avatars/300-5.jpg" />
+																	</div>
+																	<!--end::Avatar-->
+																</div>
+																<!--end::Wrapper-->
+																<!--begin::Info-->
+																<div class="d-flex flex-column justify-content-center">
+																	<a href="" class="fs-6 text-gray-800 text-hover-primary">Sean Bean</a>
+																	<div class="fw-bold text-gray-400">sean@dellito.com</div>
+																</div>
+																<!--end::Info-->
+															</div>
+															<!--end::User-->
+														</td>
+														<td>Nov 10, 2022</td>
+														<td>$879.00</td>
+														<td>
+															<span class="badge badge-light-warning fw-bolder px-4 py-3">Pending</span>
+														</td>
+														<td class="text-end">
+															<a href="#" class="btn btn-light btn-sm">View</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<!--begin::User-->
+															<div class="d-flex align-items-center">
+																<!--begin::Wrapper-->
+																<div class="me-5 position-relative">
+																	<!--begin::Avatar-->
+																	<div class="symbol symbol-35px symbol-circle">
+																		<img alt="Pic" src="assets/media/avatars/300-25.jpg" />
+																	</div>
+																	<!--end::Avatar-->
+																</div>
+																<!--end::Wrapper-->
+																<!--begin::Info-->
+																<div class="d-flex flex-column justify-content-center">
+																	<a href="" class="fs-6 text-gray-800 text-hover-primary">Brian Cox</a>
+																	<div class="fw-bold text-gray-400">brian@exchange.com</div>
+																</div>
+																<!--end::Info-->
+															</div>
+															<!--end::User-->
+														</td>
+														<td>Aug 19, 2022</td>
+														<td>$439.00</td>
+														<td>
+															<span class="badge badge-light-info fw-bolder px-4 py-3">In progress</span>
+														</td>
+														<td class="text-end">
+															<a href="#" class="btn btn-light btn-sm">View</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<!--begin::User-->
+															<div class="d-flex align-items-center">
+																<!--begin::Wrapper-->
+																<div class="me-5 position-relative">
+																	<!--begin::Avatar-->
+																	<div class="symbol symbol-35px symbol-circle">
+																		<span class="symbol-label bg-light-warning text-warning fw-bold">C</span>
+																	</div>
+																	<!--end::Avatar-->
+																	<!--begin::Online-->
+																	<div class="bg-success position-absolute h-8px w-8px rounded-circle translate-middle start-100 top-100 ms-n1 mt-n1"></div>
+																	<!--end::Online-->
+																</div>
+																<!--end::Wrapper-->
+																<!--begin::Info-->
+																<div class="d-flex flex-column justify-content-center">
+																	<a href="" class="fs-6 text-gray-800 text-hover-primary">Mikaela Collins</a>
+																	<div class="fw-bold text-gray-400">mik@pex.com</div>
+																</div>
+																<!--end::Info-->
+															</div>
+															<!--end::User-->
+														</td>
+														<td>May 05, 2022</td>
+														<td>$435.00</td>
+														<td>
+															<span class="badge badge-light-danger fw-bolder px-4 py-3">Rejected</span>
+														</td>
+														<td class="text-end">
+															<a href="#" class="btn btn-light btn-sm">View</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<!--begin::User-->
+															<div class="d-flex align-items-center">
+																<!--begin::Wrapper-->
+																<div class="me-5 position-relative">
+																	<!--begin::Avatar-->
+																	<div class="symbol symbol-35px symbol-circle">
+																		<img alt="Pic" src="assets/media/avatars/300-9.jpg" />
+																	</div>
+																	<!--end::Avatar-->
+																</div>
+																<!--end::Wrapper-->
+																<!--begin::Info-->
+																<div class="d-flex flex-column justify-content-center">
+																	<a href="" class="fs-6 text-gray-800 text-hover-primary">Francis Mitcham</a>
+																	<div class="fw-bold text-gray-400">f.mit@kpmg.com</div>
+																</div>
+																<!--end::Info-->
+															</div>
+															<!--end::User-->
+														</td>
+														<td>Oct 25, 2022</td>
+														<td>$685.00</td>
+														<td>
+															<span class="badge badge-light-info fw-bolder px-4 py-3">In progress</span>
+														</td>
+														<td class="text-end">
+															<a href="#" class="btn btn-light btn-sm">View</a>
+														</td>
+													</tr>
+												
+												
+												</tbody>
+												<!--end::Body-->
+											</table>
+											<!--end::Table-->
+										</div>
+										<!--end::Table container-->
+									</div>
+									<!--end::Card body-->
+								</div>
+
     
-
-        <div class="card col-6">
-        <div class="card-body">
-        <div style="display: flex; align-items: flex-end; justify-content: center; height: 400px;  padding: 20px; position: relative;">
-  <div style="width: 50px; margin: 0 10px; background-color: #3498db; height: 250px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-  <div style="width: 50px; margin: 0 10px; background-color: #e74c3c; height: 300px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-  <div style="width: 50px; margin: 0 10px; background-color: #2ecc71; height: 200px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-  <div style="width: 50px; margin: 0 10px; background-color: #f39c12; height: 150px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-  <div style="width: 50px; margin: 0 10px; background-color: #3498db; height: 250px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-  <div style="width: 50px; margin: 0 10px; background-color: #f39c12; height: 150px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-  <div style="width: 50px; margin: 0 10px; background-color: #f39c12; height: 150px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-  <div style="width: 50px; margin: 0 10px; background-color: grey; height: 350px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-  <div style="width: 50px; margin: 0 10px; background-color: #9b59b6; height: 100px;">
-    <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 2px; height: 10px; background-color: #e74c3c;"></div>
-  </div>
-</div>
-<div style="display: flex; justify-content: center; margin-top: 10px;">
-  <div style="width: 50px; text-align: center;">Label 1</div>
-  <div style="width: 50px; text-align: center;">Label 2</div>
-  <div style="width: 50px; text-align: center;">Label 3</div>
-  <div style="width: 50px; text-align: center;">Label 4</div>
-  <div style="width: 50px; text-align: center;">Label 5</div>
-</div>
-     
-        </div>
-        </div>
-        
-
- 
-        <div class="card col-6" style="border-left:1px solid lightgrey;">
-        <!-- table -->
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Transaction ID</th>
-      <th>Date</th>
-      <th>Customer</th>
-     
-      <th>Price</th>
-      <th>Total</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>12345</td>
-      <td>2023-08-14</td>
-     
-      <td>1</td>
-      <td>$999</td>
-      <td>$999</td>
-      <td style="color:red">Failed</td>
-    </tr>
-    <tr>
-      <td>67890</td>
-      <td>2023-08-15</td>
-     
-      <td>2</td>
-      <td>$1,198</td>
-      <td>$2,396</td>
-      <td style="color:green">Success</td>
-    </tr>
-    <tr>
-      <td>67890</td>
-      <td>2023-08-15</td>
-      
-      <td>2</td>
-      <td>$1,198</td>
-      <td>$2,396</td>
-      <td style="color:green">Success</td>
-    </tr>
-    <tr>
-      <td>12345</td>
-      <td>2023-08-14</td>
-     
-      <td>1</td>
-      <td>$999</td>
-      <td>$999</td>
-      <td style="color:red">Failed</td>
-    </tr>
-    <tr>
-      <td>67890</td>
-      <td>2023-08-15</td>
-      
-      <td>2</td>
-      <td>$1,198</td>
-      <td>$2,396</td>
-      <td style="color:green">Success</td>
-    </tr>
-    <tr>
-      <td>67890</td>
-      <td>2023-08-15</td>
-     
-      <td>2</td>
-      <td>$1,198</td>
-      <td>$2,396</td>
-      <td style="color:green">Success</td>
-    </tr>
-    <tr>
-      <td>12345</td>
-      <td>2023-08-14</td>
-     
-      <td>1</td>
-      <td>$999</td>
-      <td>$999</td>
-      <td style="color:red">Failed</td>
-    </tr>
-    <tr>
-      <td>67890</td>
-      <td>2023-08-15</td>
-    
-      <td>2</td>
-      <td>$1,198</td>
-      <td>$2,396</td>
-      <td style="color:green">Success</td>
-    </tr>
-    <tr>
-      <td>12345</td>
-      <td>2023-08-14</td>
-     
-      <td>1</td>
-      <td>$999</td>
-      <td>$999</td>
-      <td style="color:red">Failed</td>
-    </tr>
-  </tbody>
-</table>
-
-    </div>
 
     
 
