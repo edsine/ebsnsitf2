@@ -12,7 +12,7 @@
             <a class="nav-link text-primary" href="#approve" data-bs-toggle="tab">Approved Staff</a>
         </li> --}}
     </ul>
-
+ 
     <div class="tab-content" id="myTabContent" >
 
         <!-- All Staff Table -->

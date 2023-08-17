@@ -1104,7 +1104,7 @@ var KTCardWidget8 = function () {
 
         var options = {
             series: [{
-                name: 'Sales',
+                name: 'Employees',
                 data: [4.5, 5.7, 2.8, 5.9, 4.2, 5.6, 5.2, 4.5, 5.9, 4.5, 5.7, 4.8, 5.7]
             }],
             chart: {
@@ -1281,8 +1281,8 @@ var KTCardWidget9 = function () {
 
         var options = {
             series: [{
-                name: 'Visitors',
-                data: [1.5, 2.5, 2, 3, 2, 4, 2.5, 2, 2.5, 4, 2.5, 4.5, 2.5]
+                name: 'Active Loans',
+				data: [33, 25, 32, 19, 44, 16, 28, 32, 49, 28, 34, 41, 62]
             }],
             chart: {
                 fontFamily: 'inherit',
@@ -1372,7 +1372,7 @@ var KTCardWidget9 = function () {
                 },
                 y: {
                     formatter: function (val) {
-                        return val + "K"
+                        return val + ""
                     }
                 }
             },
@@ -2303,117 +2303,117 @@ var KTChartsWidget13 = (function () {
             var data = [
                 {
                     year: "2003",
-                    cars: 1587,
-                    motorcycles: 650,
-                    bicycles: 121,
+                    retirements: 1587,
+                    hires: 650,
+                    promotions: 121,
                 },
                 {
                     year: "2004",
-                    cars: 1567,
-                    motorcycles: 683,
-                    bicycles: 146,
+                    retirements: 1567,
+                    hires: 683,
+                    promotions: 146,
                 },
                 {
                     year: "2005",
-                    cars: 1617,
-                    motorcycles: 691,
-                    bicycles: 138,
+                    retirements: 1617,
+                    hires: 691,
+                    promotions: 138,
                 },
                 {
                     year: "2006",
-                    cars: 1630,
-                    motorcycles: 642,
-                    bicycles: 127,
+                    retirements: 1630,
+                    hires: 642,
+                    promotions: 127,
                 },
                 {
                     year: "2007",
-                    cars: 1660,
-                    motorcycles: 699,
-                    bicycles: 105,
+                    retirements: 1660,
+                    hires: 699,
+                    promotions: 105,
                 },
                 {
                     year: "2008",
-                    cars: 1683,
-                    motorcycles: 721,
-                    bicycles: 109,
+                    retirements: 1683,
+                    hires: 721,
+                    promotions: 109,
                 },
                 {
                     year: "2009",
-                    cars: 1691,
-                    motorcycles: 737,
-                    bicycles: 112,
+                    retirements: 1691,
+                    hires: 737,
+                    promotions: 112,
                 },
                 {
                     year: "2010",
-                    cars: 1298,
-                    motorcycles: 680,
-                    bicycles: 101,
+                    retirements: 1298,
+                    hires: 680,
+                    promotions: 101,
                 },
                 {
                     year: "2011",
-                    cars: 1275,
-                    motorcycles: 664,
-                    bicycles: 97,
+                    retirements: 1275,
+                    hires: 664,
+                    promotions: 97,
                 },
                 {
                     year: "2012",
-                    cars: 1246,
-                    motorcycles: 648,
-                    bicycles: 93,
+                    retirements: 1246,
+                    hires: 648,
+                    promotions: 93,
                 },
                 {
                     year: "2013",
-                    cars: 1318,
-                    motorcycles: 697,
-                    bicycles: 111,
+                    retirements: 1318,
+                    hires: 697,
+                    promotions: 111,
                 },
                 {
                     year: "2014",
-                    cars: 1213,
-                    motorcycles: 633,
-                    bicycles: 87,
+                    retirements: 1213,
+                    hires: 633,
+                    promotions: 87,
                 },
                 {
                     year: "2015",
-                    cars: 1199,
-                    motorcycles: 621,
-                    bicycles: 79,
+                    retirements: 1199,
+                    hires: 621,
+                    promotions: 79,
                 },
                 {
                     year: "2016",
-                    cars: 1110,
-                    motorcycles: 210,
-                    bicycles: 81,
+                    retirements: 1110,
+                    hires: 210,
+                    promotions: 81,
                 },
                 {
                     year: "2017",
-                    cars: 1165,
-                    motorcycles: 232,
-                    bicycles: 75,
+                    retirements: 1165,
+                    hires: 232,
+                    promotions: 75,
                 },
                 {
                     year: "2018",
-                    cars: 1145,
-                    motorcycles: 219,
-                    bicycles: 88,
+                    retirements: 1145,
+                    hires: 219,
+                    promotions: 88,
                 },
                 {
                     year: "2019",
-                    cars: 1163,
-                    motorcycles: 201,
-                    bicycles: 82,
+                    retirements: 1163,
+                    hires: 201,
+                    promotions: 82,
                 },
                 {
                     year: "2020",
-                    cars: 1180,
-                    motorcycles: 285,
-                    bicycles: 87,
+                    retirements: 1180,
+                    hires: 285,
+                    promotions: 87,
                 },
                 {
                     year: "2021",
-                    cars: 1159,
-                    motorcycles: 277,
-                    bicycles: 71,
+                    retirements: 1159,
+                    hires: 277,
+                    promotions: 71,
                 },
             ];
 
@@ -2492,9 +2492,9 @@ var KTChartsWidget13 = (function () {
                 series.appear(1000);
             }
 
-            createSeries("Cars", "cars", KTUtil.getCssVariableValue('--bs-primary'));
-            createSeries("Motorcycles", "motorcycles", KTUtil.getCssVariableValue('--bs-success'));
-            createSeries("Bicycles", "bicycles", KTUtil.getCssVariableValue('--bs-warning'));
+            createSeries("Retirements", "retirements", KTUtil.getCssVariableValue('--bs-primary'));
+            createSeries("New Hires", "hires", KTUtil.getCssVariableValue('--bs-success'));
+            createSeries("Promotions", "promotions", KTUtil.getCssVariableValue('--bs-warning'));
 
             // Add scrollbar
             // https://www.amcharts.com/docs/v5/charts/xy-chart/scrollbars/
@@ -12965,7 +12965,7 @@ var KTChartsWidget38 = function () {
                 colors: ['transparent']
             },
             xaxis: {
-                categories: ['E2E', 'IMC', 'SSMC', 'SSBD', 'ICCD', 'PAN', 'SBN'],
+				categories: ['HR', 'Ops', 'Mkt', 'Rent', 'Travel', 'Utilities', 'Others'],
                 axisBorder: {
                     show: false,
                 },
@@ -14898,7 +14898,7 @@ var KTChartsWidget5 = function () {
             },                               
             colors: ['#3E97FF', '#F1416C', '#50CD89', '#FFC700', '#7239EA', '#50CDCD', '#3F4254'],                                                                      
             xaxis: {
-                categories: ['Phones', 'Laptops', 'Headsets', 'Games', 'Keyboardsy', 'Monitors', 'Speakers'],
+				categories: ['Leave Submissions', 'Approved Leave', 'Loan submission', 'Approved Loans', 'Loan Blances', 'Medical leave', 'Approved Medical leave'],
                 labels: {
                     formatter: function (val) {
                       return val + "K"

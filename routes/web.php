@@ -54,6 +54,8 @@ Route::get('/hradmin', [HomeController::class, 'hradmin'])->name('hradmin');
 Route::get('/financeadmin', [HomeController::class, 'financeadmin'])->name('financeadmin');
 Route::get('/claimsadmin', [HomeController::class, 'claimsadmin'])->name('claimsadmin');
 Route::get('/itmadmin', [HomeController::class, 'itmadmin'])->name('itmadmin');
+Route::get('/complianceadmin', [HomeController::class, 'complianceadmin'])->name('complianceadmin');
+
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/view-profile', [ProfileController::class, 'showProfile'])->name('view-profile');
