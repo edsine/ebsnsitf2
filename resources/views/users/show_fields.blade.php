@@ -1,3 +1,4 @@
+<div class="modal-body">
 @if (isset($user->first_name))
     
 
@@ -101,13 +102,7 @@
     </div>
     
     <!-- Profile Picture Field -->
-    <div class="col-sm-4">
-        {!! Form::label('profile_picture', 'Profile Picture') !!}
-        <div class="form-group">
-            <p>
-                <img style="width: 50px;height: 50px" src="{{ url('storage/') }}{!! '/'.$user->profile_picture !!}" alt="Image"></p>
-        </div>
-    </div>
+   
     
     <!-- Status Field -->
 <div class="form-group col-sm-4">
@@ -228,3 +223,9 @@
 @else
     <p>This user is not a staff!</p>
 @endif
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+</div>

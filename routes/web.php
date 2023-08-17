@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     
- 
+ Route::get('users/{id}', 'UserController@show')->name('users.show');
 Route::get('certicate',[CertificateController::class,'index'])->name('certicate');
 
     Route::get('/active', [UserController::class,'getactive'])->name('active');

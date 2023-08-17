@@ -124,9 +124,9 @@ class UserController extends AppBaseController
        $send = Mail::to('tacticshustle@gmail.com')->send(new EBSMail($mailData));
            
         if($send){
-            echo "Great! HTML mail successfully send!";
+            echo "Great!  mail successfully send!";
         }else{
-            echo "Sorry! HTML mail not sent!";
+            echo "Sorry!  mail not sent!";
         }
         
     }
@@ -349,14 +349,7 @@ class UserController extends AppBaseController
      * @return Response
      */
 
-    //  public function activeusers(){
-    //     $puser=$this->userRepository
-    //     ->where('status',0)->get();
-    //     $auser=$this->userRepository
-    //     ->where('status',1)->get();
-
-    //     return view('userstatus.index', compact('auser','puser'));
-    //  }
+    
 
 
     public function destroy($id)
