@@ -176,10 +176,7 @@
                     {!! Form::number('phone', null, ['class' => 'form-control form-control-solid border border-2']) !!}
                 </div>
                 <!-- Profile Picture Field -->
-                <div class="d-flex flex-column col-md-12 mb-8 fv-row">
-                    {!! Form::label('profile_picture', 'Profile Picture') !!}
-                    {!! Form::file('profile_picture', null, ['class' => 'form-control form-control-solid border border-2']) !!}
-                </div>
+                
 
                 <!-- Status Field -->
                 <div class="d-flex flex-column col-md-12 mb-8 fv-row">
