@@ -7,11 +7,11 @@
         @include('flash::message')
         {{-- end::Sweet-alert --}}
         <!--begin::Row-->
-         @if(auth()->user()->staff->department_id == 2)
+         @if(isset(auth()->user()->staff->department_id) && auth()->user()->staff->department_id == 2)
                     @include('layouts.hradmin')
-                @elseif(auth()->user()->staff->department_id == 6)
+                @elseif(isset(auth()->user()->staff->department_id) && auth()->user()->staff->department_id == 6)
                     @include('layouts.financeadmin')
-                @elseif(auth()->user()->staff->department_id == 16)
+                @elseif(isset(auth()->user()->staff->department_id) && auth()->user()->staff->department_id == 16)
                     @include('layouts.claimsadmin')
                 @else
                     
