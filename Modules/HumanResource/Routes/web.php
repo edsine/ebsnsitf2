@@ -17,6 +17,12 @@ use Modules\HumanResource\Http\Controllers\RankingController;
 |
 */
 
+Route::get('events', 'EventController@index')->name("events");
+Route::get('index_json', 'EventController@index_json')->name("index_json");
+Route::get('index_json_data', 'EventController@index_json_data')->name("index_json_data");
+Route::post('events', 'EventController@store');
+Route::put('events/{id}', 'EventController@update');
+Route::delete('events/{id}', 'EventController@destroy');
 
 
 Route::prefix('leave_request_data')->group(function() {

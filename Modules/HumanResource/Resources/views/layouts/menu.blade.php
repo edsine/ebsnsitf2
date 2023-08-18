@@ -54,6 +54,12 @@
                 </span>
                 <span class="menu-title"> O.P.E </span>
             </a>
+            <a href="{{ route('events') }}" class="menu-link {{ Request::is('events*') ? 'active' : '' }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title"> Training Schedule </span>
+            </a>
             @endif
             {{-- <a href="{{route('ranking') }}" class="menu-link {{ Request::is('ranking*') ? 'active' : '' }}">
                 <span class="menu-bullet">
