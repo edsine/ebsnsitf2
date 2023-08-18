@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\HumanResource\Models\EventDepartmentRanking;
 
 class Ranking extends Model
 {
@@ -26,6 +27,11 @@ class Ranking extends Model
    {
        return $this->hasMany(staff::class);
    }
+
+   public function eventRankings()
+{
+    return $this->hasMany(EventDepartmentRanking::class);
+}
     
     // protected static function newFactory()
     // {

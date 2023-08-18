@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
+use Modules\HumanResource\Models\Event;
 
 /**
  * @OA\Schema(
@@ -66,13 +67,13 @@ use OwenIt\Auditing\Contracts\Auditable;
 
     protected $casts = [
         'department_unit' => 'string',
-        'description' => 'string',
-        'branch_id' => 'integer'
+        'description' => 'string'/* ,
+        'branch_id' => 'integer' */
     ];
 
     public static array $rules = [
         'department_unit' => 'required',
-        'branch_id' => 'required'
+       /*  'branch_id' => 'required' */
     ];
 
     public function branch(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -83,5 +84,10 @@ use OwenIt\Auditing\Contracts\Auditable;
     public function staff(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(staff::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
     }
 }
