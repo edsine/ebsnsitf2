@@ -445,11 +445,11 @@ var KTWidgets = function () {
 
             var options = {
                 series: [{
-                    name: 'Net Profit',
-                    data: [44, 55, 57, 56, 61, 58]
+                    name: 'Private Sector Contribution',
+                    data: [1144, 2155, 3257, 2256, 4361, 3558]
                 }, {
-                    name: 'Revenue',
-                    data: [76, 85, 101, 98, 87, 105]
+                    name: 'Public Sector Contribution',
+                    data: [1476, 2485, 4101, 3898, 3187, 4505]
                 }],
                 chart: {
                     fontFamily: 'inherit',
