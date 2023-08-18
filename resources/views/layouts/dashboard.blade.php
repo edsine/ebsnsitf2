@@ -12,16 +12,7 @@
     <!--begin:Menu sub-->
     <div class="menu-sub menu-sub-accordion">
         <!--begin:Menu item-->
-        <div class="menu-item">
-            <!--begin:Menu link-->
-            <a class="menu-link active" href="{{ route('home') }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Registration</span>
-            </a>
-            <!--end:Menu link-->
-        </div>
+        
         <!--end:Menu item-->
         <div class="menu-inner flex-column collapse" id="kt_app_sidebar_menu_dashboards_collapse">
             <!--begin:Menu item-->

@@ -42,7 +42,7 @@ class HomeController extends Controller
         $pending_employees = Employee::where('status', 2)->count();
         $data = Employer::where('status', 1);
         $data = $data->paginate(10);
-        return view('layouts.hradmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
+        return view('hradmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
     }
     public function financeadmin()
     {
@@ -53,7 +53,7 @@ class HomeController extends Controller
         $pending_employees = Employee::where('status', 2)->count();
         $data = Employer::where('status', 1);
         $data = $data->paginate(10);
-        return view('layouts.financeadmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
+        return view('financeadmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
     }
     public function claimsadmin()
     {
@@ -64,7 +64,30 @@ class HomeController extends Controller
         $pending_employees = Employee::where('status', 2)->count();
         $data = Employer::where('status', 1);
         $data = $data->paginate(10);
-        return view('layouts.claimsadmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
+        return view('claimsadmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
+    }
+    public function itmadmin()
+    {
+        
+        $registered_employers = Employer::where('status', 1)->count();
+        $pending_employers = Employer::where('status', 2)->count();
+        $registered_employees = Employee::where('status', 1)->count();
+        $pending_employees = Employee::where('status', 2)->count();
+        $data = Employer::where('status', 1);
+        $data = $data->paginate(10);
+        return view('itmadmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
+    }
+
+    public function complianceadmin()
+    {
+
+        $registered_employers = Employer::where('status', 1)->count();
+        $pending_employers = Employer::where('status', 2)->count();
+        $registered_employees = Employee::where('status', 1)->count();
+        $pending_employees = Employee::where('status', 2)->count();
+        $data = Employer::where('status', 1);
+        $data = $data->paginate(10);
+        return view('complianceadmin', compact('registered_employers', 'pending_employers', 'registered_employees', 'pending_employees', 'data'));
     }
 
     // Mail Demo UI

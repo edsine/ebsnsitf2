@@ -12,7 +12,7 @@
             <a class="nav-link text-primary" href="#approve" data-bs-toggle="tab">Approved Staff</a>
         </li> --}}
     </ul>
-
+ 
     <div class="tab-content" id="myTabContent" >
 
         <!-- All Staff Table -->
@@ -57,9 +57,23 @@
                             <td style="width: 120px">
                                 {!! Form::open(['route' => ['users.destroy', $p->id], 'method' => 'delete']) !!}
                                 <div class='btn-group' id="aa">
-                                    <a href="{{ route('users.show', [$p->id]) }}" class='btn btn-default btn-xs'>
+                                    
+                                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#abel">
+                                    
                                         <i class="far fa-eye"></i>
-                                    </a>
+                                    </button> --}}
+                                    
+                                    <button type="button" class="btn btn-primary btn-show-user" data-bs-toggle="modal" data-bs-target="#userModal"
+                                data-fullname="{{ $p->first_name.' '.$p->middle_name.' '.$p->last_name }}"
+                                data-email="{{ $p->email }}"
+                                data-role="{{ $p->role }}"
+                                data-department="{{ $p->department_unit }}"
+                                data-branch="{{ $p->branch_name }}">
+                            <i class="far fa-eye"></i>
+                        </button>
+                                    
+                                    {{-- <a href="{{ route('users.show', [$p->id]) }}" class='btn btn-default btn-xs'>
+                                    </a> --}}
                                     <a href="{{ route('users.edit', [$p->id]) }}" class='btn btn-default btn-xs'>
                                         <i class="far fa-edit"></i>
                                     </a>
@@ -84,6 +98,8 @@
         </div>
 
 
+        {{-- @include('users.show');  --}}
+
 <!-- PENDING Table -->
 <div class="tab-pane fade " id="pending" role="tabpanel" aria-labelledby="tab2-tab">
     <div class="table-responsive">
@@ -95,7 +111,7 @@
                     <th scope="col"> Role</th>
                     <th scope="col"> Department</th>
                     <th scope="col">Branch</th>
-                    {{-- <th scope="col">Approval Status</th> --}}
+                   
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -105,31 +121,23 @@
                 <tr>
                     <td>{!! $p->first_name.' '.$p->middle_name.' '.$p->last_name !!}</td>
                     <td>{!! $p->email !!}</td>
-                
-                   {{-- <td> @if ($p->role)
-                    {!! $p->role !!} 
-                   @else
-                   <span>No role yet</span>
-                   @endif
-                
-                </td> --}}
+            
                 <td >Not yet assigned a role</td>
                    
                     <td>{!! $p->department_unit !!}</td>
                     <td>{!! $p->branch_name !!}</td>
-                    {{-- <td>
-                         @if (isset($p->status) && $p->status == 1)
-                            <span class="btn btn-sm btn-success"><i class="fas fa-check "></i></span>
-                        @else
-                            <span class="btn btn-sm btn-danger"><i class="fas fa-times "></i></i></span>
-                        @endif
-                    </td> --}}
+                   
                     <td style="width: 120px">
                         {!! Form::open(['route' => ['users.destroy', $p->id], 'method' => 'delete']) !!}
                         <div class='btn-group' >
-                            <a href="{{ route('users.show', [$p->id]) }}" class='btn btn-default btn-xs'>
-                                <i class="far fa-eye"></i>
-                            </a>
+                            <button type="button" class="btn btn-primary btn-show-user" data-bs-toggle="modal" data-bs-target="#userModal"
+                            data-fullname="{{ $p->first_name.' '.$p->middle_name.' '.$p->last_name }}"
+                            data-email="{{ $p->email }}"
+                            data-role="{{ $p->role }}"
+                            data-department="{{ $p->department_unit }}"
+                            data-branch="{{ $p->branch_name }}">
+                        <i class="far fa-eye"></i>
+                    </button>
                             <a href="{{ route('users.edit', [$p->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
@@ -153,18 +161,61 @@
     </div>
 </div>
 
+
+
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">User Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Full Name:</strong> <span id="modalFullName"></span></p>
+                <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+                <p><strong>Role:</strong> <span id="modalRole"></span></p>
+                <p><strong>Department:</strong> <span id="modalDepartment"></span></p>
+                <p><strong>Branch:</strong> <span id="modalBranch"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 
 $(document).ready(function() {
     $('#mytable1').DataTable(); 
-    $('#mytable2').DataTable(); 
+    $('#mytable2').DataTable();  
 });
+
+
 // </script>
 
         
     </div>
 </div>
+<script>
+    $('.btn-show-user').on('click', function() {
+        var fullName = $(this).data('fullname');
+        var email = $(this).data('email');
+        var role = $(this).data('role');
+        var department = $(this).data('department');
+        var branch = $(this).data('branch');
 
+        $('#modalFullName').text(fullName);
+        $('#modalEmail').text(email);
+        $('#modalRole').text(role);
+        $('#modalDepartment').text(department);
+        $('#modalBranch').text(branch);
+
+        $('#userModal').modal('show');
+    });
+</script>
 
 
 

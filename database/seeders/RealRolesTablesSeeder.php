@@ -32,6 +32,9 @@ class RealRolesTablesSeeder extends Seeder
                 'REGISTRY OFFICER',
                 'ED ADMIN',
                 'HR',
+                'Branch Manager',
+                'Regional Manager',
+                
             ];
 
         $roles = collect($roleNames)->map(function ($roles_arrays) {

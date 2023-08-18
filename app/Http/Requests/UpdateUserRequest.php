@@ -26,11 +26,11 @@ class UpdateUserRequest extends FormRequest
     {
         $id = $this->route('user');
         $rules = [
-        //   'first_name'     => 'required',
-          //'email'    => 'required|email|unique:users,email,'.$id,
-        //   'password' => 'confirmed',
-        //   'roles'  => 'required'
-        // 'status'=>'required'
+          'first_name'     => 'required',
+          'email'    => 'required|email|unique:users,email,'.$id,
+          'password' => 'confirmed',
+          'roles'  => 'required'
+       
         ];
 
         return $rules;
