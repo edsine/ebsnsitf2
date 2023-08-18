@@ -34,6 +34,13 @@
     {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group col-sm-6 mt-2">
+    {!! Form::label('profile_picture', 'Profile Picture') !!}
+    <br>
+    {!! Form::file('profile_picture', null, ['class' => 'form-control form-control-solid border border-2']) !!}
+    {{-- <img src="{{ asset('public/profile_pictures/' . $user->profile_picture) }}" alt="No Profile Picture yet" width="100"> --}}
+</div>
+
 <!-- Staff Form Fields -->
 <div class="col-sm-12" id="staffDiv" style="display: none; width: 100%;">
 <div  style="display: flex;">

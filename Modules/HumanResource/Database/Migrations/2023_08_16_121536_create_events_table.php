@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('certificates', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->string("title")->nullable();
+            $table->dateTime("start")->nullable();
+            $table->dateTime("end")->nullable();
             $table->timestamps();
+            $table->softDeletes()->nullable();
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('certificates');
+        Schema::dropIfExists('events');
     }
 };

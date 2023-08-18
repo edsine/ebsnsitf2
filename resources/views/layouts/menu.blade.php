@@ -41,22 +41,19 @@ $departmentData = getDepartmentData();
         <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="kt_app_sidebar_menu" data-kt-menu="true">
             <!--Start Main Menu 1: Dashboards -->
             <div class="menu-item main-menu-item">
-                <a href="javascript:;" class="menu-link menu-toggle">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="currentColor" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="currentColor" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="currentColor" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Dashboards</span>
-                    <span class="menu-arrow"></span>
-                </a>
+
+<div class="menu-item">
+            <!--begin:Menu link-->
+            <a class="menu-link active" href="{{ route('home') }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Dashboard</span>
+            </a>
+            <!--end:Menu link-->
+        </div>
+
+               
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
                    
                 
