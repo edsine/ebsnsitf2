@@ -15,11 +15,10 @@
             @elseif(auth()->user()->staff->department_id == 16)
                 @include('layouts.claimsadmin')
             @else
-                @include('layouts.atpdashboard')
+                @include('defaultdashboard')
             @endif
         @else
-            @include('layouts.atpdashboard')
-
+            @include('defaultdashboard')
         @endif 
     </div>
     @endsection
