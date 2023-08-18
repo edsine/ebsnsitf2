@@ -7,19 +7,19 @@
         @include('flash::message')
         {{-- end::Sweet-alert --}}
         <!--begin::Row-->
-         
         @if (auth()->user()->staff != null)
             @if(auth()->user()->staff->department_id == 2)
-                @include('hradmin')
+                @include('layouts.hradmin')
             @elseif(auth()->user()->staff->department_id == 6)
-                @include('financeadmin')
+                @include('layouts.financeadmin')
             @elseif(auth()->user()->staff->department_id == 16)
-                @include('claimsadmin')
+                @include('layouts.claimsadmin')
             @else
-                @include('atpdashboard')
+                @include('layouts.atpdashboard')
             @endif
         @else
-            @include('atpdashboard')
+            @include('layouts.atpdashboard')
+
         @endif 
     </div>
     @endsection
