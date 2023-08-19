@@ -2,7 +2,7 @@
 
 namespace Modules\DocumentManager\Http\Controllers;
 
-use Flash;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
