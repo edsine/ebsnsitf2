@@ -156,7 +156,7 @@ $userData = $users1->map(function ($user) {
 
         // Prepare document input
         $document_input = [];
-        
+
         $document_input['folder_id'] = $memo_folder->id;
         $document_input['title'] = $input['title'];
         $document_input['description'] = $input['description'];
@@ -201,7 +201,7 @@ $userData = $users1->map(function ($user) {
         $version_input['document_id'] = $document->id;
         $version_input['created_by'] = Auth::user()->id;
         $version_input['version_number'] = 1;
-        $version_input['document_url'] = $document_url;
+        $version_input['document_url'] = $documentUrl;
 
         $documentVersion = $this->documentVersionRepository->create($version_input);
 
