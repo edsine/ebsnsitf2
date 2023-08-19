@@ -34,13 +34,13 @@
                         <!-- department Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('departments', 'Department(s):') !!}
-    {!! Form::select('departments[]', $departments, null, ['class' => 'form-control multiple','id'=>'departmentSelect']) !!}
+    {!! Form::select('departments[]', $departments, null, ['class' => 'form-control','id'=>'departmentSelect','multiple']) !!}
 </div>
 
 <!-- users Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('users', 'User(s):') !!}
-    {!! Form::select('users[]', $users, null, ['class' => 'form-control multiple','id'=>'userSelect']) !!}
+    {!! Form::select('users[]', $users, null, ['class' => 'form-control multiple','id'=>'userSelect','multiple']) !!}
 </div>
                     </div>
                 </div>
