@@ -56,9 +56,8 @@ class ClaimsCompensationController extends AppBaseController
 
         $branches->prepend('Select branch', '');
 
-        $claimstype= claimstype::all()->pluck('name');
-      
-
+        $claimstype= claimstype::all();
+      dd($claimstype);
         return view('claimscompensation::claimscompensation.create', compact('branches','claimstype'));
     }
 
@@ -80,8 +79,9 @@ if(!$employer){
     return view('claimscompensation::claimscompensation.searchpage')->withErrors(['employer_not_found' => 'Employer Record Not Found']);
 }
 else {
-    $claimstype = claimstype::all()->pluck('name');
-    $records = $employer->all();
+    $claimstype = claimstype::all()->pluck('name','id');
+  
+    $record = $employer->all();
     $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
 
         $branches->prepend('Select branch', '');
@@ -101,6 +101,7 @@ else {
     public function store(CreateClaimsCompensationRequest $request)
     {
         $input = $request->all();
+        
         $input['user_id'] = Auth::id();
 
         if ($request->hasFile('images')) {
