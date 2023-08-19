@@ -127,9 +127,10 @@ $departmentData = getDepartmentData();
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="menu-sub menu-sub-accordion menu-active-bg">
-                    @if (in_array($departmentData['sessionDepartmentId'], $departmentData['hrIdToCheck']))
+                   {{--  @if (in_array($departmentData['sessionDepartmentId'], $departmentData['hrIdToCheck'])) --}}
                     @include('dtarequests::layouts.menu')
-                    @endif
+                   {{--  @endif --}}
+                   
                     @include('humanresource::layouts.menu')
 
                     @if (in_array($departmentData['sessionDepartmentId'], $departmentData['hrIdToCheck']) || $departmentData['loggedInUserId'] == 1)
