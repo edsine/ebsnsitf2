@@ -11,9 +11,13 @@
             @if(auth()->user()->staff->department_id == 2)
                 @include('layouts.hradmin')
             @elseif(auth()->user()->staff->department_id == 6)
-                @include('layouts.financeadmin')
+                @include('financeadmin')
             @elseif(auth()->user()->staff->department_id == 16)
-                @include('layouts.claimsadmin')
+                @include('claimsadmin')
+            @elseif(auth()->user()->staff->department_id == 9)
+                @include('complianceadmin')
+            @elseif(auth()->user()->staff->department_id == 5)
+                @include('itmadmin')
             @else
                 @include('defaultdashboard')
             @endif
