@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                    Create Claims & Compensations
+                    CLAIMS & COMPENSATIONS 
                     </h1>
                     
                 
@@ -27,23 +27,15 @@
         @include('adminlte-templates::common.errors')
 
         <div class="card">
+            <form class="form" action="{{ route('ecs_number') }}" method="post">
+                @csrf
+                <div class="form-group my-4">
 
-            {!! Form::open(['route' => 'claimscompensation.store','enctype' => 'multipart/form-data']) !!}
-
-            <div class="card-body">
-
-                <div class="row">
-                    @include('claimscompensation::claimscompensation.fields')
+                    <label class="form-label">ENTER ECS NUMBER:</label>
+                        <input class="form-control mt-3" type="text" name="ecs_number" placeholder="ECS Number">
+                        <button class="btn btn-primary mt-6" type="submit">Search</button>
                 </div>
-
-            </div>
-
-            <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('claimscompensation.index') }}" class="btn btn-default"> Cancel </a>
-            </div>
-
-            {!! Form::close() !!}
+            </form>
 
         </div>
     </div>

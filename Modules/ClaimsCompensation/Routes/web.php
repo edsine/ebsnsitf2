@@ -13,6 +13,8 @@
 
 Route::prefix('claimscompensation')->group(function() {
     Route::get('/', 'ClaimsCompensationController@index');
+    Route::post('/','ClaimsCompensationController@searchpage')->name('ecs_number');
+    Route::get('/searchpage','ClaimsCompensationController@showsearchpage')->name('searchpage');
 });
 
 Route::middleware(['auth'])->group(function () {

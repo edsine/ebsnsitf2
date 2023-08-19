@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\ClaimsCompensation\Database\Seeders\ClaimsCompensationDatabaseSeeder;
 use Modules\HumanResource\Database\Seeders\HumanResourceDatabaseSeeder;
 use Modules\WorkflowEngine\Database\Seeders\WorkflowEngineDatabaseSeeder;
 use Modules\DocumentManager\Database\Seeders\DocumentManagerDatabaseSeeder;
@@ -36,5 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EmployerManagerDatabaseSeeder::class);
         $this->call(HumanResourceDatabaseSeeder::class);
         $this->call(ApprovalDatabaseSeeder::class);
+        $this->call(ClaimsCompensationDatabaseSeeder::class);
     }
 }
