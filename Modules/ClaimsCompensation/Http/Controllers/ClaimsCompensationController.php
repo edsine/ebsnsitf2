@@ -72,30 +72,25 @@ public function showsearchpage(){
         
         $ecs_number = $request->input('ecs_number');
 
-        // $alldata = DB::table('employers')
-        // ->join('employees','employers.id','=','employees.employer_id')
-        // ->select('ecs_number','company_name','company_address','last_name','first_name');
 
 
        $employer = Employer::where('ecs_number', $ecs_number)->first();
 
-        if ($employer) {
-            $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
+if(!$employer){
+    return view('claimscompensation::claimscompensation.searchpage')->withErrors(['employer_not_found' => 'Employer Record Not Found']);
+}
+else {
+    $claimstype = claimstype::all()->pluck('name');
+    $records = $employer->all();
+    $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
 
-            $branches->prepend('Select branch', '');
-          
-    
-            return view('claimscompensation::claimscompensation.create', compact('branches','employer'));
+        $branches->prepend('Select branch', '');
+        return view('claimscompensation::claimscompensation.create', compact('branches','employer','record','claimstype'));
+}
 
+      
 
-            // return view('claimscompensation::claimscompensation.create');
-        } 
-        else {
-            Flash::success('Employer  not found');
-            return redirect()->route('claimscompensation.index');
-        }
-
-        return view('claimscompensation::claimscompensation.searchpage', compact('employees'));
+        return view('claimscompensation::claimscompensation.searchpage', compact('employer'));
     }
 
     /**

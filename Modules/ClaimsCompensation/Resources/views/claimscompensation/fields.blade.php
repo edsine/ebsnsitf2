@@ -1,45 +1,59 @@
-<div id="first"></div>
+{{-- COMPANY NAME --}}
 
-
-<div id="second">
-
-    
-    <!-- Name Field -->
-    <div class="form-group col-sm-6">
-        {!! Form::label('name', 'Name:') !!}
-        {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
-    </div>
-    
-    <!-- Description Field -->
-    <div class="form-group col-sm-12 col-lg-12">
-        {!! Form::label('description', 'Description:') !!}
-        {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
-    </div>
-    
-    <!-- Branch Id Field -->
-    <div class="form-group col-sm-6">
-        {!! Form::label('branch_id', 'Branch:') !!}
-        {!! Form::select('branch_id', $branches, null, ['class' => 'form-control custom-select']) !!}
-    </div>
-    
-    <!-- Image Field -->
-    <div class="col-sm-4">
-        {!! Form::label('images', 'Image Document') !!}
-        <div class="form-group">
-            {!! Form::file('images',null, ['class' => 'form-control','accept' => 'image/*']) !!}
-        </div>
-        <?php $claimscompensation = isset($claimscompensations->images) ? $claimscompensations->images : ""; ?>
-        <img style="width: 100%;height: 150px" src="{{ url('storage/') }}{!! '/'.$claimscompensation !!}" alt="Image document">
-    </div>
-    
+<div class="form-group col-sm-6">
+    {!! Form::label('company_name', 'COMPANY NAME:') !!}
+    {!! Form::text('company_name', null, ['class' => 'form-control', 'required']) !!}
 </div>
-    @role('SUPERVISOR')
-    <!-- Regional Manager Status Field -->
+{{-- COMPANY EMAIL --}}
+<div class="form-group col-sm-6">
+    {!! Form::label('company_email', 'COMPANY EMAIL:') !!}
+    {!! Form::text('company_email', null, ['class' => 'form-control', 'required']) !!}
+</div>
+{{-- COMPANY ADDRESS --}}
+<div class="form-group col-sm-6">
+    {!! Form::label('company_address', 'COMPANY ADDRESS:') !!}
+    {!! Form::text('company_address', null, ['class' => 'form-control', 'required']) !!}
+</div>
+
+{{-- CLAIMS TYPE --}}
+{!! Form::label('claimstype_id', 'CLAIMTYPE')  !!}
+{!! Form::select('claimstype_id, ') !!}
+
+<!-- Name Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('name', 'Name:') !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
+</div>
+
+<!-- Description Field -->
+<div class="form-group col-sm-12 col-lg-12">
+    {!! Form::label('description', 'Description:') !!}
+    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Branch Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('branch_id', 'Branch:') !!}
+    {!! Form::select('branch_id', $branches, null, ['class' => 'form-control custom-select']) !!}
+</div>
+
+<!-- Image Field -->
+<div class="col-sm-4">
+    {!! Form::label('images', 'Image Document') !!}
+    <div class="form-group">
+    {!! Form::file('images',null, ['class' => 'form-control','accept' => 'image/*']) !!}
+    </div>
+    <?php $claimscompensation = isset($claimscompensations->images) ? $claimscompensations->images : ""; ?>
+    <img style="width: 100%;height: 150px" src="{{ url('storage/') }}{!! '/'.$claimscompensation !!}" alt="Image document">
+</div>
+
+@role('SUPERVISOR')
+<!-- Regional Manager Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('regional_manager_status', 'Regional Manager Status') !!}
     <div class="">
-        {!! Form::radio('regional_manager_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-        {!! Form::radio('regional_manager_status', 0, true) !!}&nbsp;Unapproved
+    {!! Form::radio('regional_manager_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+    {!! Form::radio('regional_manager_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
 @endrole
@@ -48,8 +62,8 @@
 <div class="form-group col-sm-6">
     {!! Form::label('head_office_status', 'Head Office Status') !!}
     <div class="">
-        {!! Form::radio('head_office_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-        {!! Form::radio('head_office_status', 0, true) !!}&nbsp;Unapproved
+    {!! Form::radio('head_office_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+    {!! Form::radio('head_office_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
 @endrole
@@ -58,8 +72,8 @@
 <div class="form-group col-sm-6">
     {!! Form::label('medical_team_status', 'Medical Team Status') !!}
     <div class="">
-        {!! Form::radio('medical_team_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
-        {!! Form::radio('medical_team_status', 0, true) !!}&nbsp;Unapproved
+    {!! Form::radio('medical_team_status', 1, false) !!}&nbsp;Approved&nbsp;&nbsp;
+    {!! Form::radio('medical_team_status', 0, true) !!}&nbsp;Unapproved
     </div>
 </div>
 @endrole
