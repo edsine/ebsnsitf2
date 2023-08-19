@@ -126,12 +126,12 @@ function getRanks()
 
 function checkPermission($permission)
 {
-    /* $user = Auth::user();
+    $user = Auth::user();
     if($user->can($permission))
     {
         return true;
     }
-    return false; */
+    return false;
 }
 
 function enum_employer_status()

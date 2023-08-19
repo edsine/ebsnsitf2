@@ -98,7 +98,21 @@ class MemoController extends AppBaseController
 
             return redirect()->back();
         }
-        return view('documentmanager::memos.create');
+
+        $departments = $this->departmentRepository->all()->pluck('department_unit', 'id');
+        $departments->prepend('Select department', '');
+        $users1 = $this->userRepository->all();
+
+$userData = $users1->map(function ($user) {
+    return [
+        'id' => $user->id,
+        'name' => $user->first_name . ' ' . $user->last_name,
+    ];
+});
+
+        $users = $userData->pluck('name', 'id');
+        $users->prepend('Select user', '');
+        return view('documentmanager::memos.create', compact(['departments','users']));
     }
 
     /**
