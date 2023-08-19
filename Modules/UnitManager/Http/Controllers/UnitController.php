@@ -89,6 +89,14 @@ class UnitController extends AppBaseController
         return $u;
     }
 
+    public function getUsersByBranch($branchId)
+    {
+        $users = $this->departmentRepository->findByBranch(2);
+        $u = array();
+        $u = $users;
+        return $u;
+    }
+
     /**
      * Store a newly created resource in storage.
      * @param Request $request
