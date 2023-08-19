@@ -8,5 +8,6 @@
     "DtaReview": true,
     "HumanResource": true,
     "Leaves": true,
-    "UnitManager": true
+    "UnitManager": true,
+    "Approval": true
 }

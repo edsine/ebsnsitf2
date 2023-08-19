@@ -7,6 +7,7 @@ use Modules\HumanResource\Database\Seeders\HumanResourceDatabaseSeeder;
 use Modules\WorkflowEngine\Database\Seeders\WorkflowEngineDatabaseSeeder;
 use Modules\DocumentManager\Database\Seeders\DocumentManagerDatabaseSeeder;
 use Modules\EmployerManager\Database\Seeders\EmployerManagerDatabaseSeeder;
+use Modules\Approval\Database\Seeders\ApprovalDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,5 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DocumentManagerDatabaseSeeder::class);
         $this->call(EmployerManagerDatabaseSeeder::class);
         $this->call(HumanResourceDatabaseSeeder::class);
+        $this->call(ApprovalDatabaseSeeder::class);
     }
 }
