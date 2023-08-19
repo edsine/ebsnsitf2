@@ -9,7 +9,7 @@
         <!--begin::Row-->
         @if (auth()->user()->staff != null)
             @if(auth()->user()->staff->department_id == 2)
-                @include('layouts.hradmin')
+                @include('hradmin')
             @elseif(auth()->user()->staff->department_id == 6)
                 @include('financeadmin')
             @elseif(auth()->user()->staff->department_id == 16)
@@ -18,6 +18,8 @@
                 @include('complianceadmin')
             @elseif(auth()->user()->staff->department_id == 5)
                 @include('itmadmin')
+            @elseif(auth()->user()->staff->department_id == 17)
+                @include('hseadmin')
             @else
                 @include('defaultdashboard')
             @endif
