@@ -58,6 +58,7 @@ Route::get('/financeadmin', [HomeController::class, 'financeadmin'])->name('fina
 Route::get('/claimsadmin', [HomeController::class, 'claimsadmin'])->name('claimsadmin');
 Route::get('/itmadmin', [HomeController::class, 'itmadmin'])->name('itmadmin');
 Route::get('/complianceadmin', [HomeController::class, 'complianceadmin'])->name('complianceadmin');
+Route::get('/hseadmin', [HomeController::class, 'hseadmin'])->name('hseadmin');
 
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
