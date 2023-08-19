@@ -31,18 +31,17 @@
                     </div>
 
                     <div class="col-sm-12 row mb-3">
-                        <div class="form-group col-sm-6">
-                            <label class="col-form-label text-right">Select Department(s)</label>
-                            <select class="form-control select2" id="department_select" name="departments[]"
-                                multiple="multiple">
-                            </select>
-                        </div>
+                        <!-- department Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('departments', 'Department(s):') !!}
+    {!! Form::select('departments[]', $departments, null, ['class' => 'form-control multiple','id'=>'departmentSelect']) !!}
+</div>
 
-                        <div class="form-group col-sm-6">
-                            <label class="col-form-label text-right">Select User(s)</label>
-                            <select class="form-control select2" id="user_select" name="users[]" multiple="multiple">
-                            </select>
-                        </div>
+<!-- users Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('users', 'User(s):') !!}
+    {!! Form::select('users[]', $users, null, ['class' => 'form-control multiple','id'=>'userSelect']) !!}
+</div>
                     </div>
                 </div>
 
