@@ -8,7 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\UserRepository;
 use Modules\Shared\Repositories\BranchRepository;
 use Illuminate\Http\Request;
-use Flash;
+use Laracasts\Flash\Flash;
 use Modules\Shared\Models\Branch;
 use Modules\Shared\Repositories\DepartmentRepository;
 use Modules\UnitManager\Repositories\RegionRepository;
