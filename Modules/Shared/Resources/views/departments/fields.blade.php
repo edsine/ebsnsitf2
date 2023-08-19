@@ -10,11 +10,11 @@
     {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
 
-{{-- <!-- Branch Id Field -->
+<!-- Branch Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('branch_id', 'Branch:') !!}
     {!! Form::select('branch_id', $branches, null, ['class' => 'form-control custom-select']) !!}
-</div> --}}
+</div>
 
 <!-- department Id Field -->
 <div class="form-group col-sm-6">

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('units')->group(function () {
         Route::resource('units', Modules\UnitManager\Http\Controllers\UnitController::class);
         Route::get('/staff/{departmentId}', 'UnitController@getUsersByDepartment');
+        Route::get('/branches/{branchId}', 'UnitController@getUsersByBranch');
     });
     Route::prefix('unithead')->group(function () {
         Route::resource('unithead', Modules\UnitManager\Http\Controllers\UnitHeadController::class);

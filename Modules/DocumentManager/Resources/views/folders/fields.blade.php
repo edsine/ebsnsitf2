@@ -13,17 +13,39 @@
 <!-- Branch Id Field -->
 <div id="branch_id_div" class="form-group col-sm-6">
     {!! Form::label('branch_id', 'Branch:') !!}
-    {!! Form::select('branch_id', $branches, null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::select('branch_id', $branches, null, ['class' => 'form-control custom-select','id'=>'branchSelect']) !!}
 </div>
 
 <!-- Department Id Field -->
 <div id="department_id_div" class="form-group col-sm-6">
     {!! Form::label('department_id', 'Department:') !!}
-    {!! Form::select('department_id', [], null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::select('department_id', [], null, ['class' => 'form-control custom-select','id'=>'departmentSelect']) !!}
 </div>
 
 
-@push('page_scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // JavaScript to handle the department selection and update user dropdown
+    $('#branchSelect').on('change', function () {
+        const selectedDepartmentId = $(this).val();
+        var homeUrl = window.location.origin;
+        if (selectedDepartmentId) {
+            $.get(`${homeUrl}/units/branches/${selectedDepartmentId}`, function (users) {
+                $('#departmentSelect').empty().append('<option value="">Select Department</option>');
+                var u = JSON.stringify(users);
+                    
+                $.each(users, function (index, user) {
+                    $('#departmentSelect').append(`<option value="${user.id}">${user.department_unit}</option>`);
+                });
+            
+            });
+        } else {
+            $('#departmentSelect').empty().append('<option value="">Select Department</option>');
+        }
+    });
+</script>
+
+{{-- @push('page_scripts')
     <script type="text/javascript">
         const departmentId = "{{ !empty($folder) ? $folder->department_id : '' }}";
         const branchId = $("#branch_id").val() || "{{ old('branch_id') }}";
@@ -61,3 +83,4 @@
         });
     </script>
 @endpush
+ --}}
