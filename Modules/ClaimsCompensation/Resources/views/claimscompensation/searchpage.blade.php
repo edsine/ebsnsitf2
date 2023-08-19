@@ -25,7 +25,14 @@
     <div class="content px-3">
 
         @include('adminlte-templates::common.errors')
-
+        <div>
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+        
         <div class="card">
             <form class="form" action="{{ route('ecs_number') }}" method="post">
                 @csrf
