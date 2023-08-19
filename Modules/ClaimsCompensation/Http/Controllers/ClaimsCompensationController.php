@@ -2,18 +2,22 @@
 
 namespace Modules\ClaimsCompensation\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
+use view;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Repositories\UserRepository;
+use App\Http\Controllers\AppBaseController;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\DB;
+use Modules\EmployerManager\Models\Employer;
+use Modules\ClaimsCompensation\Models\claimstype;
+use Modules\Shared\Repositories\BranchRepository;
+use Modules\ClaimsCompensation\Repositories\ClaimsCompensationRepository;
 use Modules\ClaimsCompensation\Http\Requests\CreateClaimsCompensationRequest;
 use Modules\ClaimsCompensation\Http\Requests\UpdateClaimsCompensationRequest;
-use App\Http\Controllers\AppBaseController;
-use Modules\ClaimsCompensation\Repositories\ClaimsCompensationRepository;
-use Modules\Shared\Repositories\BranchRepository;
-use App\Http\Repositories\UserRepository;
-use Illuminate\Support\Facades\Auth;
-use Laracasts\Flash\Flash;
 
 class ClaimsCompensationController extends AppBaseController
 {
@@ -37,19 +41,61 @@ class ClaimsCompensationController extends AppBaseController
     public function index()
     {
         $claimscompensations = $this->claimscompensationRepository->paginate(10);
+        $claimstypes = claimstype::all();
 
-        return view('claimscompensation::claimscompensation.index')->with('claimscompensations', $claimscompensations);
+        return view('claimscompensation::claimscompensation.index', compact('claimscompensations', 'claimstypes'));
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function create(Request $request)
     {
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
+
         $branches->prepend('Select branch', '');
-        return view('claimscompensation::claimscompensation.create')->with('branches', $branches);
+
+        $claimstype= claimstype::all()->pluck('name');
+      
+
+        return view('claimscompensation::claimscompensation.create', compact('branches','claimstype'));
+    }
+
+public function showsearchpage(){
+
+    return view('claimscompensation::claimscompensation.searchpage');
+}
+
+    public function searchpage(Request $request)
+    {
+        
+        $ecs_number = $request->input('ecs_number');
+
+        // $alldata = DB::table('employers')
+        // ->join('employees','employers.id','=','employees.employer_id')
+        // ->select('ecs_number','company_name','company_address','last_name','first_name');
+
+
+       $employer = Employer::where('ecs_number', $ecs_number)->first();
+
+        if ($employer) {
+            $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
+
+            $branches->prepend('Select branch', '');
+          
+    
+            return view('claimscompensation::claimscompensation.create', compact('branches','employer'));
+
+
+            // return view('claimscompensation::claimscompensation.create');
+        } 
+        else {
+            Flash::success('Employer  not found');
+            return redirect()->route('claimscompensation.index');
+        }
+
+        return view('claimscompensation::claimscompensation.searchpage', compact('employees'));
     }
 
     /**
@@ -84,7 +130,7 @@ class ClaimsCompensationController extends AppBaseController
     public function show($id)
     {
         $claimscompensations = $this->claimscompensationRepository->find($id);
-        
+
         if (empty($claimscompensations)) {
             Flash::error('Claims Compensations not found');
 
@@ -108,7 +154,7 @@ class ClaimsCompensationController extends AppBaseController
 
             return redirect(route('claimscompensation.index'));
         }
-        
+
 
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');

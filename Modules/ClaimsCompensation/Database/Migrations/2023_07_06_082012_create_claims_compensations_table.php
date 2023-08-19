@@ -15,6 +15,7 @@ class CreateClaimsCompensationsTable extends Migration
     {
         Schema::create('claims_compensations', function (Blueprint $table) {
             $table->id('id');
+            $table->foreignId('claimstype_id')->nullable()->constrained();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('images')->nullable();
@@ -27,7 +28,7 @@ class CreateClaimsCompensationsTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
-        });
+         });
     }
 
     /**
