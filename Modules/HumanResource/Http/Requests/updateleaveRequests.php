@@ -5,7 +5,7 @@ use Modules\HumanResource\Models\LeaveRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class upudateleaverequests extends FormRequest
+class updateleaverequests extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

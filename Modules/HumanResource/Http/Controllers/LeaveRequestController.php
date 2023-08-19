@@ -22,7 +22,7 @@ use Modules\Shared\Repositories\BranchRepository;
 use Modules\HumanResource\Repositories\leavetyperepository;
 
 use Modules\HumanResource\Http\Requests\createleaverequests;
-use Modules\HumanResource\Http\Requests\upudateleaverequests;
+use Modules\HumanResource\Http\Requests\updateleaverequests;
 use Modules\HumanResource\Notifications\Leaverequest;
 use Modules\HumanResource\Repositories\leaverequestrepository;
 
@@ -250,7 +250,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
      * @return Renderable
      */
     
-    public function update($id, upudateleaverequests $request)
+    public function update($id, updateleaverequests $request)
     {
        // $user= Auth::user();
         $leaverequest = $this->leaverequestrepository->find($id);
