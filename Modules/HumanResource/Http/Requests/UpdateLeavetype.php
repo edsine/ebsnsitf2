@@ -5,7 +5,7 @@ use Modules\HumanResource\Models\LeaveType;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateLeavetype extends FormRequest
+class updateleavetype extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

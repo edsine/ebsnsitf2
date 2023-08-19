@@ -5,7 +5,7 @@ namespace Modules\HumanResource\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Modules\HumanResource\Models\Ranking;
 
-class UpdateRanking extends FormRequest
+class updateranking extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

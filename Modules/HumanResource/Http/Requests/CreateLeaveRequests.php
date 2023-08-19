@@ -5,7 +5,7 @@ namespace Modules\HumanResource\Http\Requests;
 use Modules\HumanResource\Models\LeaveRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateLeaveRequests extends FormRequest
+class createleaverequests extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

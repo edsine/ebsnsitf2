@@ -71,7 +71,7 @@ public function __construct(RankingRepository $rankingRepo, BranchRepository $br
 
     {
         $rank =$this->rankingRepository->paginate(10);
-        return view('humanresource::Ranking.index',compact('rank'));
+        return view('humanresource::ranking.index',compact('rank'));
     }
 
     /**
@@ -81,7 +81,7 @@ public function __construct(RankingRepository $rankingRepo, BranchRepository $br
     public function create()
     {
        
-        return view('humanresource::Ranking.create');
+        return view('humanresource::ranking.create');
        
     }
 
@@ -126,7 +126,7 @@ public function __construct(RankingRepository $rankingRepo, BranchRepository $br
 
 
 
-        return view('humanresource::Ranking.show')->with('rank',$rank);
+        return view('humanresource::ranking.show')->with('rank',$rank);
     }
 
     /**
@@ -148,7 +148,7 @@ public function __construct(RankingRepository $rankingRepo, BranchRepository $br
 
 
 
-        return view('humanresource::Ranking.edit')->with(['rank' => $rank, 'branches' => $branches]);;
+        return view('humanresource::ranking.edit')->with(['rank' => $rank, 'branches' => $branches]);;
     }
 
     /**
