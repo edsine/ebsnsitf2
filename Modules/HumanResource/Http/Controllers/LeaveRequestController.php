@@ -75,7 +75,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
      * @return Renderable
      */
 
-   
+
 
 
     public function index()
@@ -96,7 +96,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
             $leaverequest=$this->leaverequestRepository->paginate(10);
 
         }
-        
+
         //return view('humanresource::leaverequest.index',compact(['department_head_data','leaverequest','unit_head_data']));
         return view('humanresource::leaverequest.index',compact(['leaverequest']));
     }
@@ -108,7 +108,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
     public function create()
 
     {
-        
+
         $user_id = Auth::id();
         $unit_head_data = UnitHead::with('user')->where('user_id',$user_id)->first();
         $department_head_data = DepartmentHead::with('user')->where('user_id',$user_id)->first();
@@ -120,10 +120,10 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
 
 
 
-        //the downone has been commented out 
+        //the downone has been commented out
        // $leavetype = $this->leavetypeRepository->all()->pluck('name','id');
-        
-    
+
+
 
         return view('humanresource::leaverequest.create',compact(['leavetype','department_head_data','branches','unit_head_data']));
 
@@ -131,7 +131,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
 
     public function getDuration($id)
     {
-      
+
         $leavetype = $this->leavetypeRepository->getById($id);
 
         return response()->json(['duration' => $leavetype->duration]);
@@ -140,9 +140,9 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
     public function leavetypeduration(Request $request)
     {
         $id=$request->get('id');
-        
+
         $leavetype=$this->leavetypeRepository->find($id)->pluck('duration');
-      
+
 
         return $leavetype;
     }
@@ -154,26 +154,26 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
      * @return Renderable
      */
     public function store(CreateLeaveRequests $request, LeavetypeRepository $leavetype)
-    {        
+    {
 
         $input=$request->all();
 
         $uid=Auth::id();
         $user=Auth::user();
 
-        
-        
+
+
         // $staff_id = $this->staffRepository->getByUserId($uid);
          // $input['staff_id'] = $staff_id->id;
-      
+
          $input['supervisor_approval'] = 0;
          $input['hr_approval'] = 0;
          $input['hod_approval'] = 0;
          $input['user_id']=$uid;
-         
+
         $input['leavetype_id'] = $request->type;
-         
-        
+
+
 
         if ($request->hasFile('signature_path')) {
             $file = $request->file('signature_path');
@@ -183,9 +183,17 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
         }
 
         $leaveRequest = $this->leaverequestRepository->create($input);
-        
+
         // sending a notification to the user that he has created a leave request
         //Notification::send($user,new Leaverequest($input));
+
+        //INITIATE APPROVAL FLOW || ALSO FOR UPDATING create|update
+        $approval_request = $leaveRequest->request()->create([
+            'staff_id' => $user->staff->id,
+            'type_id' => 4,//for casual leave requests
+            'order' => 1,//order/step of the flow
+            'action_id' => 1,//action taken id 1= create
+        ]);
 
         Flash::success('Leave Requests sent successfully.');
 
@@ -199,11 +207,11 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
      * @param int $id
      * @return Renderable
      */
-    
+
     public function show($id)
     {
         $leaverequest = $this->leaverequestRepository->find($id);
-        
+
 
         if (empty($leaverequest)) {
             Flash::error('Leave Requests not found');
@@ -221,7 +229,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
      */
     public function edit($id)
     {
-        
+
         $leaverequest= $this->leaverequestRepository->find($id);
         if (empty($leaverequest)) {
             Flash::error('Leave Request not found');
@@ -236,7 +244,7 @@ public function __construct(UnitHeadRepository $unitHeadRepo,UserRepository $use
        //  $leavetype=$this->leavetypeRepository->find($id)->pluck('duration','id');
       //  $leavetype=$this->leavetypeRepository->find($id)->all();
         $leavetype=$this->leavetypeRepository->all();
-       
+
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
 

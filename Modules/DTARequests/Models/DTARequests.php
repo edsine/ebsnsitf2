@@ -10,6 +10,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Notifications\Notifiable;
 use Modules\DTARequests\Notifications\UnitHeadNotification;
 use Illuminate\Notifications\Notification;
+use App\Traits\Approval;
 
 
  class DTARequests extends Model implements Auditable
@@ -18,6 +19,7 @@ use Illuminate\Notifications\Notification;
     use HasFactory;
     use AuditingAuditable;
     use Notifiable;
+    use Approval;
 
     public $table = 'dta_requests';
 

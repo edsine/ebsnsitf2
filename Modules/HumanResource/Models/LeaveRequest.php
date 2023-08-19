@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Shared\Models\Department;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Traits\Approval;
 class LeaveRequest extends Model implements Auditable
 
 
@@ -16,6 +17,7 @@ class LeaveRequest extends Model implements Auditable
     use HasFactory;
     use SoftDeletes;
     use AuditingAuditable;
+    use Approval;
     public $table = 'leave_request';
 public $primarykey='id';
     public $fillable = [
@@ -51,13 +53,13 @@ public $primarykey='id';
         'staff_id'=>'integer',
         'type'=>'string',
 
-    
+
         'date_start_new'=>'string',
         'number_days'=>'string',
         'home_address'=>'string',
         'home_number'=>'string',
         'street_name'=>'string',
-       
+
         'local_council'=>'string',
         'state'=>'string',
         'phone_number'=>'integer',
@@ -78,16 +80,16 @@ public $primarykey='id';
         'date_start_new'=>'required',
         'number_days'=>'required',
         'phone_number'=>'required',
-       
+
     ];
-    
 
 
 
-   
+
+
 public function leavetype(){
     return $this->belongsTo(LeaveType::class,'leavetype_id','id');
-    
+
 }
     public function staff(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
