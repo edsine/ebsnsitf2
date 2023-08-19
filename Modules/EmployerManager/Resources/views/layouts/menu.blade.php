@@ -24,9 +24,8 @@
     <!--begin:Menu sub-->
    {{--  <div class="menu-sub menu-sub-accordion"> --}}
         <!--begin:Menu item-->
-       
         <div class="menu-item">
-            @if (in_array($departmentData['sessionDepartmentId'], $departmentData['departmentIdsToCheck']))
+            @if (in_array($departmentData['sessionDepartmentId'], $departmentData['departmentIdsToCheck']) || \Auth::id() == 1)
             <!--begin:Menu link-->
             <a href="{{ route('employers.index') }}" class="menu-link {{ Request::is('employers*') ? 'active' : '' }}">
                 <span class="menu-bullet">

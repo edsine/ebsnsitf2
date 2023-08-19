@@ -20,10 +20,11 @@ use OwenIt\Auditing\Contracts\Auditable;
         'description',
         'branch_id',
         'user_id',
+        'claimstype_id',
         'images',
         'regional_manager_status',
         'head_office_status',
-        'medical_team_status'
+        'medical_team_status',
     ];
 
     protected $casts = [
@@ -39,6 +40,10 @@ use OwenIt\Auditing\Contracts\Auditable;
         'branch_id' => 'required'
     ];
 
+    public function claimstypes():\Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongTo(claimstype::class);
+    }
     public function branch(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\Modules\Shared\Models\Branch::class, 'branch_id', 'id');

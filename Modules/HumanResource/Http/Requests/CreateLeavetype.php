@@ -5,7 +5,7 @@ namespace Modules\HumanResource\Http\Requests;
 use Modules\HumanResource\Models\LeaveType;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateLeavetype extends FormRequest
+class createleavetype extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

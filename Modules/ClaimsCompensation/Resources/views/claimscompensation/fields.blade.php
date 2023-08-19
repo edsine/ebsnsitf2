@@ -1,3 +1,24 @@
+{{-- COMPANY NAME --}}
+
+<div class="form-group col-sm-6">
+    {!! Form::label('company_name', 'COMPANY NAME:') !!}
+    {!! Form::text('company_name', null, ['class' => 'form-control', 'required']) !!}
+</div>
+{{-- COMPANY EMAIL --}}
+<div class="form-group col-sm-6">
+    {!! Form::label('company_email', 'COMPANY EMAIL:') !!}
+    {!! Form::text('company_email', null, ['class' => 'form-control', 'required']) !!}
+</div>
+{{-- COMPANY ADDRESS --}}
+<div class="form-group col-sm-6">
+    {!! Form::label('company_address', 'COMPANY ADDRESS:') !!}
+    {!! Form::text('company_address', null, ['class' => 'form-control', 'required']) !!}
+</div>
+
+{{-- CLAIMS TYPE --}}
+{!! Form::label('claimstype_id', 'CLAIMTYPE')  !!}
+{!! Form::select('claimstype_id, ') !!}
+
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('name', 'Name:') !!}

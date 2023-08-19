@@ -8,6 +8,15 @@
                     <h1>
                     Create Claims & Compensations
                     </h1>
+                    
+                
+                </div>
+                <div class="card">
+                    <div class="form-group col-sm-6">
+              
+                    
+
+                    </div>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-end"
-                       href="{{ route('claimscompensation.create') }}">
+                       href="{{ route('searchpage') }}">
                         Add New
                     </a>
                 </div>

@@ -2,7 +2,7 @@
 
 namespace Modules\DocumentManager\Http\Controllers;
 
-use Flash;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AppBaseController;
@@ -86,7 +86,7 @@ class FolderController extends AppBaseController
         $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
         $branches->prepend('Select branch', '');
 
-        $departments = $this->departmentRepository->all()->pluck('name', 'id');
+        $departments = $this->departmentRepository->all()->pluck('department_unit', 'id');
         $departments->prepend('Select department', '');
 
         return view('documentmanager::folders.create')->with(['folders' => $folders, 'branches' => $branches, 'departments' => $departments]);
