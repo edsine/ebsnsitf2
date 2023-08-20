@@ -219,11 +219,11 @@
     $(document).ready(function() {
         $('#leave_type').on('click', function() {
             const selectedId = $(this).val();
-            const atp = location.protocol + '//' + location.host;
+            const port = location.protocol + '//' + location.host;
 
             if (selectedId !== '') {
                 $.ajax({
-                    url: `${atp}/leave_request_data/get-data/${selectedId}`,
+                    url: `${port}/leave_request_data/get-data/${selectedId}`,
                     type: 'GET',
                     data: {
                         id: selectedId
