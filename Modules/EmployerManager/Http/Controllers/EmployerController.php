@@ -16,6 +16,7 @@ use Modules\EmployerManager\Models\Employee;
 use Modules\EmployerManager\Models\Employer;
 use Modules\Shared\Repositories\BranchRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EmployerController extends AppBaseController
 {
@@ -87,6 +88,17 @@ class EmployerController extends AppBaseController
     {
         $input = $request->all();
         $input['created_by'] =  Auth::user()->id;
+
+       // $document_url = $path . "/" . $file;
+       $file = $request->file('certificate_of_incorporation');
+       $path = "employer/";
+        $title = str_replace(' ', '', $input['company_name']);
+        $fileName = $title . 'v1' . rand() . '.' . $file->getClientOriginalExtension();
+    
+        // Upload the file to the S3 bucket
+        $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName);
+
+        $input['certificate_of_incorporation'] =  $documentUrl;
 
         $employer = $this->employerRepository->create($input);
 
