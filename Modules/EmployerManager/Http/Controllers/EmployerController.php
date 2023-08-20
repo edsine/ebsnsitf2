@@ -126,6 +126,19 @@ class EmployerController extends AppBaseController
         $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName);
 
         $input['certificate_of_incorporation'] =  $documentUrl;
+        $last_ecs = Employer::get()->last();
+
+        if ($last_ecs) {
+            //if selected ecs belongs to another employer
+            do {
+                $ecs = $last_ecs['ecs_number'] + 1;
+                $employer_exists = Employer::where('ecs_number', $ecs)->get()->last();
+            } while ($employer_exists);
+        } else {
+            $ecs = '1000000001';
+        }
+
+        $input['ecs_number'] = $ecs;
 
         $employer = $this->employerRepository->create($input);
 
