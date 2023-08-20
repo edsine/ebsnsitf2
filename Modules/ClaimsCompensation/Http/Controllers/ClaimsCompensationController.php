@@ -56,8 +56,9 @@ class ClaimsCompensationController extends AppBaseController
 
         $branches->prepend('Select branch', '');
 
-        $claimstype= Claimstype::all();
-      
+        $claimstype= claimstype::all()->pluck('name');
+
+
         return view('claimscompensation::claimscompensation.create', compact('branches','claimstype'));
     }
 
@@ -68,7 +69,7 @@ public function showsearchpage(){
 
     public function searchpage(Request $request)
     {
-        
+
         $ecs_number = $request->input('ecs_number');
 
 
@@ -79,17 +80,15 @@ if(!$employer){
     return view('claimscompensation::claimscompensation.searchpage')->withErrors(['employer_not_found' => 'Employer Record Not Found']);
 }
 else {
-    $claimstype = Claimstype::all()->pluck('name','id');
-  
+    $claimstype = claimstype::all()->pluck('name');
     $record = $employer->all();
-    
     $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
 
         $branches->prepend('Select branch', '');
         return view('claimscompensation::claimscompensation.create', compact('branches','employer','record','claimstype'));
 }
 
-      
+
 
         return view('claimscompensation::claimscompensation.searchpage', compact('employer'));
     }

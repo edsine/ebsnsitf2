@@ -194,7 +194,7 @@ class DTARequestsController extends AppBaseController
             //INITIATE APPROVAL FLOW || ALSO FOR UPDATING create|update
             $approval_request = $dtarequests->request()->create([
                 'staff_id' => $staff_id->id,
-                'type_id' => 1,//for dta requests
+                'type_id' => 3,//for dta requests
                 'order' => 1,//order/step of the flow
                 'action_id' => 1,//action taken id 1= create
             ]);
