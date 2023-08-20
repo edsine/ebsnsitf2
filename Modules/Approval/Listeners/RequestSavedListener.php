@@ -46,6 +46,7 @@ class RequestSavedListener
             'flow_id' => Flow::where('approval_order', $request->order)->where('type_id', $request->type_id)->first()->id,
             'action_id' => $request->action_id,
             'staff_id' => auth()->user()->staff->id,
+            'comments' => session('comments'),
         ]);
 
         //if new approval request - CREATED
