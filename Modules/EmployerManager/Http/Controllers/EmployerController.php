@@ -42,6 +42,9 @@ class EmployerController extends AppBaseController
         
         $s_branchId = intval(session('branch_id'));
         $employers = Employer::where('branch_id', $s_branchId)->orderBy('created_at', 'DESC');
+
+        $pendingstaff1 = Employer::where('branch_id', $s_branchId)->where('status',0);
+        $activestaff1 = Employer::where('branch_id', $s_branchId)->where('status',1);
         
         if ($request->filled('search')) {
             $employers->where('ecs_number', 'like', '%' . $request->search . '%')
@@ -54,10 +57,32 @@ class EmployerController extends AppBaseController
                 ->orWhere('company_state', 'like', '%' . $request->search . '%')
                 ->orWhere('business_area', 'like', '%' . $request->search . '%')
                 ->orWhere('status', 'like', '%' . $request->search . '%');
+
+            $pendingstaff1->where('ecs_number', 'like', '%' . $request->search . '%')
+                ->orWhere('company_name', 'like', '%' . $request->search . '%')
+                ->orWhere('company_email', 'like', '%' . $request->search . '%')
+                ->orWhere('company_address', 'like', '%' . $request->search . '%')
+                ->orWhere('company_rcnumber', 'like', '%' . $request->search . '%')
+                ->orWhere('company_phone', 'like', '%' . $request->search . '%')
+                ->orWhere('company_localgovt', 'like', '%' . $request->search . '%')
+                ->orWhere('company_state', 'like', '%' . $request->search . '%')
+                ->orWhere('business_area', 'like', '%' . $request->search . '%')
+                ->orWhere('status', 'like', '%' . $request->search . '%');
+                
+                $activestaff1->where('ecs_number', 'like', '%' . $request->search . '%')
+                ->orWhere('company_name', 'like', '%' . $request->search . '%')
+                ->orWhere('company_email', 'like', '%' . $request->search . '%')
+                ->orWhere('company_address', 'like', '%' . $request->search . '%')
+                ->orWhere('company_rcnumber', 'like', '%' . $request->search . '%')
+                ->orWhere('company_phone', 'like', '%' . $request->search . '%')
+                ->orWhere('company_localgovt', 'like', '%' . $request->search . '%')
+                ->orWhere('company_state', 'like', '%' . $request->search . '%')
+                ->orWhere('business_area', 'like', '%' . $request->search . '%')
+                ->orWhere('status', 'like', '%' . $request->search . '%');
         }
 
-        $pendingstaff= Employer::where('status',0)->paginate(10);
-        $activestaff=Employer::where('status',1)->paginate(10);
+        $pendingstaff= $pendingstaff1->paginate(10);
+        $activestaff=  $activestaff1->paginate(10);
         // shehu comment down
         // $employers = $this->employerRepository->paginate(10);
         $employers = $employers->paginate(10);
