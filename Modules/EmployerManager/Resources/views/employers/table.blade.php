@@ -25,6 +25,7 @@
                     <th class="min-w-200px">Local Govt</th>
                     <th class="min-w-200px">State</th>
                     <th class="min-w-200px">Business Area</th>
+                    <th class="min-w-200px">Certificate Of Incorporation</th>
                     <th class="min-w-200px">Status</th>
                     <th class="min-w-200px">Payment Status</th>
 
@@ -56,6 +57,8 @@
                             @endif
                         </td>
                         <td>{{ $employer->business_area }}</td>
+                        <td><a href="{{ $employer->certificate_of_incorporation }}" target="_blank">Download Certificate of Incorporation</a>
+                        </td>
                         <td>
                             @if ($employer->status == 1)
                                 Registered
