@@ -178,18 +178,26 @@ class DTARequestsController extends AppBaseController
             $dtarequests = $this->dtaRequestsRepository->create($input);
 
             $unitHeadUser = $this->dtaRequestsRepository->getUnitHeadInfo($uid, $department_id);
-            
+
 
             if ($unitHeadUser) {
                 $user = $unitHeadUser->user;
 
                 // Assuming User model has a method to send email notifications
-                //$user->sendUnitHeadNotification(); 
+                //$user->sendUnitHeadNotification();
               // $user->notify(new UnitHeadNotification($user));
             }
 
 
             Flash::success('DTA Requests saved successfully.');
+
+            //INITIATE APPROVAL FLOW || ALSO FOR UPDATING create|update
+            $approval_request = $dtarequests->request()->create([
+                'staff_id' => $staff_id->id,
+                'type_id' => 3,//for dta requests
+                'order' => 1,//order/step of the flow
+                'action_id' => 1,//action taken id 1= create
+            ]);
 
             return redirect(route('dtarequests.index'));
         } catch (ModelNotFoundException $e) {
@@ -201,7 +209,7 @@ class DTARequestsController extends AppBaseController
     }
 
     /**
-     * Show the specified resource. 
+     * Show the specified resource.
      * @param int $id
      * @return Renderable
      */

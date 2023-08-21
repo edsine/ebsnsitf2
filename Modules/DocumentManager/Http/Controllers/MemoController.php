@@ -2,7 +2,7 @@
 
 namespace Modules\DocumentManager\Http\Controllers;
 
-use Flash;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +19,8 @@ use Modules\DocumentManager\Repositories\MemoHasUserRepository;
 use Modules\DocumentManager\Notifications\MemoAssignedToDepartment;
 use Modules\DocumentManager\Repositories\DocumentVersionRepository;
 use Modules\DocumentManager\Repositories\MemoHasDepartmentRepository;
+use Illuminate\Support\Facades\Storage;
+use Modules\DocumentManager\Models\Memo;
 
 class MemoController extends AppBaseController
 {
@@ -70,6 +72,7 @@ class MemoController extends AppBaseController
             return redirect()->back();
         }
 
+        /* $memos = $this->memoRepository->paginate(10); */
         $memos = $this->memoRepository->paginate(10);
 
         return view('documentmanager::memos.index')
@@ -100,7 +103,7 @@ class MemoController extends AppBaseController
         }
 
         $departments = $this->departmentRepository->all()->pluck('department_unit', 'id');
-        $departments->prepend('Select department', '');
+       // $departments->prepend('Select department', '');
         $users1 = $this->userRepository->all();
 
 $userData = $users1->map(function ($user) {
@@ -111,7 +114,7 @@ $userData = $users1->map(function ($user) {
 });
 
         $users = $userData->pluck('name', 'id');
-        $users->prepend('Select user', '');
+        //$users->prepend('Select user', '');
         return view('documentmanager::memos.create', compact(['departments','users']));
     }
 
@@ -154,6 +157,8 @@ $userData = $users1->map(function ($user) {
         }
 
         // Prepare document input
+        $document_input = [];
+
         $document_input['folder_id'] = $memo_folder->id;
         $document_input['title'] = $input['title'];
         $document_input['description'] = $input['description'];
@@ -162,7 +167,19 @@ $userData = $users1->map(function ($user) {
         $path .= $memo_folder->name;
 
 
-        $path_folder = public_path($path);
+        $file = $request->file('file');
+
+    // Define the destination folder inside the S3 bucket
+    
+    // Generate a unique file name
+    $document_url = $path . "/" . $file;
+    
+    $title = str_replace(' ', '', $input['title']);
+    $fileName = $title . 'v1' . rand() . '.' . $file->getClientOriginalExtension();
+
+    // Upload the file to the S3 bucket
+    //$documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName);
+        /* $path_folder = public_path($path);
 
         // Save file
 
@@ -174,8 +191,8 @@ $userData = $users1->map(function ($user) {
         $file->move($path_folder, $file_name);
 
         $document_url = $path . "/" . $file_name;
-
-        $document_input['document_url'] = $document_url;
+ */
+        $document_input['document_url'] = "0";//$documentUrl;
 
         $document = $this->documentRepository->create($document_input);
 
@@ -186,7 +203,7 @@ $userData = $users1->map(function ($user) {
         $version_input['document_id'] = $document->id;
         $version_input['created_by'] = Auth::user()->id;
         $version_input['version_number'] = 1;
-        $version_input['document_url'] = $document_url;
+        $version_input['document_url'] = $documentUrl;
 
         $documentVersion = $this->documentVersionRepository->create($version_input);
 

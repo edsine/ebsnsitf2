@@ -16,7 +16,6 @@ class ApprovalDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
         $this->call(ActionTableSeeder::class);
         $this->call(TypeTableSeeder::class);
     }
