@@ -47,7 +47,7 @@
                 </svg>
               </span>
               <!--end::Svg Icon-->
-              <div class="text-dark fw-bold fs-2 mb-2 mt-5">{{$registered_employees}}</div>
+              <div class="text-dark fw-bold fs-2 mb-2 mt-5">{{$claims_death_count}}</div>
               <div class="fw-semibold text-dark">Claims (Death)</div>
             </div>
             <!--end::Body-->

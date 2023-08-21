@@ -123,9 +123,9 @@ class EmployerController extends AppBaseController
         $fileName = $title . 'v1' . rand() . '.' . $file->getClientOriginalExtension();
     
         // Upload the file to the S3 bucket
-        $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName);
+       // $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName);
 
-        $input['certificate_of_incorporation'] =  $documentUrl;
+        $input['certificate_of_incorporation'] =  "0";//$documentUrl;
         $last_ecs = Employer::get()->last();
 
         if ($last_ecs) {

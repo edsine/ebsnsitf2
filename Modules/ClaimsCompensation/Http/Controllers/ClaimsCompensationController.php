@@ -10,6 +10,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\AccidentClaim;
+use App\Models\DeathClaim;
+use App\Models\DiseaseClaim;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\DB;
 use Modules\EmployerManager\Models\Employer;
@@ -40,10 +43,16 @@ class ClaimsCompensationController extends AppBaseController
      */
     public function index()
     {
-        $claimscompensations = $this->claimscompensationRepository->paginate(10);
-        $claimstypes = Claimstype::all();
+        // $claimscompensations = $this->claimscompensationRepository->paginate(10);
+        // $claimstypes = Claimstype::all();
+        
+        // $accidentclaim =AccidentClaim::all(); 
+        //  dd($accidentclaim);
+        // $diseaseclaim =DiseaseClaim::all();
 
-        return view('claimscompensation::claimscompensation.index', compact('claimscompensations', 'claimstypes'));
+        //  $dealthcliam=DeathClaim::all();
+
+        return view('claimscompensation::claimscompensation.index');
     }
 
     /**
@@ -82,6 +91,7 @@ if(!$employer){
 else {
     $claimstype = claimstype::all()->pluck('name');
     $record = $employer->all();
+
     $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
 
         $branches->prepend('Select branch', '');
