@@ -8,10 +8,10 @@
                     <h1>Claims & Compensations</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-primary float-end"
+                    {{-- <a class="btn btn-primary float-end"
                        href="{{ route('searchpage') }}">
                         Add New
-                    </a>
+                    </a> --}}
                 </div>
             </div>
         </div>
