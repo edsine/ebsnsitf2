@@ -28,8 +28,26 @@ $(document).ready(function() {
         $('#event-modal').modal('show');
     }
 
-    $(document).on('submit', '#event-form', function(e) {
+    // $(document).on('submit', '#event-form', function(e) {
+    //     e.preventDefault();
+    //     var formData = $(this).serialize();
+    //     var eventId = $('#event_id').val();
+    //     var url = eventId ? 'events/' + eventId : 'events';
+    //     $.ajax({
+    //         url: url,
+    //         method: eventId ? 'PUT' : 'POST',
+    //         data: formData,
+    //         success: function(response) {
+    //             calendar.refetchEvents();
+    //             $('#event-modal').modal('hide');
+    //         }
+    //     });
+    // });
+
+
+    $(document).on('submit', '#event-form', function (e) {
         e.preventDefault();
+        $('.submit').html('Please wait...');
         var formData = $(this).serialize();
         var eventId = $('#event_id').val();
         var url = eventId ? 'events/' + eventId : 'events';
@@ -37,12 +55,21 @@ $(document).ready(function() {
             url: url,
             method: eventId ? 'PUT' : 'POST',
             data: formData,
-            success: function(response) {
+            success: function (response) {
                 calendar.refetchEvents();
-                $('#event-modal').modal('hide');
+                // $('#event-modal').modal('hide');
+                Swal.fire(
+                    'Good job!',
+                    'Success! Your event has been added',
+                    'success'
+                ).then(() => {
+                    $('#event-modal').modal('hide');
+                });;
+                $('.submit').html('<span class="indicator-label">Save</span>');
             }
         });
     });
+
 
     $(document).on('click', '.delete-event', function() {
         var eventId = $(this).data('event-id');
