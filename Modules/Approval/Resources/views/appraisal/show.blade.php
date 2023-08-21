@@ -121,7 +121,7 @@
                                     <br />
                                     <small>
                                         {{ $timeline->staff->user->roles->pluck('name') }}
-                                    </small </td>
+                                    </small> </td>
                                 <td>
                                     <span
                                         class="badge bg-{{ $timeline->action->name == 'Approve' ? 'success' : ($timeline->action->name == 'Decline' ? 'danger' : ($timeline->action->name == 'Return' ? 'warning' : ($timeline->action->name == 'Modify' ? 'info' : 'primary'))) }}  text-white fs-6">{{ $timeline->action->status }}</span>
