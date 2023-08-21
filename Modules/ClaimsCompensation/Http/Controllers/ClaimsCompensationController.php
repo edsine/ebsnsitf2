@@ -10,10 +10,13 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\AccidentClaim;
+use App\Models\DeathClaim;
+use App\Models\DiseaseClaim;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\DB;
 use Modules\EmployerManager\Models\Employer;
-use Modules\ClaimsCompensation\Models\claimstype;
+use Modules\ClaimsCompensation\Models\Claimstype;
 use Modules\Shared\Repositories\BranchRepository;
 use Modules\ClaimsCompensation\Repositories\ClaimsCompensationRepository;
 use Modules\ClaimsCompensation\Http\Requests\CreateClaimsCompensationRequest;
@@ -40,10 +43,16 @@ class ClaimsCompensationController extends AppBaseController
      */
     public function index()
     {
-        $claimscompensations = $this->claimscompensationRepository->paginate(10);
-        $claimstypes = claimstype::all();
+        // $claimscompensations = $this->claimscompensationRepository->paginate(10);
+        // $claimstypes = Claimstype::all();
+        
+        // $accidentclaim =AccidentClaim::all(); 
+        //  dd($accidentclaim);
+        // $diseaseclaim =DiseaseClaim::all();
 
-        return view('claimscompensation::claimscompensation.index', compact('claimscompensations', 'claimstypes'));
+        //  $dealthcliam=DeathClaim::all();
+
+        return view('claimscompensation::claimscompensation.index');
     }
 
     /**
@@ -56,8 +65,9 @@ class ClaimsCompensationController extends AppBaseController
 
         $branches->prepend('Select branch', '');
 
-        $claimstype= claimstype::all();
-      dd($claimstype);
+        $claimstype= claimstype::all()->pluck('name');
+
+
         return view('claimscompensation::claimscompensation.create', compact('branches','claimstype'));
     }
 
@@ -68,7 +78,7 @@ public function showsearchpage(){
 
     public function searchpage(Request $request)
     {
-        
+
         $ecs_number = $request->input('ecs_number');
 
 
@@ -79,16 +89,16 @@ if(!$employer){
     return view('claimscompensation::claimscompensation.searchpage')->withErrors(['employer_not_found' => 'Employer Record Not Found']);
 }
 else {
-    $claimstype = claimstype::all()->pluck('name','id');
-  
+    $claimstype = claimstype::all()->pluck('name');
     $record = $employer->all();
+
     $branches = $this->branchRepository->all()->pluck('branch_name', 'id');
 
         $branches->prepend('Select branch', '');
         return view('claimscompensation::claimscompensation.create', compact('branches','employer','record','claimstype'));
 }
 
-      
+
 
         return view('claimscompensation::claimscompensation.searchpage', compact('employer'));
     }

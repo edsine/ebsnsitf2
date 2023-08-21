@@ -1,77 +1,29 @@
-<div class="card-body p-5">
-    <div class="table-responsive">
-        <table class="table" id="departments-table">
-            <thead>
-            <tr>
-                {{-- <th>Claim Type</th> --}}
-                <th>Name</th>
-                <th>Description</th>
-                <th>Branch</th>
-                <th>Documents</th>
-                <th>Regional Manager Status (SUPERVISOR)</th>
-                <th>Head Office Status (MD)</th>
-                <th>Medical Team Status (HEALTH)</th>
-                <th colspan="3">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($claimscompensations as $claimscompensation)
-                <tr>
-                    {{-- <td>{{$claimscompensation->claims ? $claimscompensation->claims->name:'no type found'}}</td> --}}
-                    <td>{{ $claimscompensation->name }}</td>
-                    <td>{{ $claimscompensation->description }}</td>
-                    <td>{{ $claimscompensation->branch ? $claimscompensation->branch->branch_name : '' }}</td>
-                    <td>
-                        <img style="width: 50px;height: 50px" src="{{ url('storage/') }}{!! '/'.$claimscompensation->images !!}" alt="Image">
-                    </td>
-                    <td>
-                        <p> @if (isset($claimscompensation->regional_manager_status) && $claimscompensation->regional_manager_status == 1)
-                            <span class="btn btn-sm btn-success">Approved</span>
-                        @else
-                            <span class="btn btn-sm btn-danger">Unapproved</span>
-                        @endif
-                            </p>
-                        </td>
-                    <td>
-                        <p> @if (isset($claimscompensation->head_office_status) && $claimscompensation->head_office_status == 1)
-                            <span class="btn btn-sm btn-success">Approved</span>
-                        @else
-                            <span class="btn btn-sm btn-danger">Unapproved</span>
-                        @endif
-                            </p>
-                        </td>
-                    <td>
-                        <p> @if (isset($claimscompensation->head_office_status) && $claimscompensation->head_office_status == 1)
-                            <span class="btn btn-sm btn-success">Approved</span>
-                        @else
-                            <span class="btn btn-sm btn-danger">Unapproved</span>
-                        @endif
-                            </p>
-                        {{ $claimscompensation->medical_team_status }}</td>
-                    <td  style="width: 120px">
-                        {!! Form::open(['route' => ['claimscompensation.destroy', $claimscompensation->id], 'method' => 'delete']) !!}
-                        <div class='btn-group'>
-                            <a href="{{ route('claimscompensation.show', [$claimscompensation->id]) }}"
-                               class='btn btn-default btn-xs'>
-                                <i class="far fa-eye"></i>
-                            </a>
-                            <a href="{{ route('claimscompensation.edit', [$claimscompensation->id]) }}"
-                               class='btn btn-default btn-xs'>
-                                <i class="far fa-edit"></i>
-                            </a>
-                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                        </div>
-                        {!! Form::close() !!}
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
 
-    <div class="card-footer clearfix">
-        <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $claimscompensations])
-        </div>
+
+  <div class="container">
+    <h1>CLAIMS NOTIFICATION </h1>
+    <ul class="nav nav-tabs" id="myTab">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#accident">ACCIDENT CLAIMS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#dealth">DEALTH CLAIMS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#disease">DISEASE CLAIMS</a>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="accident">
+       @include('claimscompensation::claimscompensation.accident');
+      </div>
+      <div class="tab-pane fade" id="dealth">
+        @include('claimscompensation::claimscompensation.death');
+      </div>
+      <div class="tab-pane fade" id="disease">
+       @include('claimscompensation::claimscompensation.disease');
+      </div>
     </div>
-</div>
+  </div>
+
