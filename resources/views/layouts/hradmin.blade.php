@@ -11,7 +11,7 @@
       <!--begin::Page title-->
       <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
-        <h1 class="text-black-50 pt-5">Human Resource :<b style="color: #000">Overview</b></h1>
+        <h1 class="text-black-50 pt-5">Human Resource :<b style="color: #000"> Overview</b></h1>
         <!--end::Title-->
       </div>
       <!--end::Page title-->
@@ -40,7 +40,7 @@
                     <!--begin::Info-->
                     <div class="d-flex align-items-center mb-2">
                       <!--begin::Value-->
-                      <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1">5000</span>
+                      <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1">{{$registered_employees}}</span>
                       <!--end::Value-->
                       <!--begin::Label-->
                       <span class="badge badge-light-success fs-base">
@@ -76,7 +76,7 @@
                     <!--begin::Info-->
                     <div class="d-flex align-items-center">
                       <!--begin::Amount-->
-                      <span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">3498</span>
+                      <span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">3</span>
                       <!--end::Amount-->
                       <!--begin::Badge-->
                       <span class="badge badge-light-danger fs-base">
