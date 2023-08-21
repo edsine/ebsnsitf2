@@ -13,7 +13,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\DB;
 use Modules\EmployerManager\Models\Employer;
-use Modules\ClaimsCompensation\Models\claimstype;
+use Modules\ClaimsCompensation\Models\Claimstype;
 use Modules\Shared\Repositories\BranchRepository;
 use Modules\ClaimsCompensation\Repositories\ClaimsCompensationRepository;
 use Modules\ClaimsCompensation\Http\Requests\CreateClaimsCompensationRequest;
@@ -41,7 +41,7 @@ class ClaimsCompensationController extends AppBaseController
     public function index()
     {
         $claimscompensations = $this->claimscompensationRepository->paginate(10);
-        $claimstypes = claimstype::all();
+        $claimstypes = Claimstype::all();
 
         return view('claimscompensation::claimscompensation.index', compact('claimscompensations', 'claimstypes'));
     }
@@ -101,6 +101,7 @@ else {
     public function store(CreateClaimsCompensationRequest $request)
     {
         $input = $request->all();
+        
         $input['user_id'] = Auth::id();
 
         if ($request->hasFile('images')) {

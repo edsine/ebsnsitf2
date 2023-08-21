@@ -2,7 +2,7 @@
 
 namespace Modules\DocumentManager\Http\Controllers;
 
-use Flash;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AppBaseController;
@@ -12,6 +12,8 @@ use Modules\DocumentManager\Http\Requests\CreateDocumentRequest;
 use Modules\DocumentManager\Http\Requests\UpdateDocumentRequest;
 use Modules\DocumentManager\Repositories\DocumentVersionRepository;
 use Modules\DocumentManager\Http\Requests\CreateDocumentVersionRequest;
+use Illuminate\Support\Facades\Storage;
+use Modules\Shared\Models\Department;
 
 class DocumentController extends AppBaseController
 {
@@ -113,23 +115,34 @@ class DocumentController extends AppBaseController
         $path .= $folder->name;
 
 
-        $path_folder = public_path($path);
+        // Get the uploaded file
+    $file = $request->file('file');
 
+    // Define the destination folder inside the S3 bucket
+    $folderPath = 'documents/Expenses';
+
+    // Generate a unique file name
+    $document_url = $path . "/" . $file;
+    $version_input = [];
+    $title = str_replace(' ', '', $input['title']);
+    $fileName = $title . 'v1' . rand() . '.' . $file->getClientOriginalExtension();
+
+    // Upload the file to the S3 bucket
+    $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName);
+
+    // Save the document URL to your database or perform other actions
+    $input['document_url'] = $documentUrl;
+    $document = $this->documentRepository->create($input);
+
+       /*  $path_folder = public_path($path);
         // Save file
-
         $file = $request->file('file');
-
         $title = str_replace(' ', '', $input['title']);
-
         $file_name = $title . '_' . 'v1' . '_' . rand() . '.' . $file->getClientOriginalExtension();
         $file->move($path_folder, $file_name);
-
         $document_url = $path . "/" . $file_name;
-
         $input['document_url'] = $document_url;
-
-        $document = $this->documentRepository->create($input);
-
+        $document = $this->documentRepository->create($input); */
         // Save document version
 
         $version_input['document_id'] = $document->id;
